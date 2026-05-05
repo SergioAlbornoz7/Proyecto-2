@@ -1,4 +1,4 @@
-CREATE DATABASE ProyectoMixII;
+CREATE DATABASE if not exists ProyectoMixII;
 USE ProyectoMixII;
 CREATE TABLE Civilization_stats (
     civilization_id INT PRIMARY KEY AUTO_INCREMENT,
