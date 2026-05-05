@@ -22,6 +22,39 @@ abstract class MilitaryUnit {
         this.coaa = coaa;
         this.cogw = cogw;
     }
+
+	public int getFood() {
+		return food;
+	}
+
+	public int getWood() {
+		return wood;
+	}
+
+	public int getIron() {
+		return iron;
+	}
+
+	public int getMana() {
+		return mana;
+	}
+
+	public int getArmor() {
+		return armor;
+	}
+
+	public int getAttackPower() {
+		return attackPower;
+	}
+
+	public int getCoaa() {
+		return coaa;
+	}
+
+	public int getCogw() {
+		return cogw;
+	}
+    
 }
 
 class Swordsman extends MilitaryUnit {
@@ -117,10 +150,112 @@ public class Civilization {
             army[i] = new ArrayList<MilitaryUnit>();
         }
 	}
+	
+	public int getTechnologyDefense() {
+		return technologyDefense;
+	}
 
-	public static void main(String[] args) {
+	public void setTechnologyDefense(int technologyDefense) {
+		this.technologyDefense = technologyDefense;
+	}
 
+	public int getTechnologyAtack() {
+		return technologyAtack;
+	}
 
+	public void setTechnologyAtack(int technologyAtack) {
+		this.technologyAtack = technologyAtack;
+	}
+
+	public int getWood() {
+		return wood;
+	}
+
+	public void setWood(int wood) {
+		this.wood = wood;
+	}
+
+	public int getIron() {
+		return iron;
+	}
+
+	public void setIron(int iron) {
+		this.iron = iron;
+	}
+
+	public int getFood() {
+		return food;
+	}
+
+	public void setFood(int food) {
+		this.food = food;
+	}
+
+	public int getMana() {
+		return mana;
+	}
+
+	public void setMana(int mana) {
+		this.mana = mana;
+	}
+
+	public int getMagicTower() {
+		return magicTower;
+	}
+
+	public void setMagicTower(int magicTower) {
+		this.magicTower = magicTower;
+	}
+
+	public int getChurch() {
+		return church;
+	}
+
+	public void setChurch(int church) {
+		this.church = church;
+	}
+
+	public int getFarm() {
+		return farm;
+	}
+
+	public void setFarm(int farm) {
+		this.farm = farm;
+	}
+
+	public int getSmithy() {
+		return smithy;
+	}
+
+	public void setSmithy(int smithy) {
+		this.smithy = smithy;
+	}
+
+	public int getCarpentry() {
+		return carpentry;
+	}
+
+	public void setCarpentry(int carpentry) {
+		this.carpentry = carpentry;
+	}
+
+	public int getBattles() {
+		return battles;
+	}
+
+	public void setBattles(int battles) {
+		this.battles = battles;
+	}
+
+	public ArrayList<MilitaryUnit>[] getArmy() {
+		return army;
+	}
+
+	public void setArmy(ArrayList<MilitaryUnit>[] army) {
+		this.army = army;
+	}
+	public void newChurch(){
+		church += 1;
 	}
 
 }
