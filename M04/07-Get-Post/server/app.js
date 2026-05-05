@@ -56,16 +56,13 @@ hbs.registerPartials(path.join(__dirname, 'views', 'partials'));
 
 // Route
 app.get('/', async (req, res) => {
-  /*try {
+  try {
     // Obtenir les dades de la base de dades
-    const cursosRows = await db.query('SELECT id, nom, tematica FROM cursos ORDER BY id');
-    const especialitatsRows = await db.query('SELECT id, nom FROM especialitats ORDER BY nom');
-
+    const Civilization_statsRows = await db.query('SELECT name FROM Civilization_stats');
     // Transformar les dades a JSON (per les plantilles .hbs)
     // Cal informar de les columnes i els seus tipus
-    const cursosJson = db.table_to_json(cursosRows, { id: 'number', nom: 'string', tematica: 'string' });
-    const especialitatsJson = db.table_to_json(especialitatsRows, { id: 'number', nom: 'string' });
-
+    const Civilization_statsJson = db.table_to_json(Civilization_statsRows, {name: 'string'});
+    
     // Llegir l'arxiu .json amb dades comunes per a totes les pàgines
     const commonData = JSON.parse(
       fs.readFileSync(path.join(__dirname, 'data', 'common.json'), 'utf8')
@@ -73,8 +70,7 @@ app.get('/', async (req, res) => {
 
     // Construir l'objecte de dades per a la plantilla
     const data = {
-      cursos: cursosJson,
-      especialitats: especialitatsJson,
+      Civilization_stats:Civilization_statsJson,
       common: commonData
     };
 
@@ -83,7 +79,7 @@ app.get('/', async (req, res) => {
   } catch (err) {
     console.error(err);
     res.status(500).send('Error consultant la base de dades');
-  }*/
+  }
 });
 
 // Start server
