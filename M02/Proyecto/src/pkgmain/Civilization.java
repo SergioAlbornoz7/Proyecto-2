@@ -2,6 +2,7 @@ package pkgmain;
 
 import java.util.ArrayList;
 
+/*Main military unit class*/
 abstract class MilitaryUnit {
     final int food;
     final int wood;
@@ -57,6 +58,7 @@ abstract class MilitaryUnit {
     
 }
 
+/*Subclasses de MilitaryUnit */
 class Swordsman extends MilitaryUnit {
     public Swordsman() {
         super(8000, 3000, 50, 0, 400, 80, 3, 55);
@@ -107,7 +109,13 @@ class Priest extends MilitaryUnit {
         super(15000, 0, 0, 15000, 0, 0, 0, 0);
     }
 }
-
+/*Excepciones*/
+class ResourceException extends Exception {
+	public ResourceException(String s){
+		super(s);
+	}
+}
+/*Clase Main*/
 public class Civilization {
 	
 	/*tech*/
@@ -254,8 +262,60 @@ public class Civilization {
 	public void setArmy(ArrayList<MilitaryUnit>[] army) {
 		this.army = army;
 	}
-	public void newChurch(){
-		church += 1;
+	public void newChurch() throws ResourceException{
+		if (food >= 10000 && wood >= 20000 && iron >= 24000 && mana >= 10000) {
+			food -= 10000;
+			wood -= 20000;
+			iron -= 24000;
+			mana -= 10000;
+			church += 1;
+		} else {
+			throw new ResourceException("No tienes suficientes materiales para construir la iglesia");
+		}
+			
 	}
+	public void newSmithy() throws ResourceException {
+        if (food >= 5000 && wood >= 10000 && iron >= 12000) {
+            food -= 5000;
+            wood -= 10000;
+            iron -= 12000;
+            smithy += 1;
+        } else {
+            throw new ResourceException("No tienes suficientes materiales para construir la herrería");
+        }
+    }
+
+    public void newCarpentry() throws ResourceException {
+        if (food >= 5000 && wood >= 10000 && iron >= 12000) {
+            food -= 5000;
+            wood -= 10000;
+            iron -= 12000;
+            carpentry += 1;
+        } else {
+            throw new ResourceException("No tienes suficientes materiales para construir la carpintería");
+        }
+    }
+
+    public void newFarm() throws ResourceException {
+        if (food >= 5000 && wood >= 10000 && iron >= 12000) {
+            food -= 5000;
+            wood -= 10000;
+            iron -= 12000;
+            farm += 1;
+        } else {
+            throw new ResourceException("No tienes suficientes materiales para construir la granja");
+        }
+    }
+
+    public void newMagicTower() throws ResourceException {
+        if (food >= 10000 && wood >= 20000 && iron >= 24000) {
+            food -= 10000;
+            wood -= 20000;
+            iron -= 24000;
+            magicTower += 1;
+        } else {
+            throw new ResourceException("No tienes suficientes materiales para construir la torre de magos");
+        }
+    }
 
 }
