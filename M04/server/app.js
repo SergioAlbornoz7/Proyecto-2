@@ -81,6 +81,18 @@ app.get('/', async (req, res) => {
     res.status(500).send('Error consultant la base de dades');
   }
 });
+//Programadores
+app.get('/Programadores', (req, res) => {
+  const Programadores = JSON.parse(
+    fs.readFileSync(path.join(__dirname, 'data', 'Programadores.json'), 'utf8')
+  );
+
+  data = {
+    Programadores: Programadores
+  }
+
+  res.render('Programadores', data);
+});
 
 // Start server
 const httpServer = app.listen(port, () => {

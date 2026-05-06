@@ -37,3 +37,28 @@ nav a{
     color: black;
     font-weight: bold;
 }
+/*Inputs*/
+.oculto{
+  display: none
+}
+.noculto{
+  display:block
+}
+.check{
+  
+}
+/*PROGRAMADORES*/
+.cuadro{
+  margin-top: 10rem;
+  margin-left: 20rem;
+  background-color: antiquewhite;
+  height: 40rem;
+  width: 70rem;
+  padding: 2%;
+}
+.programadores{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+}
