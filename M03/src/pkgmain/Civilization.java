@@ -2,84 +2,326 @@ package pkgmain;
 
 import java.util.ArrayList;
 
-/*Main military unit class*/
-abstract class MilitaryUnit {
-    final int food;
-    final int wood;
-    final int iron;
-    final int mana;
-    final int armor;
-    final int attackPower;
-    final int coaa; 
-    final int cogw;
+/*Interfaces*/
+interface MilitaryUnit {
+	abstract int attack();
+	abstract void takeDamage(int receivedDamage);
+	abstract int getActualArmor();
+	abstract int getFoodCost();
+	abstract int getWoodCost();
+	abstract int getIronCost();
+	abstract int getManaCost();
+	abstract int getChanceGeneratinWaste();
+	abstract int getChanceAttackAgain();
+	abstract void resetArmor();
+	abstract void setExperience(int n);
+	abstract int getExperience();
+}
 
-    public MilitaryUnit(int food, int wood, int iron, int mana, int armor, int attackPower, int coaa, int cogw) {
-        this.food = food;
-        this.wood = wood;
-        this.iron = iron;
-        this.mana = mana;
-        this.armor = armor;
-        this.attackPower = attackPower;
-        this.coaa = coaa;
-        this.cogw = cogw;
-    }
+/*Military Classes*/
+abstract class AttackUnit implements MilitaryUnit, Variables {
+	int armor;
+	int initialArmor;
+	int baseDamage;
+	int experience;
+	boolean sanctified;
+}
 
-	public int getFood() {
-		return food;
-	}
+abstract class DefenseUnit implements MilitaryUnit, Variables {
+	int armor;
+	int initialArmor;
+	int baseDamage;
+	int experience;
+	boolean sanctified;
+}
 
-	public int getWood() {
-		return wood;
-	}
+abstract class SpecialUnit implements MilitaryUnit, Variables {
+	final int armor = 0;
+	final int initialArmor = 0;
+	int baseDamage;
+	int experience;
 
-	public int getIron() {
-		return iron;
-	}
-
-	public int getMana() {
-		return mana;
-	}
-
-	public int getArmor() {
-		return armor;
-	}
-
-	public int getAttackPower() {
-		return attackPower;
-	}
-
-	public int getCoaa() {
-		return coaa;
-	}
-
-	public int getCogw() {
-		return cogw;
-	}
-    
 }
 
 /*Subclasses de MilitaryUnit */
-class Swordsman extends MilitaryUnit {
+class Swordsman extends AttackUnit {
+    public Swordsman(int armor, int baseDamage) {
+        super();
+        this.armor = Variables.ARMOR_SWORDSMAN + (/*Tecnologia defensa*/*Variables.PLUS_ARMOR_SWORDSMAN_BY_TECHNOLOGY)%Variables.ARMOR_SWORDSMAN;
+        this.baseDamage = Variables.BASE_DAMAGE_SWORDSMAN + (/*Tecnologia ATAQUE*/*Variables.PLUS_ATTACK_SWORDSMAN_BY_TECHNOLOGY)%Variables.BASE_DAMAGE_SWORDSMAN;
+        initialArmor = this.armor;
+    }
     public Swordsman() {
-        super(8000, 3000, 50, 0, 400, 80, 3, 55);
+        super();
+        armor = Variables.ARMOR_SWORDSMAN;
+        baseDamage = Variables.BASE_DAMAGE_SWORDSMAN;
     }
+	
+	public int attack() {
+		return 0;
+	}
+	
+	public void takeDamage(int receivedDamage) {
+		
+	}
+	
+	public int getActualArmor() {
+		return 0;
+	}
+	
+	public int getFoodCost() {
+		return 0;
+	}
+	
+	public int getWoodCost() {
+		return 0;
+	}
+	
+	public int getIronCost() {
+		return 0;
+	}
+	
+	public int getManaCost() {
+		return 0;
+	}
+	
+	public int getChanceGeneratinWaste() {
+		return 0;
+	}
+	
+	public int getChanceAttackAgain() {
+		return 0;
+	}
+	
+	public void resetArmor() {
+		
+	}
+	
+	public void setExperience(int n) {
+		
+	}
+	
+	public int getExperience() {
+		return 0;
+	}
 }
 
-class Spearman extends MilitaryUnit {
+class Spearman extends AttackUnit {
+    public Spearman(int armor, int baseDamage) {
+        super();
+        this.armor = Variables.ARMOR_SPEARMAN + (/*Tecnologia defensa*/*Variables.PLUS_ARMOR_SPEARMAN_BY_TECHNOLOGY)%Variables.ARMOR_SPEARMAN;
+        this.baseDamage = Variables.BASE_DAMAGE_SPEARMAN + (/*Tecnologia ATAQUE*/*Variables.PLUS_ATTACK_SPEARMAN_BY_TECHNOLOGY)%Variables.BASE_DAMAGE_SPEARMAN;
+        initialArmor = this.armor;
+    }
     public Spearman() {
-        super(5000, 6500, 50, 0, 1000, 150, 7, 65);
+        super();
+        armor = Variables.ARMOR_SPEARMAN;
+        baseDamage = Variables.BASE_DAMAGE_SPEARMAN;
     }
+
+	
+	public int attack() {
+		return 0;
+	}
+
+	
+	public void takeDamage(int receivedDamage) {
+		
+	}
+
+	
+	public int getActualArmor() {
+		return 0;
+	}
+
+	
+	public int getFoodCost() {
+		return 0;
+	}
+
+	
+	public int getWoodCost() {
+		return 0;
+	}
+
+	
+	public int getIronCost() {
+		return 0;
+	}
+
+	
+	public int getManaCost() {
+		return 0;
+	}
+
+	
+	public int getChanceGeneratinWaste() {
+		return 0;
+	}
+
+	
+	public int getChanceAttackAgain() {
+		return 0;
+	}
+
+	
+	public void resetArmor() {
+		
+	}
+
+	
+	public void setExperience(int n) {
+		
+	}
+
+	
+	public int getExperience() {
+		return 0;
+	}
 }
-class Crossbow extends MilitaryUnit {
-    public Crossbow() {
-        super(0, 45000, 7000, 0, 6000, 1000, 45, 80);
+class Crossbow extends AttackUnit {
+    public Crossbow(int armor, int baseDamage) {
+        super();
+        this.armor = Variables.ARMOR_CROSSBOW + (/*Tecnologia defensa*/*Variables.PLUS_ARMOR_CROSSBOW_BY_TECHNOLOGY)%Variables.ARMOR_CROSSBOW;
+        this.baseDamage = Variables.BASE_DAMAGE_CROSSBOW + (/*Tecnologia ATAQUE*/*Variables.PLUS_ATTACK_CROSSBOW_BY_TECHNOLOGY)%Variables.BASE_DAMAGE_CROSSBOW;
+        initialArmor = this.armor;
     }
+    public Crossbow() {
+        super();
+        armor = Variables.ARMOR_CROSSBOW;
+        baseDamage = Variables.BASE_DAMAGE_CROSSBOW;
+    }
+
+
+	
+	public int attack() {
+		return 0;
+	}
+
+	
+	public void takeDamage(int receivedDamage) {
+		
+	}
+
+	
+	public int getActualArmor() {
+		return 0;
+	}
+
+	
+	public int getFoodCost() {
+		return 0;
+	}
+
+	
+	public int getWoodCost() {
+		return 0;
+	}
+
+	
+	public int getIronCost() {
+		return 0;
+	}
+
+	
+	public int getManaCost() {
+		return 0;
+	}
+
+	
+	public int getChanceGeneratinWaste() {
+		return 0;
+	}
+
+	
+	public int getChanceAttackAgain() {
+		return 0;
+	}
+
+	
+	public void resetArmor() {
+		
+	}
+
+	
+	public void setExperience(int n) {
+		
+	}
+
+	
+	public int getExperience() {
+		return 0;
+	}
 }
 
-class Cannon extends MilitaryUnit {
-    public Cannon() {
-        super(0, 30000, 15000, 0, 8000, 700, 70, 90);
+class Cannon extends AttackUnit {
+    public Cannon(int armor, int baseDamage) {
+        super();
+        this.armor = Variables.ARMOR_CANNON + (/*Tecnologia defensa*/*Variables.PLUS_ARMOR_CANNON_BY_TECHNOLOGY)%Variables.ARMOR_CANNON;
+        this.baseDamage = Variables.BASE_DAMAGE_CANNON + (/*Tecnologia ATAQUE*/*Variables.PLUS_ATTACK_CANNON_BY_TECHNOLOGY)%Variables.BASE_DAMAGE_CANNON;
+        initialArmor = this.armor;
     }
+    public Cannon() {
+        super();
+        armor = Variables.ARMOR_CANNON;
+        baseDamage = Variables.BASE_DAMAGE_CANNON;
+    }
+
+	
+	public int attack() {
+		return 0;
+	}
+
+	
+	public void takeDamage(int receivedDamage) {
+		
+	}
+
+	
+	public int getActualArmor() {
+		return 0;
+	}
+
+	
+	public int getFoodCost() {
+		return 0;
+	}
+
+	
+	public int getWoodCost() {
+		return 0;
+	}
+
+	
+	public int getIronCost() {
+		return 0;
+	}
+	public int getManaCost() {
+		return 0;
+	}
+
+	
+	public int getChanceGeneratinWaste() {
+		return 0;
+	}
+
+	
+	public int getChanceAttackAgain() {
+		return 0;
+	}
+
+	
+	public void resetArmor() {
+		
+	}
+
+	public void setExperience(int n) {
+		
+	}
+
+	public int getExperience() {
+		return 0;
+	}
 }
 class ArrowTower extends MilitaryUnit {
     public ArrowTower() {
@@ -112,6 +354,11 @@ class Priest extends MilitaryUnit {
 /*Excepciones*/
 class ResourceException extends Exception {
 	public ResourceException(String s){
+		super(s);
+	}
+}
+class BuildingException extends Exception {
+	public BuildingException(String s){
 		super(s);
 	}
 }
