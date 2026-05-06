@@ -56,9 +56,27 @@ nav a{
   width: 70rem;
   padding: 2%;
 }
+.separador{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
 .programadores{
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: row;
+}
+
+.imagenes{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10rem;
+}
+.imagenes img{
+  max-height: 50%;
+  max-width: 50%;
 }
