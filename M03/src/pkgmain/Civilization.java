@@ -116,11 +116,10 @@ public class Civilization {
         for (int i = 0; i < 9; i++) {
             army[i] = new ArrayList<MilitaryUnit>();
         }
+        
 	}
-
 	public static void main(String[] args) {
-
-
+		
 	}
 
 }
