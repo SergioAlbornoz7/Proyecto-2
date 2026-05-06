@@ -75,7 +75,7 @@ app.get('/', async (req, res) => {
     };
 
     // Renderitzar la plantilla amb les dades
-    res.render('index', data);
+    res.render('Principal', data);
   } catch (err) {
     console.error(err);
     res.status(500).send('Error consultant la base de dades');
