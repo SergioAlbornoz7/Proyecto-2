@@ -15,9 +15,9 @@ const db = new MySQL();
 if (!isProxmox) {
   db.init({
     host: '127.0.0.1',
-    port: 3306,
-    user: 'root',
-    password: 'tuclave',
+    port: 3307,
+    user: 'super',
+    password: '1234',
     database: 'ProyectoMixII'
   });
 } else {
