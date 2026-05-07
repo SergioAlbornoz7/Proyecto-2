@@ -109,13 +109,14 @@ class RocketLauncher extends DefenseUnit {
 
 class Magician extends MilitaryUnit {
     public Magician() {
-        super(12000, 2000, 0, 5000, 0, 3000, 75, 0);
+        super();
+        this.baseDamage = Variables.BASE_DAMAGE_MAGICIAN + (/*Tecnologia ATAQUE*/*Variables.PLUS_ATTACK_MAGICIAN_BY_TECHNOLOGY)%Variables.BASE_DAMAGE_MAGICIAN;
     }
 }
 
 class Priest extends MilitaryUnit {
     public Priest() {
-        super(15000, 0, 0, 15000, 0, 0, 0, 0);
+        this.baseDamage = Variables.BASE_DAMAGE_PRIEST + (/*Tecnologia ATAQUE*/*Variables.PLUS_ATTACK_PRIEST_BY_TECHNOLOGY)%Variables.BASE_DAMAGE_PRIEST;
     }
 }
 /*Excepciones*/
