@@ -470,8 +470,8 @@ class Catapult extends DefenseUnit {
 class RocketLauncher extends DefenseUnit {
     public RocketLauncher(int armor, int baseDamage) {
         super();
-		this.armor = Variables.ARMOR_ROCKETLAUNCHER + (/*Tecnologia defensa*/*Variables.PLUS_ARMOR_ROCKETLAUNCHER_BY_TECHNOLOGY)%Variables.ARMOR_ROCKETLAUNCHER;
-        this.baseDamage = Variables.BASE_DAMAGE_ROCKETLAUNCHER + (/*Tecnologia ATAQUE*/*Variables.PLUS_ATTACK_ROCKETLAUNCHER_BY_TECHNOLOGY)%Variables.BASE_DAMAGE_ROCKETLAUNCHER;
+		this.armor = Variables.ARMOR_ROCKETLAUNCHERTOWER + (/*Tecnologia defensa*/*Variables.PLUS_ARMOR_ROCKETLAUNCHERTOWER_BY_TECHNOLOGY)%Variables.ARMOR_ROCKETLAUNCHERTOWER;
+        this.baseDamage = Variables.BASE_DAMAGE_ROCKETLAUNCHERTOWER + (/*Tecnologia ATAQUE*/*Variables.PLUS_ATTACK_ROCKETLAUNCHERTOWER_BY_TECHNOLOGY)%Variables.BASE_DAMAGE_ROCKETLAUNCHERTOWER;
         initialArmor = this.armor;
     }
 	public int attack() {
@@ -490,32 +490,32 @@ class RocketLauncher extends DefenseUnit {
 
     
     public int getFoodCost() {
-        return FOOD_COST_ROCKETLAUNCHER;
+        return FOOD_COST_ROCKETLAUNCHERTOWER;
     }
 
     
     public int getWoodCost() {
-        return WOOD_COST_ROCKETLAUNCHER;
+        return WOOD_COST_ROCKETLAUNCHERTOWER;
     }
 
     
     public int getIronCost() {
-        return IRON_COST_ROCKETLAUNCHER;
+        return IRON_COST_ROCKETLAUNCHERTOWER;
     }
 
     
     public int getManaCost() {
-        return MANA_COST_ROCKETLAUNCHER;
+        return MANA_COST_ROCKETLAUNCHERTOWER;
     }
 
     
     public int getChanceGeneratinWaste() {
-        return CHANCE_GENERATNG_WASTE_ROCKETLAUNCHER;
+        return CHANCE_GENERATNG_WASTE_ROCKETLAUNCHERTOWER;
     }
 
     
     public int getChanceAttackAgain() {
-        return CHANCE_ATTACK_AGAIN_ROCKETLAUNCHER;
+        return CHANCE_ATTACK_AGAIN_ROCKETLAUNCHERTOWER;
     }
 
     
