@@ -40,7 +40,6 @@ abstract class SpecialUnit implements MilitaryUnit, Variables {
 	final int initialArmor = 0;
 	int baseDamage;
 	int experience;
-
 }
 
 /*Subclasses de MilitaryUnit */
@@ -56,55 +55,6 @@ class Swordsman extends AttackUnit {
         armor = Variables.ARMOR_SWORDSMAN;
         baseDamage = Variables.BASE_DAMAGE_SWORDSMAN;
     }
-	
-	public int attack() {
-		return 0;
-	}
-	
-	public void takeDamage(int receivedDamage) {
-		
-	}
-	
-	public int getActualArmor() {
-		return 0;
-	}
-	
-	public int getFoodCost() {
-		return 0;
-	}
-	
-	public int getWoodCost() {
-		return 0;
-	}
-	
-	public int getIronCost() {
-		return 0;
-	}
-	
-	public int getManaCost() {
-		return 0;
-	}
-	
-	public int getChanceGeneratinWaste() {
-		return 0;
-	}
-	
-	public int getChanceAttackAgain() {
-		return 0;
-	}
-	
-	public void resetArmor() {
-		
-	}
-	
-	public void setExperience(int n) {
-		
-	}
-	
-	public int getExperience() {
-		return 0;
-	}
-}
 
 class Spearman extends AttackUnit {
     public Spearman(int armor, int baseDamage) {
@@ -119,66 +69,6 @@ class Spearman extends AttackUnit {
         baseDamage = Variables.BASE_DAMAGE_SPEARMAN;
     }
 
-	
-	public int attack() {
-		return 0;
-	}
-
-	
-	public void takeDamage(int receivedDamage) {
-		
-	}
-
-	
-	public int getActualArmor() {
-		return 0;
-	}
-
-	
-	public int getFoodCost() {
-		return 0;
-	}
-
-	
-	public int getWoodCost() {
-		return 0;
-	}
-
-	
-	public int getIronCost() {
-		return 0;
-	}
-
-	
-	public int getManaCost() {
-		return 0;
-	}
-
-	
-	public int getChanceGeneratinWaste() {
-		return 0;
-	}
-
-	
-	public int getChanceAttackAgain() {
-		return 0;
-	}
-
-	
-	public void resetArmor() {
-		
-	}
-
-	
-	public void setExperience(int n) {
-		
-	}
-
-	
-	public int getExperience() {
-		return 0;
-	}
-}
 class Crossbow extends AttackUnit {
     public Crossbow(int armor, int baseDamage) {
         super();
@@ -192,137 +82,6 @@ class Crossbow extends AttackUnit {
         baseDamage = Variables.BASE_DAMAGE_CROSSBOW;
     }
 
-
-	
-	public int attack() {
-		return 0;
-	}
-
-	
-	public void takeDamage(int receivedDamage) {
-		
-	}
-
-	
-	public int getActualArmor() {
-		return 0;
-	}
-
-	
-	public int getFoodCost() {
-		return 0;
-	}
-
-	
-	public int getWoodCost() {
-		return 0;
-	}
-
-	
-	public int getIronCost() {
-		return 0;
-	}
-
-	
-	public int getManaCost() {
-		return 0;
-	}
-
-	
-	public int getChanceGeneratinWaste() {
-		return 0;
-	}
-
-	
-	public int getChanceAttackAgain() {
-		return 0;
-	}
-
-	
-	public void resetArmor() {
-		
-	}
-
-	
-	public void setExperience(int n) {
-		
-	}
-
-	
-	public int getExperience() {
-		return 0;
-	}
-}
-
-class Cannon extends AttackUnit {
-    public Cannon(int armor, int baseDamage) {
-        super();
-        this.armor = Variables.ARMOR_CANNON + (/*Tecnologia defensa*/*Variables.PLUS_ARMOR_CANNON_BY_TECHNOLOGY)%Variables.ARMOR_CANNON;
-        this.baseDamage = Variables.BASE_DAMAGE_CANNON + (/*Tecnologia ATAQUE*/*Variables.PLUS_ATTACK_CANNON_BY_TECHNOLOGY)%Variables.BASE_DAMAGE_CANNON;
-        initialArmor = this.armor;
-    }
-    public Cannon() {
-        super();
-        armor = Variables.ARMOR_CANNON;
-        baseDamage = Variables.BASE_DAMAGE_CANNON;
-    }
-
-	
-	public int attack() {
-		return 0;
-	}
-
-	
-	public void takeDamage(int receivedDamage) {
-		
-	}
-
-	
-	public int getActualArmor() {
-		return 0;
-	}
-
-	
-	public int getFoodCost() {
-		return 0;
-	}
-
-	
-	public int getWoodCost() {
-		return 0;
-	}
-
-	
-	public int getIronCost() {
-		return 0;
-	}
-	public int getManaCost() {
-		return 0;
-	}
-
-	
-	public int getChanceGeneratinWaste() {
-		return 0;
-	}
-
-	
-	public int getChanceAttackAgain() {
-		return 0;
-	}
-
-	
-	public void resetArmor() {
-		
-	}
-
-	public void setExperience(int n) {
-		
-	}
-
-	public int getExperience() {
-		return 0;
-	}
-}
 class ArrowTower extends DefenseUnit {
     public ArrowTower(int armor, int baseDamage) {
         super();
@@ -330,61 +89,6 @@ class ArrowTower extends DefenseUnit {
         this.baseDamage = Variables.BASE_DAMAGE_ARROWTOWER + (/*Tecnologia ATAQUE*/*Variables.PLUS_ATTACK_ARROWTOWER_BY_TECHNOLOGY)%Variables.BASE_DAMAGE_ARROWTOWER;
         initialArmor = this.armor;
     }
-	
-	public int attack() {
-		return 0;
-	}
-
-	
-	public void takeDamage(int receivedDamage) {
-		
-	}
-
-	
-	public int getActualArmor() {
-		return 0;
-	}
-
-	
-	public int getFoodCost() {
-		return 0;
-	}
-
-	
-	public int getWoodCost() {
-		return 0;
-	}
-
-	
-	public int getIronCost() {
-		return 0;
-	}
-	public int getManaCost() {
-		return 0;
-	}
-
-	
-	public int getChanceGeneratinWaste() {
-		return 0;
-	}
-
-	
-	public int getChanceAttackAgain() {
-		return 0;
-	}
-
-	
-	public void resetArmor() {
-		
-	}
-
-	public void setExperience(int n) {
-		
-	}
-
-	public int getExperience() {
-		return 0;
-	}
 }
 
 class Catapult extends DefenseUnit {
@@ -395,63 +99,6 @@ class Catapult extends DefenseUnit {
         initialArmor = this.armor;
     }
 	
-	
-	public int attack() {
-		return 0;
-	}
-
-	
-	public void takeDamage(int receivedDamage) {
-		
-	}
-
-	
-	public int getActualArmor() {
-		return 0;
-	}
-
-	
-	public int getFoodCost() {
-		return 0;
-	}
-
-	
-	public int getWoodCost() {
-		return 0;
-	}
-
-	
-	public int getIronCost() {
-		return 0;
-	}
-	public int getManaCost() {
-		return 0;
-	}
-
-	
-	public int getChanceGeneratinWaste() {
-		return 0;
-	}
-
-	
-	public int getChanceAttackAgain() {
-		return 0;
-	}
-
-	
-	public void resetArmor() {
-		
-	}
-
-	public void setExperience(int n) {
-		
-	}
-
-	public int getExperience() {
-		return 0;
-	}
-}
-
 class RocketLauncher extends DefenseUnit {
     public RocketLauncher(int armor, int baseDamage) {
         super();
@@ -459,63 +106,7 @@ class RocketLauncher extends DefenseUnit {
         this.baseDamage = Variables.BASE_DAMAGE_ROCKETLAUNCHER + (/*Tecnologia ATAQUE*/*Variables.PLUS_ATTACK_ROCKETLAUNCHER_BY_TECHNOLOGY)%Variables.BASE_DAMAGE_ROCKETLAUNCHER;
         initialArmor = this.armor;
     }
-	
-	
-	public int attack() {
-		return 0;
-	}
 
-	
-	public void takeDamage(int receivedDamage) {
-		
-	}
-
-	
-	public int getActualArmor() {
-		return 0;
-	}
-
-	
-	public int getFoodCost() {
-		return 0;
-	}
-
-	
-	public int getWoodCost() {
-		return 0;
-	}
-
-	
-	public int getIronCost() {
-		return 0;
-	}
-	public int getManaCost() {
-		return 0;
-	}
-
-	
-	public int getChanceGeneratinWaste() {
-		return 0;
-	}
-
-	
-	public int getChanceAttackAgain() {
-		return 0;
-	}
-
-	
-	public void resetArmor() {
-		
-	}
-
-	public void setExperience(int n) {
-		
-	}
-
-	public int getExperience() {
-		return 0;
-	}
-}
 class Magician extends MilitaryUnit {
     public Magician() {
         super(12000, 2000, 0, 5000, 0, 3000, 75, 0);
