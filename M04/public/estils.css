@@ -3,6 +3,9 @@ body {
     font-size: 1.1em;
     background-color: #2e2e2e;
     margin: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
 
 /* ENCABEZADO */
@@ -69,6 +72,21 @@ body {
 
 .menu a:hover::after {
     width: 100%;
+}
+
+main {
+    flex: 1;
+}
+
+/* Footer */
+.footer {
+    background: #1b1b1b;
+    color: #dcdcdc;
+    text-align: center;
+    padding: 1.5rem 0;
+    font-size: 1rem;
+    margin-top: 2rem;
+    border-top: 2px solid #333;
 }
 
 /*INPUTS*/
@@ -143,4 +161,89 @@ body {
 .tarjeta h3 {
     margin-top: 1rem;
     font-size: 1.2rem;
+}
+/*Principal-contenido*/
+/* Contenedor principal */
+.contenedor {
+    margin: 5rem auto;
+    background: #f4f4f4;
+    width: 70rem;
+    padding: 2rem;
+    border-radius: 1rem;
+    box-shadow: 0 0 20px rgba(0,0,0,0.2);
+    font-family: Roboto, sans-serif;
+}
+
+/* Título */
+.titulo-info {
+    font-size: 1.5rem;
+    font-weight: bold;
+    cursor: pointer;
+    display: block;
+    margin-bottom: 1rem;
+}
+
+/* Cuadro desplegable */
+.cuadro-info {
+    background: white;
+    padding: 2rem;
+    border-radius: 1rem;
+    margin-top: 1rem;
+    box-shadow: 0 0 15px rgba(0,0,0,0.15);
+    transition: all .4s ease;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+/* Portada */
+.portada img {
+    width: 100%;
+    border-radius: 1rem;
+    box-shadow: 0 0 10px rgba(0,0,0,0.3);
+}
+
+/* Descripción */
+.descripcion h2 {
+    margin-bottom: .5rem;
+    font-size: 2rem;
+}
+
+.descripcion p {
+    font-size: 1.2rem;
+    line-height: 1.6rem;
+}
+
+/* Capturas */
+.capturas {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.capturas img {
+    width: 30%;
+    border-radius: .5rem;
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+}
+
+/* Animación oculto/visible */
+.oculto1 {
+    opacity: 0;
+    transform: scale(0.95);
+    height: 0;
+    overflow: hidden;
+    padding: 0;
+}
+
+.visible {
+    opacity: 1;
+    transform: scale(1);
+    height: auto;
+    padding: 2rem;
+}
+.principal{
+  flex: 1;
+  padding-bottom: 5rem;
 }
