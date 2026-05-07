@@ -1,56 +1,82 @@
 body {
     font-family: Roboto;
     font-size: 1.1em;
+    background-color: rgb(68, 65, 65);
 }
 
-table {
-  border-collapse: collapse;
+.encabezado{
+    background-color: lightblue;
+    padding:5rem;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    background-size: cover;
+}
+.encabezad1{
+    margin-top: -3rem;
+    letter-spacing: 0.5rem;
+    display: flex;
+    align-items: center;
+
 }
 
-th, td {
-  border: 1px solid #333;
-  padding: 0.5rem;
-  text-align: left;
+.encabezad1 h1{
+   text-decoration: underline;
+   text-shadow: 2px 2px 9px #ece4e4;
 }
-
-thead th {
-  background-color: #2c3e50;
-  color: #ffffff;
+.encabezad1:hover{
+    color: darkblue;
+    cursor: pointer;
 }
-
-tbody tr:nth-child(even) {
-  background-color: #dbeafe;
+nav a{
+    margin: 0 6rem;
+    text-decoration: underline;
+    font-size: 1.2rem;
+    color: black;
+    font-weight: bold;
 }
-
-tbody tr:nth-child(odd) {
-  background-color: #ffffff;
+/*Inputs*/
+.oculto{
+  display: none
 }
-
-nav {
-  border-top: 1px solid #aaa;
-  border-bottom: 1px solid #aaa;
+.noculto{
+  display:block
 }
-
-nav ul {
+.check{
+  
+}
+/*PROGRAMADORES*/
+.cuadro{
+  margin-top: 10rem;
+  margin-left: 20rem;
+  background-color: antiquewhite;
+  height: 40rem;
+  width: 70rem;
+  padding: 2%;
+}
+.separador{
   display: flex;
-  list-style: none;
-  padding: 0.5rem;
-  gap: 1rem;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.programadores{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
 }
 
-a,
-a:link,
-a:visited {
-  color: #1083e7;
-  text-decoration: none;
+.imagenes{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10rem;
 }
-
-a:hover {
-  color: #2563eb;
-  text-decoration: underline;
-}
-
-a:active {
-  color: #ffaf03;
-  text-decoration: none;
+.imagenes img{
+  max-height: 50%;
+  max-width: 50%;
 }
