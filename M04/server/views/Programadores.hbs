@@ -9,24 +9,44 @@
    <body>
         <section class="cuadro">
 
-            <div class="programadores">
-                <label for="Programador1"></label>
-                <input type="checkbox" id="Programador1" class="check" data-target="img1">Miembro1
+    <div class="programadores">
+        <label class="opcion">
+            <input type="checkbox" class="check" data-target="card1">
+            Miembro 1
+        </label>
 
+        <label class="opcion">
+            <input type="checkbox" class="check" data-target="card2">
+            Miembro 2
+        </label>
 
-                <label for="Programador2"></label>
-                <input type="checkbox" id="Programador2" class="check" data-target="img2" >Miembro2
+        <label class="opcion">
+            <input type="checkbox" class="check" data-target="card3">
+            Miembro 3
+        </label>
+    </div>
 
-                <label for="Programador1"></label>
-                <input type="checkbox" id="Programador2" class="check" data-target="img3">Miembro3
-            </div>
-            <div class="imagenes">
-                    <img src="imagenes/img1.png" id="img1" class="oculto">
-                    <img src="imagenes/img2.png" id="img2" alt="" class="oculto">
-                    <img src="imagenes/img3.png" id="img3" alt="" class="oculto">
-                </div>
-            <script src="java.js"></script>
-       </section>
+    <div class="tarjetas">
+        <div class="tarjeta oculto" id="card1">
+            <img src="imagenes/img1.png">
+            
+            <h3>{{Programadores.Programadores.name1}}</h3>
+        </div>
+
+        <div class="tarjeta oculto" id="card2">
+            <img src="imagenes/img2.png">
+            <h3>{{Programadores.Programadores.name2}}</h3>
+        </div>
+
+        <div class="tarjeta oculto" id="card3">
+            <img src="imagenes/img3.png">
+            <h3>{{Programadores.Programadores.name3}}</h3>
+        </div>
+    </div>
+    <script src="java.js"></script>
+
+</section>
+
        
        
    
