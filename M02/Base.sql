@@ -101,3 +101,4 @@ CREATE TABLE Battle_log (
     PRIMARY KEY (civilization_id, num_battle, num_line),
     FOREIGN KEY (civilization_id) REFERENCES Civilization_stats(civilization_id)
 );
+

@@ -247,3 +247,28 @@ main {
   flex: 1;
   padding-bottom: 5rem;
 }
+/*Tablas*/
+table {
+    width: 50%;
+    border-collapse: collapse;
+    margin-top: 2rem;
+    font-size: 1.1rem;
+    margin-left: 25rem;
+}
+
+thead {
+    background: #1b2a49;
+    color: white;
+}
+
+th, td {
+    padding: 1rem;
+    border-bottom: 1px solid #ccc;
+    text-align: left;
+    background-color: #4da3ff;
+}
+
+tr:hover {
+    background: #f0f0f0;
+}
+
