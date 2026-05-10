@@ -93,6 +93,86 @@ app.get('/Programadores', (req, res) => {
 
   res.render('Programadores', data);
 });
+//Batallas
+app.get('/Batallas', async (req, res) => {
+  try {
+    // Obtenir les dades de la base de dades
+    const Civilization_statsRows = await db.query('SELECT name FROM Civilization_stats');
+    // Transformar les dades a JSON (per les plantilles .hbs)
+    // Cal informar de les columnes i els seus tipus
+    const Civilization_statsJson = db.table_to_json(Civilization_statsRows, {name: 'string'});
+    
+    // Llegir l'arxiu .json amb dades comunes per a totes les pàgines
+    const commonData = JSON.parse(
+      fs.readFileSync(path.join(__dirname, 'data', 'common.json'), 'utf8')
+    );
+
+    // Construir l'objecte de dades per a la plantilla
+    const data = {
+      Civilization_stats:Civilization_statsJson,
+      common: commonData
+    };
+
+    // Renderitzar la plantilla amb les dades
+    res.render('Batallas', data);
+  } catch (err) {
+    console.error(err);
+    res.status(500).send('Error consultant la base de dades');
+  }
+});
+//Civilizaciones
+app.get('/Civilizaciones', async (req, res) => {
+  try {
+    // Obtenir les dades de la base de dades
+    const Civilization_statsRows = await db.query('SELECT name FROM Civilization_stats');
+    // Transformar les dades a JSON (per les plantilles .hbs)
+    // Cal informar de les columnes i els seus tipus
+    const Civilization_statsJson = db.table_to_json(Civilization_statsRows, {name: 'string'});
+    
+    // Llegir l'arxiu .json amb dades comunes per a totes les pàgines
+    const commonData = JSON.parse(
+      fs.readFileSync(path.join(__dirname, 'data', 'common.json'), 'utf8')
+    );
+
+    // Construir l'objecte de dades per a la plantilla
+    const data = {
+      Civilization_stats:Civilization_statsJson,
+      common: commonData
+    };
+
+    // Renderitzar la plantilla amb les dades
+    res.render('Civilizaciones', data);
+  } catch (err) {
+    console.error(err);
+    res.status(500).send('Error consultant la base de dades');
+  }
+});
+app.get('/Informes', async (req, res) => {
+  try {
+    // Obtenir les dades de la base de dades
+    const Civilization_statsRows = await db.query('SELECT name FROM Civilization_stats');
+    // Transformar les dades a JSON (per les plantilles .hbs)
+    // Cal informar de les columnes i els seus tipus
+    const Civilization_statsJson = db.table_to_json(Civilization_statsRows, {name: 'string'});
+    
+    // Llegir l'arxiu .json amb dades comunes per a totes les pàgines
+    const commonData = JSON.parse(
+      fs.readFileSync(path.join(__dirname, 'data', 'common.json'), 'utf8')
+    );
+
+    // Construir l'objecte de dades per a la plantilla
+    const data = {
+      Civilization_stats:Civilization_statsJson,
+      common: commonData
+    };
+
+    // Renderitzar la plantilla amb les dades
+    res.render('Informes Batallas', data);
+  } catch (err) {
+    console.error(err);
+    res.status(500).send('Error consultant la base de dades');
+  }
+}); 
 
 // Start server
 const httpServer = app.listen(port, () => {
