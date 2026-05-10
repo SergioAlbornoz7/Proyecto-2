@@ -31,10 +31,11 @@ CREATE TABLE attack_units_stats (
 CREATE TABLE defense_units_stats (
     civilization_id INT NOT NULL,
     unit_id INT NOT NULL,
-    type ENUM('ArrowTower','Catapult','RocketLauncher Tower') NOT NULL,
+    type ENUM('ArrowTower','Catapult','RocketLauncherTower') NOT NULL,
     armor INT DEFAULT 0,
     base_damage INT DEFAULT 0,
     experience INT DEFAULT 0,
+    sanctified BOOLEAN DEFAULT FALSE, 
     PRIMARY KEY (civilization_id, unit_id),
     FOREIGN KEY (civilization_id) REFERENCES Civilization_stats(civilization_id)
 );
@@ -45,7 +46,6 @@ CREATE TABLE special_units_stats (
     armor INT DEFAULT 0,
     base_damage INT DEFAULT 0,
     experience INT DEFAULT 0,
-    sanctified BOOLEAN DEFAULT FALSE,
     PRIMARY KEY (civilization_id, unit_id),
     FOREIGN KEY (civilization_id) REFERENCES Civilization_stats(civilization_id)
 );
@@ -85,7 +85,7 @@ CREATE TABLE Enemy_attack_stats (
     PRIMARY KEY (civilization_id, num_battle, type),
     FOREIGN KEY (civilization_id) REFERENCES Civilization_stats(civilization_id)
 );
-CREATE TABLE Battle_resources (
+CREATE TABLE Battle_stats (
     civilization_id INT NOT NULL,
     num_battle INT NOT NULL,
     wood_acquired INT DEFAULT 0,
