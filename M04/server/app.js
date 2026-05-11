@@ -149,30 +149,86 @@ app.get('/Civilizaciones', async (req, res) => {
 });
 app.get('/Informes', async (req, res) => {
   try {
-    // Obtenir les dades de la base de dades
-    const Civilization_statsRows = await db.query('SELECT name FROM Civilization_stats');
-    // Transformar les dades a JSON (per les plantilles .hbs)
-    // Cal informar de les columnes i els seus tipus
-    const Civilization_statsJson = db.table_to_json(Civilization_statsRows, {name: 'string'});
+    // 1. Afegeix civilization_id a la consulta!
+    const Battle_statsRows = await db.query(`
+      select cs.name,bt.civilization_id,bt.num_battle
+      from Civilization_stats cs
+      join Battle_stats bt on cs.civilization_id=bt.civilization_id `);
     
-    // Llegir l'arxiu .json amb dades comunes per a totes les pàgines
+    // 2. Afegeix-lo també aquí per al JSON
+    const Battle_statsJson = db.table_to_json(Battle_statsRows, {
+      civilization_id: 'number',
+      name: 'string',
+      num_battle: 'number'
+    });
+    
     const commonData = JSON.parse(
       fs.readFileSync(path.join(__dirname, 'data', 'common.json'), 'utf8')
     );
 
-    // Construir l'objecte de dades per a la plantilla
     const data = {
-      Civilization_stats:Civilization_statsJson,
+      Battle_stats: Battle_statsJson,
       common: commonData
     };
 
-    // Renderitzar la plantilla amb les dades
+    // Compte: assegura't que el fitxer es diu exactament 'Informes Batallas.hbs'
+    // (millor no fer servir espais en els noms de fitxer, però si el tens així, endavant)
     res.render('Informes Batallas', data);
   } catch (err) {
     console.error(err);
     res.status(500).send('Error consultant la base de dades');
   }
-}); 
+});
+
+app.get('/Info', async (req, res) => {
+  try {
+    // Llegit el valor del paràmetre "id" en format enter
+    const cursId = parseInt(req.query.id, 10)
+
+    // Validar que és un número enter positiu (o respondre amb error 400)
+    if (!Number.isInteger(cursId) || cursId <= 0) {
+      return res.status(400).send('Paràmetre id invàlid')
+    }
+
+    // Query only the requested course
+    const Battle_statsRows = await db.query(`
+      select cs.name,bt.civilization_id,bt.num_battle
+      from Civilization_stats cs
+      join Battle_stats bt on cs.civilization_id=bt.civilization_id
+      where bt.num_battle=${[cursId]}`)
+
+    // Si no s'ha trobat cap curs amb aquest id, respondre amb error 404
+    if (!Battle_statsRows || Battle_statsRows.length === 0) {
+      return res.status(404).send('Curs no trobat')
+    }
+
+    // Transformar les dades a JSON (per les plantilles .hbs)
+    const Battle_statsJson = db.table_to_json(Battle_statsRows, {
+      civilization_id: 'number',
+      name: 'string',
+      num_battle:'number'
+      
+    })
+
+    // Llegir l'arxiu .json amb dades comunes per a totes les pàgines
+    const commonData = JSON.parse(
+      fs.readFileSync(path.join(__dirname, 'data', 'common.json'), 'utf8')
+    )
+
+    // Construir l'objecte de dades per a la plantilla
+    // com que tenim una llista amb un sol element, agafem directament el primer element (cursosJson[0])
+    const data = {
+      Battle: Battle_statsJson[0],
+      common: commonData
+    }
+
+    // Render a new template (recommended)
+    res.render('Informes', data)
+  } catch (err) {
+    console.error(err)
+    res.status(500).send('Error consultant la base de dades')
+  }
+});
 
 // Start server
 const httpServer = app.listen(port, () => {
