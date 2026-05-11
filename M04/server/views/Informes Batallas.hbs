@@ -7,6 +7,28 @@
        {{> menu}}
    </head>
    <body>
+      <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Numero_Batallas</th>
+                    <th>Detalles</th>
+                </tr>
+            </thead>
+
+            <tbody>
+               {{#each Battle_stats}}
+                  <tr>
+                     <td>{{civilization_id}}</td>
+                     <td>{{name}}</td>
+                     <td>{{num_battle}}</td>
+                     <td><a href="/Info?id={{num_battle}}">Veure detalls</a></td>
+                  </tr>
+               {{/each}}
+         </tbody>
+      </table>
+
 
 {{> footer}}
        
