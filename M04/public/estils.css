@@ -272,3 +272,28 @@ tr:hover {
     background: #f0f0f0;
 }
 
+/*Imagenes de Informes*/
+.imagenes {
+    /* Tamaño controlado */
+    width: 24px; 
+    height: 24px;
+    
+    /* Mantiene la proporción sin deformar */
+    object-fit: contain; 
+    
+    /* Estética */
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    
+    /* Alineación con el texto */
+    vertical-align: middle;
+    margin-left: 8px; /* Espacio entre el texto "Wood" y la imagen */
+}
+
+th {
+    /* Para que el texto y la imagen estén centrados y alineados */
+    text-align: center;
+    padding: 10px;
+    white-space: nowrap; /* Evita que el texto y la imagen se separen en dos líneas */
+}
+

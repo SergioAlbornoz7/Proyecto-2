@@ -7,7 +7,36 @@
        {{> menu}}
    </head>
    <body>
-      
+    <h1>Informe de Batalla ID:{{Battle.num_battle}}</h1>
+    <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Numero_Batallas</th>
+                    <th>
+                        Wood
+                        <img class="imagenes" src="imagenes/Madera.png" alt="">
+                    </th>
+                    <th>iron</th>
+                    <th>food</th>
+                    <th>mana</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                  <tr>
+                     <td>{{Battle.civilization_id}}</td>
+                     <td>{{Battle.name}}</td>
+                     <td>{{Battle.num_battle}}</td>
+                     <td>{{Battle.wood_amount}}</td>
+                     <td>{{Battle.iron_amount}}</td>
+                     <td>{{Battle.food_amount}}</td>
+                     <td>{{Battle.mana_amount}}</td>
+                     
+                  </tr>
+         </tbody>
+      </table>
 
 
 {{> footer}}
