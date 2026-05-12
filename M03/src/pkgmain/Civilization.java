@@ -533,7 +533,7 @@ class RocketLauncher extends DefenseUnit {
         return experience;
     }
 }
-class Magician extends MilitaryUnit {
+class Magician extends SpecialUnit {
     public Magician(int armor, int baseDamage) {
         super();
 		this.armor = Variables.ARMOR_MAGICIAN + (/*Tecnologia defensa*/*Variables.PLUS_ARMOR_MAGICIAN_BY_TECHNOLOGY)%Variables.ARMOR_MAGICIAN;
@@ -600,7 +600,7 @@ class Magician extends MilitaryUnit {
     }
 }
 
-class Priest extends MilitaryUnit {
+class Priest extends SpecialUnit {
     public Priest(int armor, int baseDamage) {
 		this.armor = Variables.ARMOR_PRIEST + (/*Tecnologia defensa*/*Variables.PLUS_ARMOR_PRIEST_BY_TECHNOLOGY)%Variables.ARMOR_PRIEST;
         this.baseDamage = Variables.BASE_DAMAGE_PRIEST + (/*Tecnologia ATAQUE*/*Variables.PLUS_ATTACK_PRIEST_BY_TECHNOLOGY)%Variables.BASE_DAMAGE_PRIEST;
