@@ -275,9 +275,10 @@ tr:hover {
 /*Imagenes de Informes*/
 .imagenes {
     /* Tamaño controlado */
-    width: 24px; 
-    height: 24px;
-    
+    width: 64px; 
+    height: 64px;
+    display: flex;
+    flex-direction: column;
     /* Mantiene la proporción sin deformar */
     object-fit: contain; 
     
