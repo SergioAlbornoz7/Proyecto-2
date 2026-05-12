@@ -738,7 +738,7 @@ public class Civilization {
     class Magician extends SpecialUnit {
         public Magician(int armor, int baseDamage) {
             super();
-    		this.armor = 0 + (getTechnologyDefense()*0)%0;
+    		this.armor = 0;
             this.baseDamage = Variables.BASE_DAMAGE_MAGICIAN + (getTechnologyAtack()*Variables.PLUS_ATTACK_MAGICIAN_BY_TECHNOLOGY)%Variables.BASE_DAMAGE_MAGICIAN;
     		initialArmor = this.armor;
         }
@@ -804,8 +804,8 @@ public class Civilization {
 
     class Priest extends SpecialUnit {
         public Priest(int armor, int baseDamage) {
-    		this.armor = 0 + (getTechnologyDefense()*0)%0;
-            this.baseDamage = 0 + (getTechnologyAtack()*0)%0;
+    		this.armor = 0;
+            this.baseDamage = 0;
     		initialArmor = this.armor;
         }
     	public int attack() {
