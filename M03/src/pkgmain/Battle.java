@@ -3,17 +3,17 @@ package pkgmain;
 import java.util.ArrayList;
 
 public class Battle {
-	ArrayList<MilitaryUnit> civilizationArmy;
-	ArrayList<MilitaryUnit> enemyArmy;
-	ArrayList armies; //Ni idea de como poner esto
-	String battleDevelopment;
-	int initialCostFleet;
-	int initialNumberUnitsCivilization, initialNumbersUnitsEnemy;
-	int wasteWoodIron;
-	int enemyDrops;
-	int CivilizationDrops;
-	int resourcesLooses;
-	int initialArmies;
-	int actualNumberUnitsCivulization;
-	int actualNumberUnitsEnemy;
+	private ArrayList<MilitaryUnit> civilizationArmy;
+	private ArrayList<MilitaryUnit> enemyArmy;
+	private ArrayList armies; //Ni idea de como poner esto
+	private String battleDevelopment;
+	private int initialCostFleet;
+	private int initialNumberUnitsCivilization, initialNumbersUnitsEnemy;
+	private int wasteWoodIron;
+	private int enemyDrops;
+	private int civilizationDrops;
+	private int resourcesLooses;
+	private int initialArmies;
+	private int actualNumberUnitsCivulization;
+	private int actualNumberUnitsEnemy;
 }
