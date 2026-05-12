@@ -239,7 +239,7 @@ public class Civilization {
 
     abstract class SpecialUnit implements MilitaryUnit, Variables {
     	int armor = 0;
-    	final int initialArmor = 0;
+    	int initialArmor = 0;
     	int baseDamage;
     	int experience;
     }
@@ -738,7 +738,7 @@ public class Civilization {
     class Magician extends SpecialUnit {
         public Magician(int armor, int baseDamage) {
             super();
-    		this.armor = Variables.ARMOR_MAGICIAN + (getTechnologyDefense()*Variables.PLUS_ARMOR_MAGICIAN_BY_TECHNOLOGY )%Variables.ARMOR_MAGICIAN;
+    		this.armor = 0 + (getTechnologyDefense()*0)%0;
             this.baseDamage = Variables.BASE_DAMAGE_MAGICIAN + (getTechnologyAtack()*Variables.PLUS_ATTACK_MAGICIAN_BY_TECHNOLOGY)%Variables.BASE_DAMAGE_MAGICIAN;
     		initialArmor = this.armor;
         }
@@ -804,8 +804,8 @@ public class Civilization {
 
     class Priest extends SpecialUnit {
         public Priest(int armor, int baseDamage) {
-    		this.armor = Variables.ARMOR_PRIEST + (getTechnologyDefense()*Variables.PLUS_ARMOR_PRIEST_BY_TECHNOLOGY)%Variables.ARMOR_PRIEST;
-            this.baseDamage = Variables.BASE_DAMAGE_PRIEST + (getTechnologyAtack()*Variables.PLUS_ATTACK_PRIEST_BY_TECHNOLOGY)%Variables.BASE_DAMAGE_PRIEST;
+    		this.armor = 0 + (getTechnologyDefense()*0)%0;
+            this.baseDamage = 0 + (getTechnologyAtack()*0)%0;
     		initialArmor = this.armor;
         }
     	public int attack() {
