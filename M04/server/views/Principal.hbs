@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+   <head>
+        {{> header}}
+       <meta charset="UTF-8">
+       <title>Principal</title>
+       {{> menu}}
+   </head>
+   <body>
+    <main class="principal">
+        <section class="contenedor">
+            <label for="Informacion" class="titulo-info">Sobre el juego</label>
+            <input type="checkbox" id="Informacion" class="check" data-target="INFO">
+
+            <div class="cuadro-info oculto1" id="INFO">
+
+                <div class="portada">
+                    <img src="/imagenes/portada.png" alt="Portada del juego">
+                </div>
+
+                <div class="descripcion">
+                    <h2>ProyectMixII</h2>
+                    <p>
+                        Aquí puedes escribir una descripción del juego, su historia, mecánicas,
+                        inspiración, modos de juego, etc.
+                    </p>
+                </div>
+
+                <div class="capturas">
+                    <img src="/imagenes/cap1.png">
+                    <img src="/imagenes/cap2.png">
+                    <img src="/imagenes/cap3.png">
+                </div>
+            </div>
+        </section>
+        <table>
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Rol</th>
+                    <th>Edad</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr>
+                    <td>Juan</td>
+                    <td>Programador</td>
+                    <td>20</td>
+                </tr>
+
+                <tr>
+                    <td>Ana</td>
+                    <td>Diseñadora</td>
+                    <td>19</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Rol</th>
+                    <th>Edad</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr>
+                    <td>Juan</td>
+                    <td>Programador</td>
+                    <td>20</td>
+                </tr>
+
+                <tr>
+                    <td>Ana</td>
+                    <td>Diseñadora</td>
+                    <td>19</td>
+                </tr>
+            </tbody>
+        </table>
+
+    </main>
+  
+
+
+    <script src="java.js"></script>
+
+   {{> footer}}
+   </body>
+</html> 
