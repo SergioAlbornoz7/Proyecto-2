@@ -300,7 +300,7 @@ public class Civilization {
     			mana -= Variables.MANA_COST_ARROWTOWER;
             } else {
             	System.out.println(String.format("Se han creado %d espadachines", n-i));
-                throw new ResourceException("No tienes suficientes materiales para crear mas espadachines"); 
+                throw new ResourceException("No tienes suficientes materiales para crear mas Torres"); 
             }
     	}
     }
@@ -314,7 +314,7 @@ public class Civilization {
     			mana -= Variables.MANA_COST_CATAPULT;
             } else {
             	System.out.println(String.format("Se han creado %d espadachines", n-i));
-                throw new ResourceException("No tienes suficientes materiales para crear mas espadachines"); 
+                throw new ResourceException("No tienes suficientes materiales para crear mas Catapultas"); 
             }
     	}
     }
@@ -328,7 +328,7 @@ public class Civilization {
     			mana -= Variables.MANA_COST_ROCKETLAUNCHERTOWER;
             } else {
             	System.out.println(String.format("Se han creado %d espadachines", n-i));
-                throw new ResourceException("No tienes suficientes materiales para crear mas cañones"); 
+                throw new ResourceException("No tienes suficientes materiales para crear mas Lanzacohetes"); 
             }
     	}
     }
@@ -342,7 +342,7 @@ public class Civilization {
     			mana -= Variables.MANA_COST_MAGICIAN;
             } else {
             	System.out.println(String.format("Se han creado %d espadachines", n-i));
-                throw new ResourceException("No tienes suficientes materiales para crear mas cañones"); 
+                throw new ResourceException("No tienes suficientes materiales para crear mas Mago"); 
             }
     	}
     }
@@ -356,7 +356,7 @@ public class Civilization {
     			mana -= Variables.MANA_COST_PRIEST;
             } else {
             	System.out.println(String.format("Se han creado %d espadachines", n-i));
-                throw new ResourceException("No tienes suficientes materiales para crear mas cañones"); 
+                throw new ResourceException("No tienes suficientes materiales para crear mas Clerigo"); 
             }
     	}
     }
