@@ -245,6 +245,7 @@ public class Civilization {
     }
 
     /*Subclasses de MilitaryUnit */
+    /*Attack*/
     class Swordsman extends AttackUnit {
         public Swordsman(int armor, int baseDamage) {
             super();
@@ -536,6 +537,7 @@ public class Civilization {
             return experience;
         }
     }
+    /*Defense*/
     class ArrowTower extends DefenseUnit {
         public ArrowTower(int armor, int baseDamage) {
             super();
@@ -735,6 +737,7 @@ public class Civilization {
             return experience;
         }
     }
+    /*Special*/
     class Magician extends SpecialUnit {
         public Magician(int armor, int baseDamage) {
             super();
