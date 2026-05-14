@@ -232,6 +232,19 @@ public class Civilization {
         }
     }
     
+    /*Create Units*/
+    
+    public void newSwordsman(int n) throws ResourceException {
+    	for (int i = n; i != 0; i--) {
+    		if (true) {
+                
+            } else {
+            	System.out.println(String.format("Se han creado %d espadachines", n-i));
+                throw new ResourceException("No tienes suficientes materiales para crear mas espadachines"); 
+            }
+    	}
+    }
+    
     /*Interfaces*/
     
     interface MilitaryUnit {
