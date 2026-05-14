@@ -25,13 +25,13 @@ public class Main {
 			//Crear conección//
 			
 			//Crear consulta//
-			String querySql = "select num_battle from Battle_stats";
+			String querySql = "select num_battle,civilization_id,wood_acquired,iron_acquired from Battle_stats";
 			Statement stmnt=conn.createStatement();
 				//creamos un contenedor para ponder nuestros datos
 			//4)ejecutar querry
 			ResultSet rs=stmnt.executeQuery(querySql);
 			while (rs.next()) {
-				System.out.println("num_battle = "+rs.getInt(1));
+				System.out.println("num_battle = "+rs.getInt(1)+"civilization_id = "+rs.getInt(2)+"wood_acquired = "+rs.getInt(3)+"iron_battle = "+rs.getInt(4));
 			}
 			
 		} catch (ClassNotFoundException e) {
