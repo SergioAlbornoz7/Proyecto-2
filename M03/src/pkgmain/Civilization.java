@@ -236,15 +236,60 @@ public class Civilization {
     
     public void newSwordsman(int n) throws ResourceException {
     	for (int i = n; i != 0; i--) {
-    		if (true) {
-                
+    		if (food >= Variables.FOOD_COST_SWORDSMAN && wood >= Variables.WOOD_COST_SWORDSMAN && iron >= Variables.IRON_COST_SWORDSMAN && mana >= Variables.MANA_COST_SWORDSMAN) {
+                army[0].add(new Swordsman());
+    			food -= Variables.FOOD_COST_SWORDSMAN;
+    			wood -= Variables.WOOD_COST_SWORDSMAN;
+    			iron -= Variables.IRON_COST_SWORDSMAN;
+    			mana -= Variables.MANA_COST_SWORDSMAN;
             } else {
             	System.out.println(String.format("Se han creado %d espadachines", n-i));
                 throw new ResourceException("No tienes suficientes materiales para crear mas espadachines"); 
             }
     	}
     }
-    
+    public void newSpearman(int n) throws ResourceException {
+    	for (int i = n; i != 0; i--) {
+    		if (food >= Variables.FOOD_COST_SPEARMAN && wood >= Variables.WOOD_COST_SPEARMAN && iron >= Variables.IRON_COST_SPEARMAN && mana >= Variables.MANA_COST_SPEARMAN) {
+                army[0].add(new Spearman());
+    			food -= Variables.FOOD_COST_SPEARMAN;
+    			wood -= Variables.WOOD_COST_SPEARMAN;
+    			iron -= Variables.IRON_COST_SPEARMAN;
+    			mana -= Variables.MANA_COST_SPEARMAN;
+            } else {
+            	System.out.println(String.format("Se han creado %d espadachines", n-i));
+                throw new ResourceException("No tienes suficientes materiales para crear mas lanceros"); 
+            }
+    	}
+    }
+    public void newCrosbow(int n) throws ResourceException {
+    	for (int i = n; i != 0; i--) {
+    		if (food >= Variables.FOOD_COST_CROSSBOW && wood >= Variables.WOOD_COST_CROSSBOW && iron >= Variables.IRON_COST_CROSSBOW && mana >= Variables.MANA_COST_CROSSBOW) {
+                army[0].add(new Crossbow());
+    			food -= Variables.FOOD_COST_CROSSBOW;
+    			wood -= Variables.WOOD_COST_CROSSBOW;
+    			iron -= Variables.IRON_COST_CROSSBOW;
+    			mana -= Variables.MANA_COST_CROSSBOW;
+            } else {
+            	System.out.println(String.format("Se han creado %d espadachines", n-i));
+                throw new ResourceException("No tienes suficientes materiales para crear mas ballesteros"); 
+            }
+    	}
+    }
+    public void newCannon(int n) throws ResourceException {
+    	for (int i = n; i != 0; i--) {
+    		if (food >= Variables.FOOD_COST_CANNON && wood >= Variables.WOOD_COST_CANNON && iron >= Variables.IRON_COST_CANNON && mana >= Variables.MANA_COST_CANNON) {
+                army[0].add(new Cannon());
+    			food -= Variables.FOOD_COST_CANNON;
+    			wood -= Variables.WOOD_COST_CANNON;
+    			iron -= Variables.IRON_COST_CANNON;
+    			mana -= Variables.MANA_COST_CANNON;
+            } else {
+            	System.out.println(String.format("Se han creado %d espadachines", n-i));
+                throw new ResourceException("No tienes suficientes materiales para crear mas cañones"); 
+            }
+    	}
+    }
     /*Interfaces*/
     
     interface MilitaryUnit {
