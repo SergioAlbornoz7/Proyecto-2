@@ -2,6 +2,8 @@ package pkgmain;
 
 import java.util.ArrayList;
 
+import pkgmain.Civilization.MilitaryUnit;
+
 public class Battle {
 	// Variables
 	private ArrayList<MilitaryUnit> civilizationArmy;
@@ -12,8 +14,8 @@ public class Battle {
 	private int initialNumberUnitsCivilization;
 	private int initialNumbersUnitsEnemy;
 	private int[] wasteWoodIron;
-	private int enemyDrops;
-	private int civilizationDrops;
+	private int[] enemyDrops;
+	private int[] civilizationDrops;
 	private int[][] resourcesLooses;
 	private int[][] initialArmies;
 	private int[] actualNumberUnitsCivilization;
@@ -25,8 +27,15 @@ public class Battle {
 		this.civilizationArmy = civilizationArmy;
 		this.enemyArmy = enemyArmy;
 		this.initialCostFleet = new int[2][3];
+		this.initialArmies = new int[2][9];
+		this.actualNumberUnitsCivilization = new int[9];
+		this.actualNumberUnitsEnemy = new int[9];
+		this.civilizationDrops = new int[9];
+		this.enemyDrops = new int[9];
+		
 		
 		//Recursos
 		this.wasteWoodIron = new int[2];
+		this.resourcesLooses = new int[2][4];
 	}
 }
