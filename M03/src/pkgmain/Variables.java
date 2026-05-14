@@ -215,10 +215,10 @@ public interface Variables {
 	// CHANCE ATTACK EVERY UNIT
 
 	// SWORDSMAN, SPEARMAN, CROSSBOW, CANNON, ARROWTOWER, CATAPULT, ROCKETLAUNCHERTOWER, MAGICIAN, PRIEST
-	public final int  CHANCE_ATTACK_CIVILIZATION_UNITS = {4,9,13,37,4,9,14,10,0};
+	public final int[]  CHANCE_ATTACK_CIVILIZATION_UNITS = {4,9,13,37,4,9,14,10,0};
 
 	// SWORDSMAN, SPEARMAN, CROSSBOW, CANNON
-	public final int  CHANCE_ATTACK_ENEMY_UNITS = {10,20,30,40};
+	public final int[]  CHANCE_ATTACK_ENEMY_UNITS = {10,20,30,40};
 	
 	// percentage of waste that will be generated with respect to the cost of the units
 	public final int PERCENTATGE_WASTE = 70;
