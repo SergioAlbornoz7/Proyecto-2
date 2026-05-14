@@ -192,7 +192,7 @@ app.get('/Info', async (req, res) => {
 
     // Query only the requested course
     const Battle_statsRows = await db.query(`
-      select cs.name,bt.civilization_id,bt.num_battle
+      select cs.name,bt.civilization_id,bt.num_battle,cs.wood_amount,cs.iron_amount,cs.food_amount,cs.mana_amount
       from Civilization_stats cs
       join Battle_stats bt on cs.civilization_id=bt.civilization_id
       where bt.num_battle=${[cursId]}`)
@@ -206,7 +206,11 @@ app.get('/Info', async (req, res) => {
     const Battle_statsJson = db.table_to_json(Battle_statsRows, {
       civilization_id: 'number',
       name: 'string',
-      num_battle:'number'
+      num_battle:'number',
+      wood_amount:'number',
+      iron_amount:'number',
+      food_amount:'number',
+      mana_amount:'number'
       
     })
 
