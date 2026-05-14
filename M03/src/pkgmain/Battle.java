@@ -21,7 +21,6 @@ public class Battle {
 	private int[][] initialArmies;
 	private int[] actualNumberUnitsCivilization;
 	private int[] actualNumberUnitsEnemy;
-	private boolean True;
 	
 	//constructor
 	public Battle(ArrayList<MilitaryUnit> civilizationArmy, ArrayList<MilitaryUnit> enemyArmy) {
@@ -63,6 +62,6 @@ public class Battle {
 	}
 	
 	boolean inBattle() {
-		return True;
+		return true;
 	}
 }
