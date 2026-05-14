@@ -2,6 +2,9 @@ package pkgmain;
 
 import java.util.ArrayList;
 
+import pkgmain.Civilization.MilitaryUnit;
+
+
 public class Battle {
 	// Variables
 	private ArrayList<MilitaryUnit> civilizationArmy;
@@ -12,8 +15,8 @@ public class Battle {
 	private int initialNumberUnitsCivilization;
 	private int initialNumbersUnitsEnemy;
 	private int[] wasteWoodIron;
-	private int enemyDrops;
-	private int civilizationDrops;
+	private int[] enemyDrops;
+	private int[] civilizationDrops;
 	private int[][] resourcesLooses;
 	private int[][] initialArmies;
 	private int[] actualNumberUnitsCivilization;
@@ -25,8 +28,40 @@ public class Battle {
 		this.civilizationArmy = civilizationArmy;
 		this.enemyArmy = enemyArmy;
 		this.initialCostFleet = new int[2][3];
+		this.initialArmies = new int[2][9];
+		this.actualNumberUnitsCivilization = new int[9];
+		this.actualNumberUnitsEnemy = new int[9];
+		this.civilizationDrops = new int[9];
+		this.enemyDrops = new int[9];
+		
 		
 		//Recursos
 		this.wasteWoodIron = new int[2];
+		this.resourcesLooses = new int[2][4];
+	}
+	
+	public void startBattle() {
+		int turn = (int) (Math.random()*2+1);
+		while (inBattle()) {
+			if (turn == 1) {
+				civilizationAttack();
+				turn = 2;
+			}else {
+				enemyAttack();
+				turn = 1;
+			}
+		}
+	}
+	
+	public void civilizationAttack() {
+		
+	}
+	
+	public void enemyAttack() {
+		
+	}
+	
+	boolean inBattle() {
+		return true;
 	}
 }
