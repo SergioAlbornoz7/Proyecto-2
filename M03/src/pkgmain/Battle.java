@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import pkgmain.Civilization.MilitaryUnit;
 
+
 public class Battle {
 	// Variables
 	private ArrayList<MilitaryUnit> civilizationArmy;
@@ -20,6 +21,7 @@ public class Battle {
 	private int[][] initialArmies;
 	private int[] actualNumberUnitsCivilization;
 	private int[] actualNumberUnitsEnemy;
+	private boolean True;
 	
 	//constructor
 	public Battle(ArrayList<MilitaryUnit> civilizationArmy, ArrayList<MilitaryUnit> enemyArmy) {
@@ -37,5 +39,30 @@ public class Battle {
 		//Recursos
 		this.wasteWoodIron = new int[2];
 		this.resourcesLooses = new int[2][4];
+	}
+	
+	public void startBattle() {
+		int turn = (int) (Math.random()*2+1);
+		while (inBattle()) {
+			if (turn == 1) {
+				civilizationAttack();
+				turn = 2;
+			}else {
+				enemyAttack();
+				turn = 1;
+			}
+		}
+	}
+	
+	public void civilizationAttack() {
+		
+	}
+	
+	public void enemyAttack() {
+		
+	}
+	
+	boolean inBattle() {
+		return True;
 	}
 }
