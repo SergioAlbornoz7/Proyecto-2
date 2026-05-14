@@ -7,7 +7,7 @@ public class Civilization {
 	
 	/*tech*/
 	private int technologyDefense;
-	private int technologyAtack;
+	private int technologyAttack;
 	
 	/*resources*/
 	private int wood;
@@ -26,11 +26,11 @@ public class Civilization {
 	int battles;
 	ArrayList<MilitaryUnit>[] army = new ArrayList[9];
 
-	public Civilization(int technologyDefense, int technologyAtack, int wood, int iron, int food, int mana,
+	public Civilization(int technologyDefense, int technologyAttack, int wood, int iron, int food, int mana,
 			int magicTower, int church, int farm, int smithy, int carpentry, int battles) {
 		super();
 		this.technologyDefense = technologyDefense;
-		this.technologyAtack = technologyAtack;
+		this.technologyAttack = technologyAttack;
 		this.wood = wood;
 		this.iron = iron;
 		this.food = food;
@@ -46,6 +46,8 @@ public class Civilization {
         }
 	}
 	
+	/*getters and setters*/
+	
 	public int getTechnologyDefense() {
 		return technologyDefense;
 	}
@@ -54,12 +56,12 @@ public class Civilization {
 		this.technologyDefense = technologyDefense;
 	}
 
-	public int getTechnologyAtack() {
-		return technologyAtack;
+	public int getTechnologyAttack() {
+		return technologyAttack;
 	}
 
-	public void setTechnologyAtack(int technologyAtack) {
-		this.technologyAtack = technologyAtack;
+	public void setTechnologyAttack(int technologyAttack) {
+		this.technologyAttack = technologyAttack;
 	}
 
 	public int getWood() {
@@ -149,23 +151,26 @@ public class Civilization {
 	public void setArmy(ArrayList<MilitaryUnit>[] army) {
 		this.army = army;
 	}
+	
+	/*Build*/
+	
 	public void newChurch() throws ResourceException{
-		if (food >= 10000 && wood >= 20000 && iron >= 24000 && mana >= 10000) {
-			food -= 10000;
-			wood -= 20000;
-			iron -= 24000;
+		if (food >= Variables.FOOD_COST_CHURCH && wood >= Variables.WOOD_COST_CHURCH && iron >= Variables.IRON_COST_CHURCH && mana >= 10000) {
+			food -= Variables.FOOD_COST_CHURCH;
+			wood -= Variables.WOOD_COST_CHURCH;
+			iron -= Variables.IRON_COST_CHURCH;
 			mana -= 10000;
 			church += 1;
 		} else {
-			throw new ResourceException("No tienes suficientes materiales para construir la iglesia");
+			throw new ResourceException("No tienes suficientes materiales para construir la capilla");
 		}
 			
 	}
 	public void newSmithy() throws ResourceException {
-        if (food >= 5000 && wood >= 10000 && iron >= 12000) {
-            food -= 5000;
-            wood -= 10000;
-            iron -= 12000;
+        if (food >= Variables.FOOD_COST_SMITHY && wood >= Variables.WOOD_COST_SMITHY && iron >= Variables.IRON_COST_SMITHY) {
+            food -= Variables.FOOD_COST_SMITHY;
+            wood -= Variables.WOOD_COST_SMITHY;
+            iron -= Variables.IRON_COST_SMITHY;
             smithy += 1;
         } else {
             throw new ResourceException("No tienes suficientes materiales para construir la herrería");
@@ -173,10 +178,10 @@ public class Civilization {
     }
 
     public void newCarpentry() throws ResourceException {
-        if (food >= 5000 && wood >= 10000 && iron >= 12000) {
-            food -= 5000;
-            wood -= 10000;
-            iron -= 12000;
+        if (food >= Variables.FOOD_COST_CARPENTRY && wood >= Variables.WOOD_COST_CARPENTRY && iron >= Variables.IRON_COST_CARPENTRY) {
+            food -= Variables.FOOD_COST_CARPENTRY;
+            wood -= Variables.WOOD_COST_CARPENTRY;
+            iron -= Variables.IRON_COST_CARPENTRY;
             carpentry += 1;
         } else {
             throw new ResourceException("No tienes suficientes materiales para construir la carpintería");
@@ -184,10 +189,10 @@ public class Civilization {
     }
 
     public void newFarm() throws ResourceException {
-        if (food >= 5000 && wood >= 10000 && iron >= 12000) {
-            food -= 5000;
-            wood -= 10000;
-            iron -= 12000;
+        if (food >= Variables.FOOD_COST_FARM && wood >= Variables.WOOD_COST_FARM && iron >= Variables.IRON_COST_FARM) {
+            food -= Variables.FOOD_COST_FARM;
+            wood -= Variables.WOOD_COST_FARM;
+            iron -= Variables.IRON_COST_FARM;
             farm += 1;
         } else {
             throw new ResourceException("No tienes suficientes materiales para construir la granja");
@@ -195,16 +200,40 @@ public class Civilization {
     }
 
     public void newMagicTower() throws ResourceException {
-        if (food >= 10000 && wood >= 20000 && iron >= 24000) {
-            food -= 10000;
-            wood -= 20000;
-            iron -= 24000;
+        if (food >= Variables.FOOD_COST_MAGICTOWER && wood >= Variables.WOOD_COST_MAGICTOWER && iron >= Variables.IRON_COST_MAGICTOWER) {
+            food -= Variables.FOOD_COST_MAGICTOWER;
+            wood -= Variables.WOOD_COST_MAGICTOWER;
+            iron -= Variables.IRON_COST_MAGICTOWER;
             magicTower += 1;
         } else {
             throw new ResourceException("No tienes suficientes materiales para construir la torre de magos");
         }
     }
+    
+    /*Upgrades*/
+    
+    public void upgradeTechnologyAttack() throws ResourceException {
+        if (wood >= Variables.UPGRADE_BASE_ATTACK_TECHNOLOGY_WOOD_COST + (Variables.UPGRADE_BASE_ATTACK_TECHNOLOGY_WOOD_COST % Variables.UPGRADE_PLUS_ATTACK_TECHNOLOGY_WOOD_COST)*technologyAttack && iron >= Variables.UPGRADE_BASE_ATTACK_TECHNOLOGY_IRON_COST + (Variables.UPGRADE_BASE_ATTACK_TECHNOLOGY_IRON_COST % Variables.UPGRADE_PLUS_ATTACK_TECHNOLOGY_IRON_COST)*technologyAttack) {
+            wood -= Variables.UPGRADE_BASE_ATTACK_TECHNOLOGY_WOOD_COST + (Variables.UPGRADE_BASE_ATTACK_TECHNOLOGY_WOOD_COST % Variables.UPGRADE_PLUS_ATTACK_TECHNOLOGY_WOOD_COST)*technologyAttack;
+            iron -= Variables.UPGRADE_BASE_ATTACK_TECHNOLOGY_IRON_COST+ (Variables.UPGRADE_BASE_ATTACK_TECHNOLOGY_IRON_COST % Variables.UPGRADE_PLUS_ATTACK_TECHNOLOGY_IRON_COST)*technologyAttack;
+            technologyAttack += 1;
+        } else {
+            throw new ResourceException("No tienes suficientes materiales para investigar la tecnologia de ataque");
+        }
+    }
+    
+    public void upgradeTechnologyDefense() throws ResourceException {
+        if (wood >= Variables.UPGRADE_BASE_DEFENSE_TECHNOLOGY_WOOD_COST + (Variables.UPGRADE_BASE_DEFENSE_TECHNOLOGY_WOOD_COST % Variables.UPGRADE_PLUS_DEFENSE_TECHNOLOGY_WOOD_COST)*technologyDefense && iron >= Variables.UPGRADE_BASE_DEFENSE_TECHNOLOGY_IRON_COST + (Variables.UPGRADE_BASE_DEFENSE_TECHNOLOGY_IRON_COST % Variables.UPGRADE_PLUS_DEFENSE_TECHNOLOGY_IRON_COST)*technologyDefense) {
+            wood -= Variables.UPGRADE_BASE_DEFENSE_TECHNOLOGY_WOOD_COST + (Variables.UPGRADE_BASE_DEFENSE_TECHNOLOGY_WOOD_COST % Variables.UPGRADE_PLUS_DEFENSE_TECHNOLOGY_WOOD_COST)*technologyDefense;
+            iron -= Variables.UPGRADE_BASE_DEFENSE_TECHNOLOGY_IRON_COST+ (Variables.UPGRADE_BASE_DEFENSE_TECHNOLOGY_IRON_COST % Variables.UPGRADE_PLUS_DEFENSE_TECHNOLOGY_IRON_COST)*technologyDefense;
+            technologyDefense += 1;
+        } else {
+            throw new ResourceException("No tienes suficientes materiales para investigar la tecnologia de defensa");
+        }
+    }
+    
     /*Interfaces*/
+    
     interface MilitaryUnit {
     	abstract int attack();
     	abstract void takeDamage(int receivedDamage);
@@ -250,7 +279,7 @@ public class Civilization {
         public Swordsman(int armor, int baseDamage) {
             super();
             this.armor = Variables.ARMOR_SWORDSMAN + (getTechnologyDefense()*Variables.PLUS_ARMOR_SWORDSMAN_BY_TECHNOLOGY)%Variables.ARMOR_SWORDSMAN;
-            this.baseDamage = Variables.BASE_DAMAGE_SWORDSMAN + (getTechnologyAtack()*Variables.PLUS_ATTACK_SWORDSMAN_BY_TECHNOLOGY)%Variables.BASE_DAMAGE_SWORDSMAN;
+            this.baseDamage = Variables.BASE_DAMAGE_SWORDSMAN + (getTechnologyAttack()*Variables.PLUS_ATTACK_SWORDSMAN_BY_TECHNOLOGY)%Variables.BASE_DAMAGE_SWORDSMAN;
             initialArmor = this.armor;
     		
         }
@@ -325,7 +354,7 @@ public class Civilization {
         public Spearman(int armor, int baseDamage) {
             super();
             this.armor = Variables.ARMOR_SPEARMAN + (getTechnologyDefense()*Variables.PLUS_ARMOR_SPEARMAN_BY_TECHNOLOGY)%Variables.ARMOR_SPEARMAN;
-            this.baseDamage = Variables.BASE_DAMAGE_SPEARMAN + (getTechnologyAtack()*Variables.PLUS_ATTACK_SPEARMAN_BY_TECHNOLOGY)%Variables.BASE_DAMAGE_SPEARMAN;
+            this.baseDamage = Variables.BASE_DAMAGE_SPEARMAN + (getTechnologyAttack()*Variables.PLUS_ATTACK_SPEARMAN_BY_TECHNOLOGY)%Variables.BASE_DAMAGE_SPEARMAN;
             initialArmor = this.armor;
         }
         public Spearman() {
@@ -397,7 +426,7 @@ public class Civilization {
         public Crossbow(int armor, int baseDamage) {
             super();
             this.armor = Variables.ARMOR_CROSSBOW + (getTechnologyDefense()*Variables.PLUS_ARMOR_CROSSBOW_BY_TECHNOLOGY)%Variables.ARMOR_CROSSBOW;
-            this.baseDamage = Variables.BASE_DAMAGE_CROSSBOW + (getTechnologyAtack()*Variables.PLUS_ATTACK_CROSSBOW_BY_TECHNOLOGY)%Variables.BASE_DAMAGE_CROSSBOW;
+            this.baseDamage = Variables.BASE_DAMAGE_CROSSBOW + (getTechnologyAttack()*Variables.PLUS_ATTACK_CROSSBOW_BY_TECHNOLOGY)%Variables.BASE_DAMAGE_CROSSBOW;
             initialArmor = this.armor;
         }
         public Crossbow() {
@@ -469,7 +498,7 @@ public class Civilization {
         public Cannon(int armor, int baseDamage) {
             super();
             this.armor = Variables.ARMOR_CANNON + (getTechnologyDefense()*Variables.PLUS_ARMOR_CANNON_BY_TECHNOLOGY)%Variables.ARMOR_CANNON;
-            this.baseDamage = Variables.BASE_DAMAGE_CANNON + (getTechnologyAtack()*Variables.PLUS_ATTACK_CANNON_BY_TECHNOLOGY)%Variables.BASE_DAMAGE_CANNON;
+            this.baseDamage = Variables.BASE_DAMAGE_CANNON + (getTechnologyAttack()*Variables.PLUS_ATTACK_CANNON_BY_TECHNOLOGY)%Variables.BASE_DAMAGE_CANNON;
             initialArmor = this.armor;
         }
         public Cannon() {
@@ -542,7 +571,7 @@ public class Civilization {
         public ArrowTower(int armor, int baseDamage) {
             super();
     		this.armor = Variables.ARMOR_ARROWTOWER + (getTechnologyDefense()*Variables.PLUS_ARMOR_ARROWTOWER_BY_TECHNOLOGY)%Variables.ARMOR_ARROWTOWER;
-            this.baseDamage = Variables.BASE_DAMAGE_ARROWTOWER + (getTechnologyAtack()*Variables.PLUS_ATTACK_ARROWTOWER_BY_TECHNOLOGY)%Variables.BASE_DAMAGE_ARROWTOWER;
+            this.baseDamage = Variables.BASE_DAMAGE_ARROWTOWER + (getTechnologyAttack()*Variables.PLUS_ATTACK_ARROWTOWER_BY_TECHNOLOGY)%Variables.BASE_DAMAGE_ARROWTOWER;
             initialArmor = this.armor;
         }
     	public int attack() {
@@ -609,7 +638,7 @@ public class Civilization {
         public Catapult(int armor, int baseDamage) {
             super();
     		this.armor = Variables.ARMOR_CATAPULT + (getTechnologyDefense()*Variables.PLUS_ARMOR_CATAPULT_BY_TECHNOLOGY)%Variables.ARMOR_CATAPULT;
-            this.baseDamage = Variables.BASE_DAMAGE_CATAPULT + (getTechnologyAtack()*Variables.PLUS_ATTACK_CATAPULT_BY_TECHNOLOGY)%Variables.BASE_DAMAGE_CATAPULT;
+            this.baseDamage = Variables.BASE_DAMAGE_CATAPULT + (getTechnologyAttack()*Variables.PLUS_ATTACK_CATAPULT_BY_TECHNOLOGY)%Variables.BASE_DAMAGE_CATAPULT;
             initialArmor = this.armor;
         }
     		public int attack() {
@@ -675,7 +704,7 @@ public class Civilization {
         public RocketLauncher(int armor, int baseDamage) {
             super();
     		this.armor = Variables.ARMOR_ROCKETLAUNCHERTOWER + (getTechnologyDefense()*Variables.PLUS_ARMOR_ROCKETLAUNCHERTOWER_BY_TECHNOLOGY)%Variables.ARMOR_ROCKETLAUNCHERTOWER;
-            this.baseDamage = Variables.BASE_DAMAGE_ROCKETLAUNCHERTOWER + (getTechnologyAtack()*Variables.PLUS_ATTACK_ROCKETLAUNCHERTOWER_BY_TECHNOLOGY)%Variables.BASE_DAMAGE_ROCKETLAUNCHERTOWER;
+            this.baseDamage = Variables.BASE_DAMAGE_ROCKETLAUNCHERTOWER + (getTechnologyAttack()*Variables.PLUS_ATTACK_ROCKETLAUNCHERTOWER_BY_TECHNOLOGY)%Variables.BASE_DAMAGE_ROCKETLAUNCHERTOWER;
             initialArmor = this.armor;
         }
     	public int attack() {
@@ -742,7 +771,7 @@ public class Civilization {
         public Magician(int armor, int baseDamage) {
             super();
     		this.armor = 0;
-            this.baseDamage = Variables.BASE_DAMAGE_MAGICIAN + (getTechnologyAtack()*Variables.PLUS_ATTACK_MAGICIAN_BY_TECHNOLOGY)%Variables.BASE_DAMAGE_MAGICIAN;
+            this.baseDamage = Variables.BASE_DAMAGE_MAGICIAN + (getTechnologyAttack()*Variables.PLUS_ATTACK_MAGICIAN_BY_TECHNOLOGY)%Variables.BASE_DAMAGE_MAGICIAN;
     		initialArmor = this.armor;
         }
     	public int attack() {
