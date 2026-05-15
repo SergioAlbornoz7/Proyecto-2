@@ -209,6 +209,33 @@ public class Civilization {
             throw new ResourceException("No tienes suficientes materiales para construir la torre de magos");
         }
     }
+    public void printStats() {
+    	System.out.printf("%14s %n %n", "              ***************************CIVILIZATION STATS***************************              ");
+    	System.out.println("--------------------------------------------------TECHNOLOGY----------------------------------------\n");
+        System.out.printf("%79s %20s %n", "Attack", "Defense");
+        System.out.printf("%79s %20s %n %n", getTechnologyAttack(), getTechnologyDefense());
+        System.out.println("---------------------------------------------------BUILDINGS----------------------------------------\n");
+        System.out.printf("%16s %20s %20s %20s %20s %n", "Farm", "Smithy", "Carpentry", "Magic Tower", "Church");
+        System.out.printf("%16s %20s %20s %20s %20s %n %n", getFarm(), getSmithy(), getCarpentry(), getMagicTower(), getChurch());
+        //nicio Tropas
+        System.out.println("------------------------------------------------ATTACK UNITS----------------------------------------\n");
+    	System.out.printf("%37s %20s %20s %20s %n", "Swordsman", "Spearman", "Crosswob", "Cannon");
+    	System.out.printf("%37d %20d %20d %20d %n %n", 0, 0, 0, 0);
+        System.out.println("----------------------------------------------------DEFENSES----------------------------------------\n");
+        System.out.printf("%58s %20s %20s %n", "Arrow Tower", "Catapult", "Rocket Launcher");
+        System.out.printf("%58d %20d %20d %n %n", 0, 0, 0);
+        System.out.println("-----------------------------------------------SPECIAL UNITS----------------------------------------\n");
+        System.out.printf("%79s %20s %n", "Mague", "Priest");
+        System.out.printf("%79s %20s %n %n", 0, 0);
+        //fin Tropas
+        System.out.println("---------------------------------------------------RESOURCES----------------------------------------\n");
+        System.out.printf("%37s %20s %20s %20s %n", "Food", "Wood", "Iron", "Mana");
+        System.out.printf("%37d %20d %20d %20d %n", getFood(), getWood(), getIron(), getMana());
+        
+        System.out.printf("%37s %20s %20s %20s %n", "Food", "Wood", "Iron", "Mana");
+        System.out.printf("%37d %20d %20d %20d %n", getFarm()*Variables.CIVILIZATION_FOOD_GENERATED_PER_FARM + Variables.CIVILIZATION_FOOD_GENERATED, getCarpentry()*Variables.CIVILIZATION_WOOD_GENERATED_PER_CARPENTRY + Variables.CIVILIZATION_WOOD_GENERATED, 
+        		getSmithy()*Variables.CIVILIZATION_IRON_GENERATED_PER_SMITHY + Variables.CIVILIZATION_IRON_GENERATED, getMagicTower()*Variables.CIVILIZATION_MANA_GENERATED_PER_MAGIC_TOWER);
+    	
     
     /*Upgrades*/
     
@@ -1037,45 +1064,5 @@ public class Civilization {
     	public BuildingException(String s){
     		super(s);
     	}
-    }
-    
-    public void printStats() {
-    	System.out.printf("%14s %n %n", "              ***************************CIVILIZATION STATS***************************              ");
-    	System.out.println("--------------------------------------------------TECHNOLOGY----------------------------------------\n");
-        System.out.printf("%79s %20s %n", "Attack", "Defense");
-        System.out.printf("%79s %20s %n %n", getTechnologyAttack(), getTechnologyDefense());
-        System.out.println("---------------------------------------------------BUILDINGS----------------------------------------\n");
-        System.out.printf("%16s %20s %20s %20s %20s %n", "Farm", "Smithy", "Carpentry", "Magic Tower", "Church");
-        System.out.printf("%16s %20s %20s %20s %20s %n %n", getFarm(), getSmithy(), getCarpentry(), getMagicTower(), getChurch());
-        //nicio Tropas
-        System.out.println("------------------------------------------------ATTACK UNITS----------------------------------------\n");
-    	System.out.printf("%37s %20s %20s %20s %n", "Swordsman", "Spearman", "Crosswob", "Cannon");
-    	System.out.printf("%37d %20d %20d %20d %n %n", 0, 0, 0, 0);
-        System.out.println("----------------------------------------------------DEFENSES----------------------------------------\n");
-        System.out.printf("%58s %20s %20s %n", "Arrow Tower", "Catapult", "Rocket Launcher");
-        System.out.printf("%58d %20d %20d %n %n", 0, 0, 0);
-        System.out.println("-----------------------------------------------SPECIAL UNITS----------------------------------------\n");
-        System.out.printf("%79s %20s %n", "Mague", "Priest");
-        System.out.printf("%79s %20s %n %n", 0, 0);
-        //fin Tropas
-        System.out.println("---------------------------------------------------RESOURCES----------------------------------------\n");
-        System.out.printf("%37s %20s %20s %20s %n", "Food", "Wood", "Iron", "Mana");
-        System.out.printf("%37d %20d %20d %20d %n", getFood(), getWood(), getIron(), getMana());
-        
-        System.out.printf("%37s %20s %20s %20s %n", "Food", "Wood", "Iron", "Mana");
-        System.out.printf("%37d %20d %20d %20d %n", getFarm()*Variables.CIVILIZATION_FOOD_GENERATED_PER_FARM + Variables.CIVILIZATION_FOOD_GENERATED, getCarpentry()*Variables.CIVILIZATION_WOOD_GENERATED_PER_CARPENTRY + Variables.CIVILIZATION_WOOD_GENERATED, 
-        		getSmithy()*Variables.CIVILIZATION_IRON_GENERATED_PER_SMITHY + Variables.CIVILIZATION_IRON_GENERATED, getMagicTower()*Variables.CIVILIZATION_MANA_GENERATED_PER_MAGIC_TOWER);
-    	
-    }
-    public static void main(String[] args) {
-    	System.out.println("------------------------------------------------ATTACK UNITS----------------------------------------\n");
-    	System.out.printf("%37s %20s %20s %20s %n", "Swordsman", "Spearman", "Crosswob", "Cannon");
-    	System.out.printf("%37d %20d %20d %20d %n %n", 0, 0, 0, 0);
-        System.out.println("----------------------------------------------------DEFENSES----------------------------------------\n");
-        System.out.printf("%58s %20s %20s %n", "Arrow Tower", "Catapult", "Rocket Launcher");
-        System.out.printf("%58d %20d %20d %n %n", 0, 0, 0);
-        System.out.println("---------------------------------------------------RESOURCES----------------------------------------\n");
-        System.out.printf("%37s %20s %20s %20s %n", "Farm", "Wood", "Iron", "Mana");
-        System.out.printf("%37d %20d %20d %20d %n", 0, 0, 0, 0);
     }
 }
