@@ -4,7 +4,11 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -21,6 +25,7 @@ public class UI {
 class MiVentana extends JFrame{
 	private PanelCentral panelCentral;
 	private Panel_Oeste panelOeste;
+	private BufferedImage imagen;
 	MiVentana(){
         setBounds(800, 400, 900, 700);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -29,6 +34,14 @@ class MiVentana extends JFrame{
         setVisible(true);
 	}
 	public void init_components(){
+		try {
+			imagen = ImageIO.read(new File("./src/Icono.png"));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		setIconImage(imagen);
+		
         panelCentral = new PanelCentral();
         add(panelCentral);
         
