@@ -235,6 +235,7 @@ public class Civilization {
         System.out.printf("%37s %20s %20s %20s %n", "Food", "Wood", "Iron", "Mana");
         System.out.printf("%37d %20d %20d %20d %n", getFarm()*Variables.CIVILIZATION_FOOD_GENERATED_PER_FARM + Variables.CIVILIZATION_FOOD_GENERATED, getCarpentry()*Variables.CIVILIZATION_WOOD_GENERATED_PER_CARPENTRY + Variables.CIVILIZATION_WOOD_GENERATED, 
         		getSmithy()*Variables.CIVILIZATION_IRON_GENERATED_PER_SMITHY + Variables.CIVILIZATION_IRON_GENERATED, getMagicTower()*Variables.CIVILIZATION_MANA_GENERATED_PER_MAGIC_TOWER);
+    }
     	
     
     /*Upgrades*/
