@@ -62,6 +62,7 @@ public class Battle {
 	}
 	
 	boolean inBattle() {
+		
 		return true;
 	}
 }
