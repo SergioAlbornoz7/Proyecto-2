@@ -7,9 +7,11 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.GridLayout;
+import java.awt.Image;
 
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -204,6 +206,7 @@ class Panel_Este_Inferior extends JPanel{
         for (int i = 0; i <nombres.length; i++) {
             JButton botonEstructura = new JButton(nombres[i]);
             
+            
             // Opcional: Puedes cambiarles el color de fondo para que se noten más
             botonEstructura.setBackground(Color.white); 
             
@@ -220,11 +223,11 @@ class Panel_Inferior_Central extends JPanel {
 			"Lancero",
 			"Ballesta",
 			"Cañon",
-			"Mago",
-			"Sacerdote",
 			"Torre Lanza",
 			"Catapulta",
 			"Lanzacohetes",
+			"Mago",
+			"Sacerdote",
 	};
     
     public Panel_Inferior_Central() {
@@ -240,8 +243,18 @@ class Panel_Inferior_Central extends JPanel {
         this.setPreferredSize(new Dimension(700, 250));
         
         // 3. Creamos y añadimos los 10 cuadraditos (en este caso, botones)
+        
+        	
         for (int i = 0; i<nombres.length; i++) {
-            JButton botonTropa = new JButton(nombres[i]);
+        	// 1. Cargar la imagen original
+        	System.out.println(nombres[i]+".png");
+	        ImageIcon iconoOriginal = new ImageIcon(nombres[i]+".png");
+	        
+	        // 2. Redimensionar la imagen a 100x100
+	        // Image.SCALE_SMOOTH hace que la imagen no pierda tanta calidad al achicarse
+	        Image imagenRedimensionada = iconoOriginal.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH);
+	        ImageIcon iconoFinal = new ImageIcon(imagenRedimensionada);
+            JButton botonTropa = new JButton(iconoFinal);
             
             // Opcional: Puedes cambiarles el color de fondo para que se noten más
             botonTropa.setBackground(Color.WHITE); 
