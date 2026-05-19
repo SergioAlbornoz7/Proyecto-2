@@ -199,7 +199,12 @@ public class Main {
 		}
 		return enemy.getArmy();
 	}
-	static void viewThreat() {
-		enemy.getArmy()
+	static String viewThreat() {
+		ArrayList<MilitaryUnit>[] data = enemy.getArmy();
+		String result = new String();
+		result.format("NEW threat COMMING \n", )
+		return result;
+		
+		
 	}
 }
