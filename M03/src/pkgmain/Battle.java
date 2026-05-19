@@ -3,8 +3,6 @@ package pkgmain;
 import java.util.ArrayList;
 
 import pkgmain.Civilization.MilitaryUnit;
-
-
 public class Battle {
 	// Variables
 	private ArrayList<MilitaryUnit>[] civilizationArmy;
@@ -65,4 +63,36 @@ public class Battle {
 		
 		return true;
 	}
+	
+	//Metodos finales//
+	String getBattleReport(int battles) {
+		return battleDevelopment;
+		}
+	String getBattleDevelopment() {
+		return battleDevelopment;
+		}
+	
+	public void initInitialArmies() {
+	}
+	public void updateResourcesLooses() {
+	}
+	public void fleetResourceCost(ArrayList<MilitaryUnit> army) {}
+	public void initialFleetNumber(ArrayList<MilitaryUnit> army) {}
+	public int remainderPercentageFleet(ArrayList<MilitaryUnit> army) {
+		return initialNumberUnitsCivilization;
+		}
+	public int getGroupDefender(ArrayList<MilitaryUnit> army) {
+		return initialNumberUnitsCivilization;
+		
+	}
+	public int getCivilizationGroupAttacker(){
+		return initialNumberUnitsCivilization;
+		}
+	public int getEnemyGroupAttacker() {
+		return initialNumberUnitsCivilization;
+		}
+	public void resetArmyArmor() {
+		
+	}
+	
 }
