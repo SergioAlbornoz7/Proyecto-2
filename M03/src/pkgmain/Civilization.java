@@ -6,8 +6,8 @@ import java.util.ArrayList;
 public class Civilization {
 	
 	/*tech*/
-	private int technologyDefense;
-	private int technologyAttack;
+	private int technologyDefense = 0;
+	private int technologyAttack = 0;
 	
 	/*resources*/
 	private int wood;

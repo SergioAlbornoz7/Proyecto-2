@@ -5,45 +5,61 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
+
+import pkgmain.Civilization.MilitaryUnit;
 
 public class Main {
-
+	
+	static ArrayList<MilitaryUnit>[] enemyArmy = new ArrayList[9];
+	
 	public static void main(String[] args) {
-		String urlDatos = "jdbc:mysql://127.0.0.1:3307/ProyectoMixII?serverTimezone=UTC";
-		String usuari = "super";
-		String pass = "1234";
 		
-		try {
-			//Cargar Driver//
-			Class.forName("com.mysql.cj.jdbc.Driver");
-			System.out.println("Driver cargado correctamente");
-			//Cargar Driver//
-			
-			//Crear conección//
-			Connection conn = DriverManager.getConnection(urlDatos, usuari, pass);
-			System.out.println("Connection carregat correctament");
-			//Crear conección//
-			
-			//Crear consulta//
-			String querySql = "select num_battle,civilization_id,wood_acquired,iron_acquired from Battle_stats";
-			Statement stmnt=conn.createStatement();
-				//creamos un contenedor para ponder nuestros datos
-			//4)ejecutar querry
-			ResultSet rs=stmnt.executeQuery(querySql);
-			while (rs.next()) {
-				System.out.println("num_battle = "+rs.getInt(1)+"civilization_id = "+rs.getInt(2)+"wood_acquired = "+rs.getInt(3)+"iron_battle = "+rs.getInt(4));
+		Civilization player = new Civilization(0,0,0,0,0,0,0,0,0,0,0,0);
+		
+		/*Tasks*/
+		TimerTask recursos= new TimerTask() {
+			public void run() {
+				player.setFood(player.getFood() + player.getFarm()*Variables.CIVILIZATION_FOOD_GENERATED_PER_FARM + Variables.CIVILIZATION_FOOD_GENERATED);
+				player.setIron(player.getIron() + player.getSmithy()*Variables.CIVILIZATION_IRON_GENERATED_PER_SMITHY + Variables.CIVILIZATION_IRON_GENERATED);
+				player.setWood(player.getWood() + player.getCarpentry()*Variables.CIVILIZATION_WOOD_GENERATED_PER_CARPENTRY + Variables.CIVILIZATION_WOOD_GENERATED);
+				player.setMana(player.getMana() + player.getMagicTower()*Variables.CIVILIZATION_MANA_GENERATED_PER_MAGIC_TOWER);
 			}
-			
-		} catch (ClassNotFoundException e) {
-			//Cargar Driver//
-			System.out.println("Driver no ha cargado correctamente");
-			//Cargar Driver//
+		};
 		
-		//Crear conección//	
-		} catch (SQLException e) {
-			System.out.println("Connection no ha carregat correctament");
-		}
-		//Crear conección//
-	}
+		TimerTask enemy_attack = new TimerTask() {
 
+			public void run() {
+				createEnemyArmy(Variables.ENEMY_FLEET_INCREASE*player.battles);
+			}
+		
+		};
+		
+		/*Timer*/
+		Timer timer = new Timer();
+		
+		/*Schedules*/
+		
+		timer.schedule(recursos, 0, 18000);
+		
+		timer.schedule(enemy_attack, 180000, 180000);
+		
+	}
+	static void createEnemyArmy(int percentage) {
+		
+		/*Recursos*/
+		int iron = (Variables.IRON_BASE_ENEMY_ARMY*(100+percentage))/100;
+		int wood = (Variables.WOOD_BASE_ENEMY_ARMY*(100+percentage))/100;
+		int food = (Variables.FOOD_BASE_ENEMY_ARMY*(100+percentage))/100;
+		
+		/*Create void Army*/
+		
+		for (int i = 0; i < 9; i++) {
+			enemyArmy[i] = new ArrayList<MilitaryUnit>();
+		}
+		
+	}
+	
 }
