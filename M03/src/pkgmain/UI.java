@@ -79,8 +79,6 @@ class Panel_Oeste extends JPanel {
 		boton1 = new JButton("Boton 1");
 		
 		add(boton1);
-		
-		
 	}
 }
 
