@@ -14,6 +14,7 @@ import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
@@ -120,44 +121,51 @@ class Panel_Oeste extends JPanel {
 class Panel_Oeste_Inferior extends JPanel{
 	private String[] nombres= {
 			"Comida",
+			"Hierro",
 			"Madera",
 			"Mana",
-			"Hierro",
 	};
 	public Panel_Oeste_Inferior() {
         // 1. Decimos que este panel se organice como una rejilla de 2x5
         // Parámetros: GridLayout(filas, columnas, espacio_horizontal, espacio_vertical)
         setLayout(new GridLayout(4, 1, 0, 10));
         
-        // 2. Le ponemos el borde con título centrado
-        TitledBorder borde = BorderFactory.createTitledBorder("Lateral Derecho Estructuras");
-        borde.setTitleJustification(TitledBorder.TOP);
-        setBorder(borde);
-        
         this.setPreferredSize(new Dimension(200, 400));
         
         // 3. Creamos y añadimos los 10 cuadraditos (en este caso, botones)
         for (int i = 0; i <nombres.length; i++) {
-            JButton botonEstructura = new JButton(nombres[i]);
+        	ImageIcon iconoRecursoO = new ImageIcon(nombres[i]+".png");
+            Image imagenEscalada = iconoRecursoO.getImage().getScaledInstance(75, 75, Image.SCALE_SMOOTH);
+            ImageIcon iconoRecursoF = new ImageIcon(imagenEscalada);
+            JLabel imagenRecurso = new JLabel(iconoRecursoF);
+            JLabel cantidad = new JLabel("1000");
             
             // Opcional: Puedes cambiarles el color de fondo para que se noten más
-            botonEstructura.setBackground(Color.white); 
+            imagenRecurso.setBackground(Color.white); 
             
             // Al usar GridLayout, solo con hacer add(), Java lo mete en la celda que toca
-            add(botonEstructura);
+            add(imagenRecurso);
+            add(cantidad);
         }
     }
 }
 class Panel_Oeste_Botones extends JPanel {
     public Panel_Oeste_Botones() {
+    	// Cargamos y adaptamos las imagenes de las mejoras para añadirlas a los botones
+    	ImageIcon iconoAtaque = new ImageIcon("AttackPlus.png");
+    	Image imagenAtaque = iconoAtaque.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH);
+        ImageIcon iconoAtaquePlus = new ImageIcon(imagenAtaque);
+        ImageIcon iconoDefensa = new ImageIcon("DefensePlus.png");
+    	Image imagenDefensa = iconoDefensa.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH);
+        ImageIcon iconoDefensaPlus = new ImageIcon(imagenDefensa);
         // 1 fila, 2 columnas, 5 píxeles de separación horizontal, 0 vertical
         setLayout(new GridLayout(1, 2, 5, 0));
         
         // Le damos una altura preferida pequeña para que no se estiren demasiado hacia arriba
-        setPreferredSize(new Dimension(200, 50));
+        setPreferredSize(new Dimension(100, 100));
         
-        JButton btnAtaque = new JButton("[Mejora Ataque]");
-        JButton btnDefensa = new JButton("[Mejora Defensa]");
+        JButton btnAtaque = new JButton(iconoAtaquePlus);
+        JButton btnDefensa = new JButton(iconoDefensaPlus);
         
         btnAtaque.setBackground(Color.WHITE);
         btnDefensa.setBackground(Color.WHITE);
