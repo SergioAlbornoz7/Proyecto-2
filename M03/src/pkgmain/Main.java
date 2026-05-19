@@ -199,7 +199,13 @@ public class Main {
 		}
 		return enemy.getArmy();
 	}
-	static void viewThreat() {
-		enemy.getArmy()
+	static String viewThreat() {
+		int swn = enemy.getArmy()[0].size();
+		int spn = enemy.getArmy()[1].size();
+		int cbn = enemy.getArmy()[2].size();
+		int cnn = enemy.getArmy()[3].size();
+		String result = new String();
+		result.format("NEW threat COMMING \n", )
+		return result;
 	}
 }
