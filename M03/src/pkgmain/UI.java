@@ -13,6 +13,8 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 import javax.swing.border.TitledBorder;
 
 public class UI {
@@ -59,18 +61,44 @@ class MiVentana extends JFrame{
 	}
 }
 class PanelCentral extends JPanel {
-	private JButton boton1;
-	private Panel_Inferior_Central panelInferiorCentral;
-	PanelCentral() {
-		
-		setLayout(new BorderLayout());
-		
-		boton1 = new JButton("Boton 1");
-		add(boton1,BorderLayout.NORTH);
-		
-		panelInferiorCentral=new Panel_Inferior_Central();
-		add(panelInferiorCentral,BorderLayout.SOUTH);
-	}
+    // Reemplazamos el JButton por un JTextArea para los mensajes del juego
+    private JTextArea areaRegistro; 
+    private JScrollPane scrollRegistro;
+    private Panel_Inferior_Central panelInferiorCentral;
+
+    PanelCentral() {
+        setLayout(new BorderLayout());
+        
+        // 1. Creamos el área de texto
+        areaRegistro = new JTextArea();
+        areaRegistro.setBackground(Color.WHITE); // Tu fondo blanco deseado
+        areaRegistro.setEditable(false);         // Evita que el jugador pueda escribir o borrar textos directamente
+        areaRegistro.setLineWrap(true);          // Si la línea es muy larga, salta de renglón automáticamente
+        areaRegistro.setWrapStyleWord(true);      // Corta por palabras completas, no a mitad de una letra
+        
+        // Mensaje inicial de prueba
+        areaRegistro.setText("--- Bienvenido a Seamos Civilizados ---\n¡El juego ha comenzado!\n");
+        
+        // 2. Metemos el JTextArea dentro del JScrollPane para que tenga barras de scroll
+        scrollRegistro = new JScrollPane(areaRegistro);
+        
+        // Le ponemos un borde decorativo para que combine con el resto de la interfaz
+        TitledBorder borde = BorderFactory.createTitledBorder("Registro de Eventos");
+        scrollRegistro.setBorder(borde);
+        
+        // 3. Lo añadimos en el CENTER. 
+        // Al estar en el CENTER ocupará TODO el espacio disponible entre los paneles laterales y el de tropas
+        add(scrollRegistro, BorderLayout.CENTER);
+        
+        // Tu panel de tropas se queda exactamente donde estaba abajo
+        panelInferiorCentral = new Panel_Inferior_Central();
+        add(panelInferiorCentral, BorderLayout.SOUTH);
+    }
+    
+    // 4. Método público muy útil para mandar mensajes desde otros lados del código
+    public void registrarEvento(String mensaje) {
+        areaRegistro.append(mensaje + "\n");
+    }
 }
 
 class Panel_Oeste extends JPanel {
