@@ -7,8 +7,8 @@ import pkgmain.Civilization.MilitaryUnit;
 
 public class Battle {
 	// Variables
-	private ArrayList<MilitaryUnit> civilizationArmy;
-	private ArrayList<MilitaryUnit> enemyArmy;
+	private ArrayList<MilitaryUnit>[] civilizationArmy;
+	private ArrayList<MilitaryUnit>[] enemyArmy;
 	private ArrayList<MilitaryUnit>[][] armies; 
 	private String battleDevelopment;
 	private int[][] initialCostFleet;
@@ -23,7 +23,7 @@ public class Battle {
 	private int[] actualNumberUnitsEnemy;
 	
 	//constructor
-	public Battle(ArrayList<MilitaryUnit> civilizationArmy, ArrayList<MilitaryUnit> enemyArmy) {
+	public Battle(ArrayList<MilitaryUnit>[] civilizationArmy, ArrayList<MilitaryUnit>[] enemyArmy) {
 		//Ejercitos
 		this.civilizationArmy = civilizationArmy;
 		this.enemyArmy = enemyArmy;
