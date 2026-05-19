@@ -34,13 +34,13 @@ class MiVentana extends JFrame{
         setVisible(true);
 	}
 	public void init_components(){
-		try {
-			imagen = ImageIO.read(new File("./src/Icono.png"));
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		setIconImage(imagen);
+//		try {
+//			imagen = ImageIO.read(new File("./src/Icono.png"));
+//		} catch (IOException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//		setIconImage(imagen);
 		
         panelCentral = new PanelCentral();
         add(panelCentral);
