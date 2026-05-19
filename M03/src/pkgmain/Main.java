@@ -29,6 +29,7 @@ public class Main {
 
 			public void run() {
 				Battle nb = new Battle(player.getArmy(), createEnemyArmy(Variables.ENEMY_FLEET_INCREASE*player.getBattles()));
+				viewThreat();
 				nb.startBattle();
 				player.setBattles(player.getBattles() + 1);
 			}
@@ -199,13 +200,12 @@ public class Main {
 		}
 		return enemy.getArmy();
 	}
-	static String viewThreat() {
+	static void viewThreat() {
 		int swn = enemy.getArmy()[0].size();
 		int spn = enemy.getArmy()[1].size();
 		int cbn = enemy.getArmy()[2].size();
 		int cnn = enemy.getArmy()[3].size();
 		String result = new String();
-		result.format("NEW threat COMMING \n", )
-		return result;
+		result.format("NEW threat COMMING \n", );
 	}
 }
