@@ -28,9 +28,9 @@ public class Main {
 		TimerTask enemy_attack = new TimerTask() {
 
 			public void run() {
-				Battle nb = new Battle(player.army, createEnemyArmy(Variables.ENEMY_FLEET_INCREASE*player.battles));
+				Battle nb = new Battle(player.getArmy(), createEnemyArmy(Variables.ENEMY_FLEET_INCREASE*player.getBattles()));
 				nb.startBattle();
-				player.battles += 1;
+				player.setBattles(player.getBattles() + 1);
 			}
 		
 		};
@@ -55,35 +55,35 @@ public class Main {
 		/*Create void Army*/
 		
 		for (int i = 0; i < 9; i++) {
-			Main.enemy.army[i] = new ArrayList<MilitaryUnit>();
+			enemy.getArmy()[i] = new ArrayList<MilitaryUnit>();
 		}
 		while (true) {
 			int rand = (int) Math.random()*100+1;
 			if (rand < 36) {
 				try {
 					if (food >= Variables.FOOD_COST_SWORDSMAN && wood >= Variables.WOOD_COST_SWORDSMAN && iron >= Variables.IRON_COST_SWORDSMAN) {
-						Main.enemy.army[0].add(enemy.new Swordsman());
+						enemy.getArmy()[0].add(enemy.new Swordsman());
 					} else {
 						throw enemy.new ResourceException("No tienes suficientes materiales para crear mas espadachines"); 
 					}
 				} catch (ResourceException e) {
 					try {
 						if (food >= Variables.FOOD_COST_SPEARMAN && wood >= Variables.WOOD_COST_SPEARMAN && iron >= Variables.IRON_COST_SPEARMAN) {
-							Main.enemy.army[1].add(enemy.new Spearman());
+							enemy.getArmy()[1].add(enemy.new Spearman());
 						} else {
 							throw enemy.new ResourceException("No tienes suficientes materiales para crear mas lanceros"); 
 						}
 					} catch (ResourceException a) {
 						try {
 							if (food >= Variables.FOOD_COST_CROSSBOW && wood >= Variables.WOOD_COST_CROSSBOW && iron >= Variables.IRON_COST_CROSSBOW) {
-								Main.enemy.army[2].add(enemy.new Crossbow());
+								enemy.getArmy()[2].add(enemy.new Crossbow());
 							} else {
 								throw enemy.new ResourceException("No tienes suficientes materiales para crear mas ballesteros"); 
 							}
 						} catch (ResourceException b) {
 							try {
 								if (food >= Variables.FOOD_COST_CANNON && wood >= Variables.WOOD_COST_CANNON && iron >= Variables.IRON_COST_CANNON) {
-									Main.enemy.army[3].add(enemy.new Cannon());
+									enemy.getArmy()[3].add(enemy.new Cannon());
 								} else {
 									throw enemy.new ResourceException("No tienes suficientes materiales para crear mas cañones"); 
 								}
@@ -96,28 +96,28 @@ public class Main {
 			} else if (rand < 61) {
 				try {
 						if (food >= Variables.FOOD_COST_SPEARMAN && wood >= Variables.WOOD_COST_SPEARMAN && iron >= Variables.IRON_COST_SPEARMAN) {
-							Main.enemy.army[1].add(enemy.new Spearman());
+							enemy.getArmy()[1].add(enemy.new Spearman());
 						} else {
 							throw enemy.new ResourceException("No tienes suficientes materiales para crear mas lanceros"); 
 						}
 					} catch (ResourceException e) {
 					try {
 						if (food >= Variables.FOOD_COST_SWORDSMAN && wood >= Variables.WOOD_COST_SWORDSMAN && iron >= Variables.IRON_COST_SWORDSMAN) {
-							Main.enemy.army[0].add(enemy.new Swordsman());
+							enemy.getArmy()[0].add(enemy.new Swordsman());
 						} else {
 							throw enemy.new ResourceException("No tienes suficientes materiales para crear mas espadachines"); 
 						}
 					} catch (ResourceException a) { 
 						try {
 							if (food >= Variables.FOOD_COST_CROSSBOW && wood >= Variables.WOOD_COST_CROSSBOW && iron >= Variables.IRON_COST_CROSSBOW) {
-								Main.enemy.army[2].add(enemy.new Crossbow());
+								enemy.getArmy()[2].add(enemy.new Crossbow());
 							} else {
 								throw enemy.new ResourceException("No tienes suficientes materiales para crear mas ballesteros"); 
 							}
 						} catch (ResourceException b) {
 							try {
 								if (food >= Variables.FOOD_COST_CANNON && wood >= Variables.WOOD_COST_CANNON && iron >= Variables.IRON_COST_CANNON) {
-									Main.enemy.army[3].add(enemy.new Cannon());
+									enemy.getArmy()[3].add(enemy.new Cannon());
 								} else {
 									throw enemy.new ResourceException("No tienes suficientes materiales para crear mas cañones"); 
 								}
@@ -130,28 +130,28 @@ public class Main {
 			} else if (rand < 81) {
 				try {
 					if (food >= Variables.FOOD_COST_CROSSBOW && wood >= Variables.WOOD_COST_CROSSBOW && iron >= Variables.IRON_COST_CROSSBOW) {
-						Main.enemy.army[2].add(enemy.new Crossbow());
+						enemy.getArmy()[2].add(enemy.new Crossbow());
 					} else {
 						throw enemy.new ResourceException("No tienes suficientes materiales para crear mas ballesteros"); 
 					}
 				} catch (ResourceException e) {
 					try {
 						if (food >= Variables.FOOD_COST_SWORDSMAN && wood >= Variables.WOOD_COST_SWORDSMAN && iron >= Variables.IRON_COST_SWORDSMAN) {
-							Main.enemy.army[0].add(enemy.new Swordsman());
+							enemy.getArmy()[0].add(enemy.new Swordsman());
 						} else {
 							throw enemy.new ResourceException("No tienes suficientes materiales para crear mas espadachines"); 
 						}
 					} catch (ResourceException a) {
 						try {
 							if (food >= Variables.FOOD_COST_SPEARMAN && wood >= Variables.WOOD_COST_SPEARMAN && iron >= Variables.IRON_COST_SPEARMAN) {
-								Main.enemy.army[1].add(enemy.new Spearman());
+								enemy.getArmy()[1].add(enemy.new Spearman());
 							} else {
 								throw enemy.new ResourceException("No tienes suficientes materiales para crear mas lanceros"); 
 							}
 						} catch (ResourceException b) {
 							try {
 								if (food >= Variables.FOOD_COST_CANNON && wood >= Variables.WOOD_COST_CANNON && iron >= Variables.IRON_COST_CANNON) {
-									Main.enemy.army[3].add(enemy.new Cannon());
+									enemy.getArmy()[3].add(enemy.new Cannon());
 								} else {
 									throw enemy.new ResourceException("No tienes suficientes materiales para crear mas cañones"); 
 								}
@@ -164,28 +164,28 @@ public class Main {
 			} else {
 				try {
 					if (food >= Variables.FOOD_COST_CANNON && wood >= Variables.WOOD_COST_CANNON && iron >= Variables.IRON_COST_CANNON) {
-						Main.enemy.army[3].add(enemy.new Cannon());
+						enemy.getArmy()[3].add(enemy.new Cannon());
 					} else {
 						throw enemy.new ResourceException("No tienes suficientes materiales para crear mas cañones"); 
 					}
 				} catch (ResourceException e) {
 					try {
 						if (food >= Variables.FOOD_COST_SWORDSMAN && wood >= Variables.WOOD_COST_SWORDSMAN && iron >= Variables.IRON_COST_SWORDSMAN) {
-							Main.enemy.army[0].add(enemy.new Swordsman());
+							enemy.getArmy()[0].add(enemy.new Swordsman());
 						} else {
 							throw enemy.new ResourceException("No tienes suficientes materiales para crear mas espadachines"); 
 						}
 					} catch (ResourceException a) {
 						try {
 							if (food >= Variables.FOOD_COST_SPEARMAN && wood >= Variables.WOOD_COST_SPEARMAN && iron >= Variables.IRON_COST_SPEARMAN) {
-								Main.enemy.army[1].add(enemy.new Spearman());
+								enemy.getArmy()[1].add(enemy.new Spearman());
 							} else {
 								throw enemy.new ResourceException("No tienes suficientes materiales para crear mas lanceros"); 
 							}
 						} catch (ResourceException b) {
 							try {
 								if (food >= Variables.FOOD_COST_CROSSBOW && wood >= Variables.WOOD_COST_CROSSBOW && iron >= Variables.IRON_COST_CROSSBOW) {
-									Main.enemy.army[2].add(enemy.new Crossbow());
+									enemy.getArmy()[2].add(enemy.new Crossbow());
 								} else {
 									throw enemy.new ResourceException("No tienes suficientes materiales para crear mas ballesteros"); 
 								}
@@ -197,6 +197,9 @@ public class Main {
 				}
 			}
 		}
-		return Main.enemy.army;
+		return enemy.getArmy();
+	}
+	static void viewThreat() {
+		enemy.getArmy()
 	}
 }
