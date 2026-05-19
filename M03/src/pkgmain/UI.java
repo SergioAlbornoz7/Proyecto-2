@@ -1,6 +1,7 @@
 package pkgmain;
 
 import java.awt.BorderLayout;
+import java.awt.Button;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -43,10 +44,10 @@ class MiVentana extends JFrame{
 //		setIconImage(imagen);
 		
         panelCentral = new PanelCentral();
-        add(panelCentral);
+        add(panelCentral, BorderLayout.CENTER);
         
         panelOeste = new Panel_Oeste();
-        panelOeste.setBackground(Color.BLACK);
+//        panelOeste.setBackground(Color.BLACK);
         add(panelOeste, BorderLayout.WEST);
         
         panelEste=new Panel_Este();
@@ -73,16 +74,70 @@ class PanelCentral extends JPanel {
 }
 
 class Panel_Oeste extends JPanel {
-	private JButton boton1,boton2,boton3;
+	private Panel_Oeste_Inferior panelInferiorCentral;
+	private Panel_Oeste_Botones panelBotonesMejora;
 	Panel_Oeste(){
-		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-		boton1 = new JButton("Boton 1");
+		setLayout(new BorderLayout());
 		
-		add(boton1);
+		panelInferiorCentral=new Panel_Oeste_Inferior();
+		add(panelInferiorCentral,BorderLayout.NORTH);
 		
-		
+		panelBotonesMejora = new Panel_Oeste_Botones();
+        add(panelBotonesMejora, BorderLayout.SOUTH);
 	}
 }
+
+class Panel_Oeste_Inferior extends JPanel{
+	private String[] nombres= {
+			"Comida",
+			"Madera",
+			"Mana",
+			"Hierro",
+	};
+	public Panel_Oeste_Inferior() {
+        // 1. Decimos que este panel se organice como una rejilla de 2x5
+        // Parámetros: GridLayout(filas, columnas, espacio_horizontal, espacio_vertical)
+        setLayout(new GridLayout(4, 1, 0, 10));
+        
+        // 2. Le ponemos el borde con título centrado
+        TitledBorder borde = BorderFactory.createTitledBorder("Lateral Derecho Estructuras");
+        borde.setTitleJustification(TitledBorder.TOP);
+        setBorder(borde);
+        
+        this.setPreferredSize(new Dimension(200, 400));
+        
+        // 3. Creamos y añadimos los 10 cuadraditos (en este caso, botones)
+        for (int i = 0; i <nombres.length; i++) {
+            JButton botonEstructura = new JButton(nombres[i]);
+            
+            // Opcional: Puedes cambiarles el color de fondo para que se noten más
+            botonEstructura.setBackground(Color.white); 
+            
+            // Al usar GridLayout, solo con hacer add(), Java lo mete en la celda que toca
+            add(botonEstructura);
+        }
+    }
+}
+class Panel_Oeste_Botones extends JPanel {
+    public Panel_Oeste_Botones() {
+        // 1 fila, 2 columnas, 5 píxeles de separación horizontal, 0 vertical
+        setLayout(new GridLayout(1, 2, 5, 0));
+        
+        // Le damos una altura preferida pequeña para que no se estiren demasiado hacia arriba
+        setPreferredSize(new Dimension(200, 50));
+        
+        JButton btnAtaque = new JButton("[Mejora Ataque]");
+        JButton btnDefensa = new JButton("[Mejora Defensa]");
+        
+        btnAtaque.setBackground(Color.WHITE);
+        btnDefensa.setBackground(Color.WHITE);
+        
+        add(btnAtaque);
+        add(btnDefensa);
+    }
+}
+
+
 
 
 
@@ -98,10 +153,17 @@ class Panel_Este extends JPanel {
 	}
 }
 class Panel_Este_Inferior extends JPanel{
+	private String[] nombres= {
+			"Granja",
+			"Carpinteria",
+			"Herreria",
+			"Torre Magica",
+			"Iglesia"
+	};
 	public Panel_Este_Inferior() {
         // 1. Decimos que este panel se organice como una rejilla de 2x5
         // Parámetros: GridLayout(filas, columnas, espacio_horizontal, espacio_vertical)
-        setLayout(new GridLayout(4, 1, 0, 10));
+        setLayout(new GridLayout(5, 1, 0, 10));
         
         // 2. Le ponemos el borde con título centrado
         TitledBorder borde = BorderFactory.createTitledBorder("Lateral Derecho Estructuras");
@@ -111,8 +173,8 @@ class Panel_Este_Inferior extends JPanel{
         this.setPreferredSize(new Dimension(200, 400));
         
         // 3. Creamos y añadimos los 10 cuadraditos (en este caso, botones)
-        for (int i = 1; i <= 4; i++) {
-            JButton botonEstructura = new JButton("[Nueva Estructura " + i + "]");
+        for (int i = 0; i <nombres.length; i++) {
+            JButton botonEstructura = new JButton(nombres[i]);
             
             // Opcional: Puedes cambiarles el color de fondo para que se noten más
             botonEstructura.setBackground(Color.white); 
@@ -125,6 +187,17 @@ class Panel_Este_Inferior extends JPanel{
 }
 
 class Panel_Inferior_Central extends JPanel {
+	private String[] nombres= {
+			"Espadachin",
+			"Lancero",
+			"Ballesta",
+			"Cañon",
+			"Mago",
+			"Sacerdote",
+			"Torre Lanza",
+			"Catapulta",
+			"Lanzacohetes",
+	};
     
     public Panel_Inferior_Central() {
         // 1. Decimos que este panel se organice como una rejilla de 2x5
@@ -139,8 +212,8 @@ class Panel_Inferior_Central extends JPanel {
         this.setPreferredSize(new Dimension(700, 250));
         
         // 3. Creamos y añadimos los 10 cuadraditos (en este caso, botones)
-        for (int i = 1; i <= 10; i++) {
-            JButton botonTropa = new JButton("[Reclutar Tropa " + i + "]");
+        for (int i = 0; i<nombres.length; i++) {
+            JButton botonTropa = new JButton(nombres[i]);
             
             // Opcional: Puedes cambiarles el color de fondo para que se noten más
             botonTropa.setBackground(Color.WHITE); 
