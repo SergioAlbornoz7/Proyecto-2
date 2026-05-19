@@ -50,7 +50,7 @@ class MiVentana extends JFrame{
         add(panelOeste, BorderLayout.WEST);
         
         panelEste=new Panel_Este();
-        panelEste.setBackground(Color.black);
+//        panelEste.setBackground(Color.black);
         add(panelEste,BorderLayout.EAST);
         
 //        panelInferiorCentral=new Panel_Inferior_Central();
@@ -77,27 +77,51 @@ class Panel_Oeste extends JPanel {
 	Panel_Oeste(){
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		boton1 = new JButton("Boton 1");
-		boton2 = new JButton("Boton 2");
-		boton3 = new JButton("Boton 3");
+		
 		add(boton1);
-		add(boton2);
-		add(boton3);
+		
 		
 	}
 }
 
+
+
 class Panel_Este extends JPanel {
-	private JButton boton1,boton2,boton3;
+	private Panel_Este_Inferior peinferior;
 	Panel_Este(){
-		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-		boton1 = new JButton("Boton 1");
-		boton2 = new JButton("Boton 2");
-		boton3 = new JButton("Boton 3");
-		add(boton1);
-		add(boton2);
-		add(boton3);
+		setLayout(new BorderLayout());
+		
+		peinferior=new Panel_Este_Inferior();
+		add(peinferior,BorderLayout.NORTH);
+		
 		
 	}
+}
+class Panel_Este_Inferior extends JPanel{
+	public Panel_Este_Inferior() {
+        // 1. Decimos que este panel se organice como una rejilla de 2x5
+        // Parámetros: GridLayout(filas, columnas, espacio_horizontal, espacio_vertical)
+        setLayout(new GridLayout(4, 1, 0, 10));
+        
+        // 2. Le ponemos el borde con título centrado
+        TitledBorder borde = BorderFactory.createTitledBorder("Lateral Derecho Estructuras");
+        borde.setTitleJustification(TitledBorder.TOP);
+        setBorder(borde);
+        
+        this.setPreferredSize(new Dimension(200, 400));
+        
+        // 3. Creamos y añadimos los 10 cuadraditos (en este caso, botones)
+        for (int i = 1; i <= 4; i++) {
+            JButton botonEstructura = new JButton("[Nueva Estructura " + i + "]");
+            
+            // Opcional: Puedes cambiarles el color de fondo para que se noten más
+            botonEstructura.setBackground(Color.white); 
+            
+            // Al usar GridLayout, solo con hacer add(), Java lo mete en la celda que toca
+            add(botonEstructura);
+        }
+    }
+	
 }
 
 class Panel_Inferior_Central extends JPanel {
