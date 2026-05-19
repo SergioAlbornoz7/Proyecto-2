@@ -23,8 +23,8 @@ public class Civilization {
 	private int carpentry;
 	
 	/*military*/
-	int battles;
-	ArrayList<MilitaryUnit>[] army = new ArrayList[9];
+	private int battles;
+	private ArrayList<MilitaryUnit>[] army = new ArrayList[9];
 
 	public Civilization(int technologyDefense, int technologyAttack, int wood, int iron, int food, int mana,
 			int magicTower, int church, int farm, int smithy, int carpentry, int battles) {
