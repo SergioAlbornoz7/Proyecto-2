@@ -79,8 +79,6 @@ class Panel_Oeste extends JPanel {
 		boton1 = new JButton("Boton 1");
 		
 		add(boton1);
-		
-		
 	}
 }
 
@@ -98,6 +96,11 @@ class Panel_Este extends JPanel {
 	}
 }
 class Panel_Este_Inferior extends JPanel{
+	private String[] nombres= {
+			"Torre Lanza",
+			"Catapulta",
+			"Lanzacohetes",
+	};
 	public Panel_Este_Inferior() {
         // 1. Decimos que este panel se organice como una rejilla de 2x5
         // Parámetros: GridLayout(filas, columnas, espacio_horizontal, espacio_vertical)
@@ -111,8 +114,8 @@ class Panel_Este_Inferior extends JPanel{
         this.setPreferredSize(new Dimension(200, 400));
         
         // 3. Creamos y añadimos los 10 cuadraditos (en este caso, botones)
-        for (int i = 1; i <= 4; i++) {
-            JButton botonEstructura = new JButton("[Nueva Estructura " + i + "]");
+        for (int i = 0; i <nombres.length; i++) {
+            JButton botonEstructura = new JButton(nombres[i]);
             
             // Opcional: Puedes cambiarles el color de fondo para que se noten más
             botonEstructura.setBackground(Color.white); 
@@ -125,6 +128,17 @@ class Panel_Este_Inferior extends JPanel{
 }
 
 class Panel_Inferior_Central extends JPanel {
+	private String[] nombres= {
+			"Espadachin",
+			"Lancero",
+			"Ballesta",
+			"Cañon",
+			"Mago",
+			"Sacerdote",
+			"Torre Lanza",
+			"Catapulta",
+			"Lanzacohetes",
+	};
     
     public Panel_Inferior_Central() {
         // 1. Decimos que este panel se organice como una rejilla de 2x5
@@ -139,8 +153,8 @@ class Panel_Inferior_Central extends JPanel {
         this.setPreferredSize(new Dimension(700, 250));
         
         // 3. Creamos y añadimos los 10 cuadraditos (en este caso, botones)
-        for (int i = 1; i <= 10; i++) {
-            JButton botonTropa = new JButton("[Reclutar Tropa " + i + "]");
+        for (int i = 0; i<nombres.length; i++) {
+            JButton botonTropa = new JButton(nombres[i]);
             
             // Opcional: Puedes cambiarles el color de fondo para que se noten más
             botonTropa.setBackground(Color.WHITE); 
