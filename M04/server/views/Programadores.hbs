@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+   <head>
+        {{> header}}
+       <meta charset="UTF-8">
+       <title>Programadores</title>
+       {{> menu}}
+   </head>
+   <body>
+        <section class="cuadro">
+
+    <div class="programadores">
+        <label class="opcion">
+            <input type="checkbox" class="check" data-target="card1">
+            Miembro 1
+        </label>
+
+        <label class="opcion">
+            <input type="checkbox" class="check" data-target="card2">
+            Miembro 2
+        </label>
+
+        <label class="opcion">
+            <input type="checkbox" class="check" data-target="card3">
+            Miembro 3
+        </label>
+    </div>
+
+    <div class="tarjetas">
+        <div class="tarjeta oculto" id="card1">
+            <img src="imagenes/img1.png">
+            
+            <h3>{{Programadores.Programadores.name1}}</h3>
+        </div>
+
+        <div class="tarjeta oculto" id="card2">
+            <img src="imagenes/img2.png">
+            <h3>{{Programadores.Programadores.name2}}</h3>
+        </div>
+
+        <div class="tarjeta oculto" id="card3">
+            <img src="imagenes/img3.png">
+            <h3>{{Programadores.Programadores.name3}}</h3>
+        </div>
+    </div>
+    <script src="java.js"></script>
+</section>
+{{> footer}}
+       
+   </body>
+</html> 
