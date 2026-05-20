@@ -204,6 +204,9 @@ class Panel_Oeste_Botones extends JPanel {
         
         add(btnAtaque);
         add(btnDefensa);
+        btnAtaque.addActionListener(e -> System.out.println("[CLICK] Pulsaste botonAtaque (Debería ser Ataque)"));
+        btnDefensa.addActionListener(e -> System.out.println("[CLICK] Pulsaste botonDefensa (Debería ser Defensa)"));
+
     }
 }
 
@@ -222,40 +225,59 @@ class Panel_Este extends JPanel {
 		
 	}
 }
-class Panel_Este_Inferior extends JPanel{
-	private String[] nombres= {
-			"Granja",
-			"Carpinteria",
-			"Herreria",
-			"Torre Magica",
-			"Iglesia"
-	};
-	public Panel_Este_Inferior() {
-        // 1. Decimos que este panel se organice como una rejilla de 2x5
-        // Parámetros: GridLayout(filas, columnas, espacio_horizontal, espacio_vertical)
+class Panel_Este_Inferior extends JPanel {
+    private JButton boton1, boton2, boton3, boton4, boton5;
+
+    // 1. AQUÍ EMPIEZA Y TERMINA EL CONSTRUCTOR
+    public Panel_Este_Inferior() {
+        
         setLayout(new GridLayout(5, 1, 0, 10));
         
-        // 2. Le ponemos el borde con título centrado
+        
+        
         TitledBorder borde = BorderFactory.createTitledBorder("Lateral Derecho Estructuras");
         borde.setTitleJustification(TitledBorder.TOP);
         setBorder(borde);
         
-        this.setPreferredSize(new Dimension(200, 400));
+        boton1=crearBotonEstructura("Granja");
+        boton2=crearBotonEstructura("Herreria");
+        boton3=crearBotonEstructura("Iglesia");
+        boton4=crearBotonEstructura("Torre_Magica");
+        boton5=crearBotonEstructura("Carpinteria");
         
-        // 3. Creamos y añadimos los 10 cuadraditos (en este caso, botones)
-        for (int i = 0; i <nombres.length; i++) {
-            JButton botonEstructura = new JButton(nombres[i]);
-            
-            
-            // Opcional: Puedes cambiarles el color de fondo para que se noten más
-            botonEstructura.setBackground(Color.white); 
-            
-            // Al usar GridLayout, solo con hacer add(), Java lo mete en la celda que toca
-            add(botonEstructura);
+        add(boton1);
+        add(boton2);
+        add(boton3);
+        add(boton4);
+        add(boton5);
+        
+        boton1.addActionListener(e -> System.out.println("[CLICK] Pulsaste boton1 (Debería ser Granja)"));
+        boton2.addActionListener(e -> System.out.println("[CLICK] Pulsaste boton1 (Debería ser Herreria)"));
+        boton3.addActionListener(e -> System.out.println("[CLICK] Pulsaste boton1 (Debería ser Iglesia)"));
+        boton4.addActionListener(e -> System.out.println("[CLICK] Pulsaste boton1 (Debería ser Torre_Magica)"));
+        boton5.addActionListener(e -> System.out.println("[CLICK] Pulsaste boton1 (Debería ser Carpinteria)"));
+    } 
+
+    // 2. AQUÍ EMPIEZA TU MÉTODO AUXILIAR (Fuera del constructor)
+    private JButton crearBotonEstructura(String nombreImagen) {
+        System.out.println("Cargando: " + nombreImagen + ".png");
+        
+        ImageIcon iconoOriginal = new ImageIcon(nombreImagen + ".png");
+        
+        if (iconoOriginal.getImageLoadStatus() != java.awt.MediaTracker.COMPLETE) {
+            iconoOriginal.getImage().getWidth(null); 
         }
-    }
-	
-}
+        
+        Image imagenRedimensionada = iconoOriginal.getImage().getScaledInstance(70, 70, Image.SCALE_SMOOTH);
+        ImageIcon iconoFinal = new ImageIcon(imagenRedimensionada);
+        
+        JButton boton = new JButton(iconoFinal);
+        boton.setBackground(Color.WHITE);
+        
+        return boton;
+    } 
+    
+} 
 
 class Panel_Inferior_Central extends JPanel {
     private JButton boton1, boton2, boton3, boton4, boton5, boton6, boton7, boton8, boton9;
