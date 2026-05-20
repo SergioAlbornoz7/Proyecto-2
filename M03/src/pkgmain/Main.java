@@ -3,6 +3,9 @@ package pkgmain;
 import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
+
+import javax.swing.SwingUtilities;
+
 import pkgmain.Civilization.MilitaryUnit;
 import pkgmain.Civilization.ResourceException;
 
@@ -13,14 +16,27 @@ public class Main {
 	static Civilization enemy = new Civilization(0,0,0,0,0,0,0,0,0,0,0,0);
 	
 	public static void main(String[] args) {
-		
+		SwingUtilities.invokeLater(new Runnable() {
+	        public void run() {
+	            UI.ventana = new MiVentana();
+	        };
+		});
 		/*Tasks*/
 		TimerTask recursos= new TimerTask() {
 			public void run() {
+				System.out.println("añadidos");
 				player.setFood(player.getFood() + player.getFarm()*Variables.CIVILIZATION_FOOD_GENERATED_PER_FARM + Variables.CIVILIZATION_FOOD_GENERATED);
 				player.setIron(player.getIron() + player.getSmithy()*Variables.CIVILIZATION_IRON_GENERATED_PER_SMITHY + Variables.CIVILIZATION_IRON_GENERATED);
 				player.setWood(player.getWood() + player.getCarpentry()*Variables.CIVILIZATION_WOOD_GENERATED_PER_CARPENTRY + Variables.CIVILIZATION_WOOD_GENERATED);
 				player.setMana(player.getMana() + player.getMagicTower()*Variables.CIVILIZATION_MANA_GENERATED_PER_MAGIC_TOWER);
+				
+				SwingUtilities.invokeLater(new Runnable() {
+					public void run() {
+		                if (UI.ventana != null) {
+		                    UI.ventana.actuInterRecursos();
+		                }
+		            }
+		        });
 			}
 		};
 		
@@ -59,7 +75,7 @@ public class Main {
 			enemy.getArmy()[i] = new ArrayList<MilitaryUnit>();
 		}
 		while (true) {
-			int rand = (int) Math.random()*100+1;
+			int rand = (int) (Math.random()*100)+1;
 			if (rand < 36) {
 				try {
 					if (food >= Variables.FOOD_COST_SWORDSMAN && wood >= Variables.WOOD_COST_SWORDSMAN && iron >= Variables.IRON_COST_SWORDSMAN) {
