@@ -15,6 +15,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
@@ -330,18 +331,47 @@ class Panel_Inferior_Central extends JPanel {
         add(boton11);
      
      // PASO 2: Clics independientes con Lambdas (Mucho más limpio y sin errores de argumentos)
-        boton1.addActionListener(e -> System.out.println("[CLICK] Pulsaste boton1 (Debería ser Espadachin)"));
-        boton2.addActionListener(e -> System.out.println("[CLICK] Pulsaste boton2 (Debería ser Lancero)"));
-        boton3.addActionListener(e -> System.out.println("[CLICK] Pulsaste boton3 (Debería ser Ballesta)"));
-        boton4.addActionListener(e -> System.out.println("[CLICK] Pulsaste boton4 (Debería ser Cañon)"));
-        boton5.addActionListener(e -> System.out.println("[CLICK] Pulsaste boton5 (Debería ser Torre Lanza)"));
-        boton6.addActionListener(e -> System.out.println("[CLICK] Pulsaste boton6 (Debería ser Catapulta)"));
-        boton7.addActionListener(e -> System.out.println("[CLICK] Pulsaste boton7 (Debería ser Lanzacohetes)"));
-        boton8.addActionListener(e -> System.out.println("[CLICK] Pulsaste boton8 (Debería ser Mago)"));
-        boton9.addActionListener(e -> System.out.println("[CLICK] Pulsaste boton9 (Debería ser Sacerdote)"));
+        boton1.addActionListener(e -> pedirCantidadTropas("Espadachin"));
+        boton2.addActionListener(e -> pedirCantidadTropas("Lancero"));
+        boton3.addActionListener(e -> pedirCantidadTropas("Ballesta"));
+        boton4.addActionListener(e -> pedirCantidadTropas("Cañon"));
+        boton5.addActionListener(e -> pedirCantidadTropas("Torre Lanza"));
+        boton6.addActionListener(e -> pedirCantidadTropas("Catapulta"));
+        boton7.addActionListener(e -> pedirCantidadTropas("Lanzacohetes"));
+        boton8.addActionListener(e -> pedirCantidadTropas("Mago"));
+        boton9.addActionListener(e -> pedirCantidadTropas("Sacerdote"));
         boton10.addActionListener(e -> System.out.println("[CLICK] Pulsaste boton10 (Debería ser Informe)"));
         boton11.addActionListener(e -> System.out.println("[CLICK] Pulsaste boton11 (Debería ser Ejercito Enemigo)"));
 
+    }
+    
+    private void pedirCantidadTropas(String nombreTropa) {
+        // Despliega la pestañita pidiendo el dato
+        String respuesta = JOptionPane.showInputDialog(
+            this, 
+            "¿Cuántas unidades de '" + nombreTropa + "' deseas ingresar?", 
+            "Configurar Tropas", 
+            JOptionPane.QUESTION_MESSAGE
+        );
+        
+        // Controlamos si el usuario le dio a "Cancelar" o cerró la pestañita sin escribir
+        if (respuesta != null && !respuesta.trim().isEmpty()) {
+            try {
+                // Convertimos el texto ingresado a un número entero entero
+                int cantidad = Integer.parseInt(respuesta);
+                
+                if (cantidad >= 0) {
+                    System.out.println("-> Has asignado " + cantidad + " unidades a: " + nombreTropa);
+                    // AQUÍ FUTURO: Puedes guardar 'cantidad' en las variables de tu juego.
+                } else {
+                    JOptionPane.showMessageDialog(this, "La cantidad no puede ser negativa.", "Error", JOptionPane.ERROR_MESSAGE);
+                }
+                
+            } catch (NumberFormatException ex) {
+                // Si pone letras o símbolos, saltará aquí en lugar de romper el programa
+                JOptionPane.showMessageDialog(this, "Por favor, introduce un número entero válido.", "Error de formato", JOptionPane.ERROR_MESSAGE);
+            }
+        }
     }
     
  // 3. ¡ESTE ES EL MÉTODO QUE TE FALTA AÑADIR!
