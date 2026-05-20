@@ -7,11 +7,14 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.GridLayout;
+import java.awt.Image;
 
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
@@ -118,44 +121,51 @@ class Panel_Oeste extends JPanel {
 class Panel_Oeste_Inferior extends JPanel{
 	private String[] nombres= {
 			"Comida",
+			"Hierro",
 			"Madera",
 			"Mana",
-			"Hierro",
 	};
 	public Panel_Oeste_Inferior() {
         // 1. Decimos que este panel se organice como una rejilla de 2x5
         // Parámetros: GridLayout(filas, columnas, espacio_horizontal, espacio_vertical)
         setLayout(new GridLayout(4, 1, 0, 10));
         
-        // 2. Le ponemos el borde con título centrado
-        TitledBorder borde = BorderFactory.createTitledBorder("Lateral Derecho Estructuras");
-        borde.setTitleJustification(TitledBorder.TOP);
-        setBorder(borde);
-        
         this.setPreferredSize(new Dimension(200, 400));
         
         // 3. Creamos y añadimos los 10 cuadraditos (en este caso, botones)
         for (int i = 0; i <nombres.length; i++) {
-            JButton botonEstructura = new JButton(nombres[i]);
+        	ImageIcon iconoRecursoO = new ImageIcon(nombres[i]+".png");
+            Image imagenEscalada = iconoRecursoO.getImage().getScaledInstance(75, 75, Image.SCALE_SMOOTH);
+            ImageIcon iconoRecursoF = new ImageIcon(imagenEscalada);
+            JLabel imagenRecurso = new JLabel(iconoRecursoF);
+            JLabel cantidad = new JLabel("1000");
             
             // Opcional: Puedes cambiarles el color de fondo para que se noten más
-            botonEstructura.setBackground(Color.white); 
+            imagenRecurso.setBackground(Color.white); 
             
             // Al usar GridLayout, solo con hacer add(), Java lo mete en la celda que toca
-            add(botonEstructura);
+            add(imagenRecurso);
+            add(cantidad);
         }
     }
 }
 class Panel_Oeste_Botones extends JPanel {
     public Panel_Oeste_Botones() {
+    	// Cargamos y adaptamos las imagenes de las mejoras para añadirlas a los botones
+    	ImageIcon iconoAtaque = new ImageIcon("AttackPlus.png");
+    	Image imagenAtaque = iconoAtaque.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH);
+        ImageIcon iconoAtaquePlus = new ImageIcon(imagenAtaque);
+        ImageIcon iconoDefensa = new ImageIcon("DefensePlus.png");
+    	Image imagenDefensa = iconoDefensa.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH);
+        ImageIcon iconoDefensaPlus = new ImageIcon(imagenDefensa);
         // 1 fila, 2 columnas, 5 píxeles de separación horizontal, 0 vertical
         setLayout(new GridLayout(1, 2, 5, 0));
         
         // Le damos una altura preferida pequeña para que no se estiren demasiado hacia arriba
-        setPreferredSize(new Dimension(200, 50));
+        setPreferredSize(new Dimension(100, 100));
         
-        JButton btnAtaque = new JButton("[Mejora Ataque]");
-        JButton btnDefensa = new JButton("[Mejora Defensa]");
+        JButton btnAtaque = new JButton(iconoAtaquePlus);
+        JButton btnDefensa = new JButton(iconoDefensaPlus);
         
         btnAtaque.setBackground(Color.WHITE);
         btnDefensa.setBackground(Color.WHITE);
@@ -204,6 +214,7 @@ class Panel_Este_Inferior extends JPanel{
         for (int i = 0; i <nombres.length; i++) {
             JButton botonEstructura = new JButton(nombres[i]);
             
+            
             // Opcional: Puedes cambiarles el color de fondo para que se noten más
             botonEstructura.setBackground(Color.white); 
             
@@ -215,39 +226,82 @@ class Panel_Este_Inferior extends JPanel{
 }
 
 class Panel_Inferior_Central extends JPanel {
-	private String[] nombres= {
-			"Espadachin",
-			"Lancero",
-			"Ballesta",
-			"Cañon",
-			"Mago",
-			"Sacerdote",
-			"Torre Lanza",
-			"Catapulta",
-			"Lanzacohetes",
-	};
-    
+    private JButton boton1, boton2, boton3, boton4, boton5, boton6, boton7, boton8, boton9;
+
     public Panel_Inferior_Central() {
-        // 1. Decimos que este panel se organice como una rejilla de 2x5
-        // Parámetros: GridLayout(filas, columnas, espacio_horizontal, espacio_vertical)
+        // 1. Configuración básica
         setLayout(new GridLayout(2, 5, 10, 10));
         
-        // 2. Le ponemos el borde con título centrado
         TitledBorder borde = BorderFactory.createTitledBorder("Zona Inferior (Tropas)");
         borde.setTitleJustification(TitledBorder.CENTER);
         setBorder(borde);
         
         this.setPreferredSize(new Dimension(700, 250));
         
-        // 3. Creamos y añadimos los 10 cuadraditos (en este caso, botones)
-        for (int i = 0; i<nombres.length; i++) {
-            JButton botonTropa = new JButton(nombres[i]);
-            
-            // Opcional: Puedes cambiarles el color de fondo para que se noten más
-            botonTropa.setBackground(Color.WHITE); 
-            
-            // Al usar GridLayout, solo con hacer add(), Java lo mete en la celda que toca
-            add(botonTropa);
-        }
+        // ========================================================
+        // PASO 1: CREAR TODOS LOS BOTONES (Aquí se procesan las imágenes)
+        // ========================================================
+        boton1 = crearBotonTropa("Espadachin");
+        boton2 = crearBotonTropa("Lancero");
+        boton3 = crearBotonTropa("Ballesta");
+        boton4 = crearBotonTropa("Cañon");
+        boton5 = crearBotonTropa("Torre Lanza");
+        boton6 = crearBotonTropa("Catapulta");
+        boton7 = crearBotonTropa("Lanzacohetes");
+        boton8 = crearBotonTropa("Mago");
+        boton9 = crearBotonTropa("Sacerdote");
+        
+        // ========================================================
+        // PASO 2: AÑADIRLOS AL LAYOUT (Orden visual garantizado)
+        // ========================================================
+        // Ahora que todos existen y tienen su imagen lista en memoria,
+        // los metemos a la cuadrícula. El orden aquí es sagrado.
+        add(boton1); // Celda 1 (Fila 1, Col 1) -> Espadachín
+        add(boton2); // Celda 2 (Fila 1, Col 2) -> Lancero
+        add(boton3); // Celda 3 (Fila 1, Col 3) -> Ballesta
+        add(boton4); // Celda 4 (Fila 1, Col 4) -> Cañón
+        add(boton5); // Celda 5 (Fila 1, Col 5) -> Torre Lanza
+        
+        add(boton6); // Celda 6 (Fila 2, Col 1) -> Catapulta
+        add(boton7); // Celda 7 (Fila 2, Col 2) -> Lanzacohetes
+        add(boton8); // Celda 8 (Fila 2, Col 3) -> Mago
+        add(boton9); // Celda 9 (Fila 2, Col 4) -> Sacerdote
+     
+     // PASO 2: Clics independientes con Lambdas (Mucho más limpio y sin errores de argumentos)
+        boton1.addActionListener(e -> System.out.println("[CLICK] Pulsaste boton1 (Debería ser Espadachin)"));
+        boton2.addActionListener(e -> System.out.println("[CLICK] Pulsaste boton2 (Debería ser Lancero)"));
+        boton3.addActionListener(e -> System.out.println("[CLICK] Pulsaste boton3 (Debería ser Ballesta)"));
+        boton4.addActionListener(e -> System.out.println("[CLICK] Pulsaste boton4 (Debería ser Cañon)"));
+        boton5.addActionListener(e -> System.out.println("[CLICK] Pulsaste boton5 (Debería ser Torre Lanza)"));
+        boton6.addActionListener(e -> System.out.println("[CLICK] Pulsaste boton6 (Debería ser Catapulta)"));
+        boton7.addActionListener(e -> System.out.println("[CLICK] Pulsaste boton7 (Debería ser Lanzacohetes)"));
+        boton8.addActionListener(e -> System.out.println("[CLICK] Pulsaste boton8 (Debería ser Mago)"));
+        boton9.addActionListener(e -> System.out.println("[CLICK] Pulsaste boton9 (Debería ser Sacerdote)"));
     }
+    
+ // 3. ¡ESTE ES EL MÉTODO QUE TE FALTA AÑADIR!
+    // Debe ir dentro de la clase, pero fuera del constructor anterior.
+    private JButton crearBotonTropa(String nombreImagen) {
+        System.out.println("Cargando: " + nombreImagen + ".png");
+        
+        // Cargamos la imagen usando el nombre que le pasamos por parámetro
+        ImageIcon iconoOriginal = new ImageIcon(nombreImagen + ".png");
+        
+        // Forzamos a Java a esperar a que la imagen se procese en memoria
+        if (iconoOriginal.getImageLoadStatus() != java.awt.MediaTracker.COMPLETE) {
+            iconoOriginal.getImage().getWidth(null); 
+        }
+        
+        // Redimensionamos la imagen de forma limpia a 70x70 píxeles
+        Image imagenRedimensionada = iconoOriginal.getImage().getScaledInstance(70, 70, Image.SCALE_SMOOTH);
+        ImageIcon iconoFinal = new ImageIcon(imagenRedimensionada);
+        
+        // Fabricamos el botón, le ponemos la imagen, el fondo blanco y lo devolvemos
+        JButton boton = new JButton(iconoFinal);
+        boton.setBackground(Color.WHITE);
+        
+        return boton; // Devolvemos el botón listo para ser asignado
+
+    // Tu método crearBotonTropa(String nombreImagen) se queda exactamente igual abajo
 }
+}    

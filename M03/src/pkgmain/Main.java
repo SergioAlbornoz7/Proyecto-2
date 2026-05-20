@@ -13,7 +13,6 @@ public class Main {
 	static Civilization enemy = new Civilization(0,0,0,0,0,0,0,0,0,0,0,0);
 	
 	public static void main(String[] args) {
-
 		
 		/*Tasks*/
 		TimerTask recursos= new TimerTask() {
@@ -200,12 +199,13 @@ public class Main {
 		}
 		return enemy.getArmy();
 	}
-	static void viewThreat() {
+	static String viewThreat() {
 		int swn = enemy.getArmy()[0].size();
 		int spn = enemy.getArmy()[1].size();
 		int cbn = enemy.getArmy()[2].size();
 		int cnn = enemy.getArmy()[3].size();
-		String result = new String();
-		result.format("NEW threat COMMING \n", );
+		String result = String.format("NEW threat COMMING %n Swordsman %11d %n Spearman %12d %n Crossbow %12d %n Cannon %14d", swn, spn, cbn, cnn);;
+		
+		return result;
 	}
 }
