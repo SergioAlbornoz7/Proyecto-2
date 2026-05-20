@@ -199,7 +199,7 @@ public class Main {
 		}
 		return enemy.getArmy();
 	}
-	static void viewThreat() {
+	static String viewThreat() {
 		int swn = enemy.getArmy()[0].size();
 		int spn = enemy.getArmy()[1].size();
 		int cbn = enemy.getArmy()[2].size();
