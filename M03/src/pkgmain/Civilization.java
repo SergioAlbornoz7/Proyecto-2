@@ -221,7 +221,7 @@ public class Civilization {
         //nicio Tropas
         System.out.println("------------------------------------------------ATTACK UNITS----------------------------------------\n");
     	System.out.printf("%37s %20s %20s %20s %n", "Swordsman", "Spearman", "Crosswob", "Cannon");
-    	System.out.printf("%37d %20d %20d %20d %n %n", data[0].size(), data[1].size(), data[2].size(), data[0].size(3));
+    	System.out.printf("%37d %20d %20d %20d %n %n", data[0].size(), data[1].size(), data[2].size(), data[3].size());
         System.out.println("----------------------------------------------------DEFENSES----------------------------------------\n");
         System.out.printf("%58s %20s %20s %n", "Arrow Tower", "Catapult", "Rocket Launcher");
         System.out.printf("%58d %20d %20d %n %n", data[4].size(), data[5].size(), data[6].size());
