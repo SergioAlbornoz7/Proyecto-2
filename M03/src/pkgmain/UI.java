@@ -89,6 +89,7 @@ class PanelCentral extends JPanel {
         TitledBorder borde = BorderFactory.createTitledBorder("Registro de Eventos");
         scrollRegistro.setBorder(borde);
         
+        
         // 3. Lo añadimos en el CENTER. 
         // Al estar en el CENTER ocupará TODO el espacio disponible entre los paneles laterales y el de tropas
         add(scrollRegistro, BorderLayout.CENTER);
@@ -102,6 +103,7 @@ class PanelCentral extends JPanel {
     public void registrarEvento(String mensaje) {
         areaRegistro.append(mensaje + "\n");
     }
+    
 }
 
 class Panel_Oeste extends JPanel {
@@ -249,6 +251,8 @@ class Panel_Este_Inferior extends JPanel {
 
 class Panel_Inferior_Central extends JPanel {
     private JButton boton1, boton2, boton3, boton4, boton5, boton6, boton7, boton8, boton9;
+	private Button boton11;
+	private Button boton10;
 
     public Panel_Inferior_Central() {
         // 1. Configuración básica
@@ -272,6 +276,8 @@ class Panel_Inferior_Central extends JPanel {
         boton7 = crearBotonTropa("Lanzacohetes");
         boton8 = crearBotonTropa("Mago");
         boton9 = crearBotonTropa("Sacerdote");
+        boton10=new Button("Informe");
+        boton11=new Button("Ejercito Enemigo");
         
         // ========================================================
         // PASO 2: AÑADIRLOS AL LAYOUT (Orden visual garantizado)
@@ -288,6 +294,8 @@ class Panel_Inferior_Central extends JPanel {
         add(boton7); // Celda 7 (Fila 2, Col 2) -> Lanzacohetes
         add(boton8); // Celda 8 (Fila 2, Col 3) -> Mago
         add(boton9); // Celda 9 (Fila 2, Col 4) -> Sacerdote
+        add(boton10);
+        add(boton11);
      
      // PASO 2: Clics independientes con Lambdas (Mucho más limpio y sin errores de argumentos)
         boton1.addActionListener(e -> System.out.println("[CLICK] Pulsaste boton1 (Debería ser Espadachin)"));
@@ -299,6 +307,9 @@ class Panel_Inferior_Central extends JPanel {
         boton7.addActionListener(e -> System.out.println("[CLICK] Pulsaste boton7 (Debería ser Lanzacohetes)"));
         boton8.addActionListener(e -> System.out.println("[CLICK] Pulsaste boton8 (Debería ser Mago)"));
         boton9.addActionListener(e -> System.out.println("[CLICK] Pulsaste boton9 (Debería ser Sacerdote)"));
+        boton10.addActionListener(e -> System.out.println("[CLICK] Pulsaste boton10 (Debería ser Informe)"));
+        boton11.addActionListener(e -> System.out.println("[CLICK] Pulsaste boton11 (Debería ser Ejercito Enemigo)"));
+
     }
     
  // 3. ¡ESTE ES EL MÉTODO QUE TE FALTA AÑADIR!
