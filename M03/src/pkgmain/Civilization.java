@@ -23,8 +23,8 @@ public class Civilization {
 	private int carpentry;
 	
 	/*military*/
-	int battles;
-	ArrayList<MilitaryUnit>[] army = new ArrayList[9];
+	private int battles;
+	private ArrayList<MilitaryUnit>[] army = new ArrayList[9];
 
 	public Civilization(int technologyDefense, int technologyAttack, int wood, int iron, int food, int mana,
 			int magicTower, int church, int farm, int smithy, int carpentry, int battles) {
@@ -210,6 +210,7 @@ public class Civilization {
         }
     }
     public void printStats() {
+    	ArrayList<MilitaryUnit>[] data = getArmy();
     	System.out.printf("%14s %n %n", "              ***************************CIVILIZATION STATS***************************              ");
     	System.out.println("--------------------------------------------------TECHNOLOGY----------------------------------------\n");
         System.out.printf("%79s %20s %n", "Attack", "Defense");
@@ -220,13 +221,13 @@ public class Civilization {
         //nicio Tropas
         System.out.println("------------------------------------------------ATTACK UNITS----------------------------------------\n");
     	System.out.printf("%37s %20s %20s %20s %n", "Swordsman", "Spearman", "Crosswob", "Cannon");
-    	System.out.printf("%37d %20d %20d %20d %n %n", 0, 0, 0, 0);
+    	System.out.printf("%37d %20d %20d %20d %n %n", data[0].size(), data[1].size(), data[2].size(), data[0].size(3));
         System.out.println("----------------------------------------------------DEFENSES----------------------------------------\n");
         System.out.printf("%58s %20s %20s %n", "Arrow Tower", "Catapult", "Rocket Launcher");
-        System.out.printf("%58d %20d %20d %n %n", 0, 0, 0);
+        System.out.printf("%58d %20d %20d %n %n", data[4].size(), data[5].size(), data[6].size());
         System.out.println("-----------------------------------------------SPECIAL UNITS----------------------------------------\n");
         System.out.printf("%79s %20s %n", "Mague", "Priest");
-        System.out.printf("%79s %20s %n %n", 0, 0);
+        System.out.printf("%79s %20s %n %n", data[7].size(), data[8].size());
         //fin Tropas
         System.out.println("---------------------------------------------------RESOURCES----------------------------------------\n");
         System.out.printf("%37s %20s %20s %20s %n", "Food", "Wood", "Iron", "Mana");
