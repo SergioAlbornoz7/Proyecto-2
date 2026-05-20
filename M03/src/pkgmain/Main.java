@@ -46,6 +46,7 @@ public class Main {
 				Battle nb = new Battle(player.getArmy(), createEnemyArmy(Variables.ENEMY_FLEET_INCREASE*player.getBattles()));
 				viewThreat();
 				nb.startBattle();
+				
 				player.setBattles(player.getBattles() + 1);
 			}
 		
