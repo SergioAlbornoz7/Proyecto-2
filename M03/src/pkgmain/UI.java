@@ -254,12 +254,40 @@ class Panel_Este_Inferior extends JPanel {
         add(boton4);
         add(boton5);
         
-        boton1.addActionListener(e -> System.out.println("[CLICK] Pulsaste boton1 (Debería ser Granja)"));
-        boton2.addActionListener(e -> System.out.println("[CLICK] Pulsaste boton1 (Debería ser Herreria)"));
-        boton3.addActionListener(e -> System.out.println("[CLICK] Pulsaste boton1 (Debería ser Iglesia)"));
-        boton4.addActionListener(e -> System.out.println("[CLICK] Pulsaste boton1 (Debería ser Torre_Magica)"));
-        boton5.addActionListener(e -> System.out.println("[CLICK] Pulsaste boton1 (Debería ser Carpinteria)"));
-    } 
+        boton1.addActionListener(e -> pedirCantidadEstructuras("Granja"));
+        boton2.addActionListener(e -> pedirCantidadEstructuras("Herreria"));
+        boton3.addActionListener(e -> pedirCantidadEstructuras("Iglesia"));
+        boton4.addActionListener(e -> pedirCantidadEstructuras("Torre_Magica"));
+        boton5.addActionListener(e -> pedirCantidadEstructuras("Carpinteria"));
+    }
+    private void pedirCantidadEstructuras(String nombreTropa) {
+        // Despliega la pestañita pidiendo el dato
+        String respuesta = JOptionPane.showInputDialog(
+            this, 
+            "¿Cuántas estructuras de '" + nombreTropa + "' deseas ingresar?", 
+            "Configurar Tropas", 
+            JOptionPane.QUESTION_MESSAGE
+        );
+        
+        // Controlamos si el usuario le dio a "Cancelar" o cerró la pestañita sin escribir
+        if (respuesta != null && !respuesta.trim().isEmpty()) {
+            try {
+                // Convertimos el texto ingresado a un número entero entero
+                int cantidad = Integer.parseInt(respuesta);
+                
+                if (cantidad >= 0) {
+                    System.out.println("-> Has asignado " + cantidad + " unidades a: " + nombreTropa);
+                    // AQUÍ FUTURO: Puedes guardar 'cantidad' en las variables de tu juego.
+                } else {
+                    JOptionPane.showMessageDialog(this, "La cantidad no puede ser negativa.", "Error", JOptionPane.ERROR_MESSAGE);
+                }
+                
+            } catch (NumberFormatException ex) {
+                // Si pone letras o símbolos, saltará aquí en lugar de romper el programa
+                JOptionPane.showMessageDialog(this, "Por favor, introduce un número entero válido.", "Error de formato", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    }
 
     // 2. AQUÍ EMPIEZA TU MÉTODO AUXILIAR (Fuera del constructor)
     private JButton crearBotonEstructura(String nombreImagen) {
