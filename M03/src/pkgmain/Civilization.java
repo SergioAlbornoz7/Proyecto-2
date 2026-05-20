@@ -154,59 +154,64 @@ public class Civilization {
 	
 	/*Build*/
 	
-	public void newChurch() throws ResourceException{
+	public void newChurch() {
 		if (food >= Variables.FOOD_COST_CHURCH && wood >= Variables.WOOD_COST_CHURCH && iron >= Variables.IRON_COST_CHURCH && mana >= 10000) {
 			food -= Variables.FOOD_COST_CHURCH;
 			wood -= Variables.WOOD_COST_CHURCH;
 			iron -= Variables.IRON_COST_CHURCH;
 			mana -= 10000;
 			church += 1;
+			UI.ventana.nuevoEvento("Se ha creado una iglesia");
 		} else {
-			throw new ResourceException("No tienes suficientes materiales para construir la capilla");
+			UI.ventana.nuevoEvento("No tienes materiales suficientes para construir una iglesia");
 		}
 			
 	}
-	public void newSmithy() throws ResourceException {
+	public void newSmithy() {
         if (food >= Variables.FOOD_COST_SMITHY && wood >= Variables.WOOD_COST_SMITHY && iron >= Variables.IRON_COST_SMITHY) {
             food -= Variables.FOOD_COST_SMITHY;
             wood -= Variables.WOOD_COST_SMITHY;
             iron -= Variables.IRON_COST_SMITHY;
             smithy += 1;
+            UI.ventana.nuevoEvento("Se ha creado una herreria");
         } else {
-            throw new ResourceException("No tienes suficientes materiales para construir la herrería");
+        	UI.ventana.nuevoEvento("No tienes suficientes materiales para construir una herrería");
         }
     }
 
-    public void newCarpentry() throws ResourceException {
+    public void newCarpentry() {
         if (food >= Variables.FOOD_COST_CARPENTRY && wood >= Variables.WOOD_COST_CARPENTRY && iron >= Variables.IRON_COST_CARPENTRY) {
             food -= Variables.FOOD_COST_CARPENTRY;
             wood -= Variables.WOOD_COST_CARPENTRY;
             iron -= Variables.IRON_COST_CARPENTRY;
             carpentry += 1;
+            UI.ventana.nuevoEvento("Se ha creado una carpinteria");
         } else {
-            throw new ResourceException("No tienes suficientes materiales para construir la carpintería");
+        	UI.ventana.nuevoEvento("No tienes suficientes materiales para construir una carpintería");
         }
     }
 
-    public void newFarm() throws ResourceException {
+    public void newFarm() {
         if (food >= Variables.FOOD_COST_FARM && wood >= Variables.WOOD_COST_FARM && iron >= Variables.IRON_COST_FARM) {
             food -= Variables.FOOD_COST_FARM;
             wood -= Variables.WOOD_COST_FARM;
             iron -= Variables.IRON_COST_FARM;
             farm += 1;
+            UI.ventana.nuevoEvento("Se ha creado una granja");
         } else {
-            throw new ResourceException("No tienes suficientes materiales para construir la granja");
+        	UI.ventana.nuevoEvento("No tienes suficientes materiales para construir una granja");
         }
     }
 
-    public void newMagicTower() throws ResourceException {
+    public void newMagicTower() {
         if (food >= Variables.FOOD_COST_MAGICTOWER && wood >= Variables.WOOD_COST_MAGICTOWER && iron >= Variables.IRON_COST_MAGICTOWER) {
             food -= Variables.FOOD_COST_MAGICTOWER;
             wood -= Variables.WOOD_COST_MAGICTOWER;
             iron -= Variables.IRON_COST_MAGICTOWER;
             magicTower += 1;
+            UI.ventana.nuevoEvento("Se ha creado una torre magica");
         } else {
-            throw new ResourceException("No tienes suficientes materiales para construir la torre de magos");
+        	UI.ventana.nuevoEvento("No tienes suficientes materiales para construir una torre magica");
         }
     }
     public void printStats() {
@@ -241,25 +246,54 @@ public class Civilization {
     
     /*Upgrades*/
     
-    public void upgradeTechnologyAttack() throws ResourceException {
-        if (wood >= Variables.UPGRADE_BASE_ATTACK_TECHNOLOGY_WOOD_COST + (Variables.UPGRADE_BASE_ATTACK_TECHNOLOGY_WOOD_COST % Variables.UPGRADE_PLUS_ATTACK_TECHNOLOGY_WOOD_COST)*technologyAttack && iron >= Variables.UPGRADE_BASE_ATTACK_TECHNOLOGY_IRON_COST + (Variables.UPGRADE_BASE_ATTACK_TECHNOLOGY_IRON_COST % Variables.UPGRADE_PLUS_ATTACK_TECHNOLOGY_IRON_COST)*technologyAttack) {
-            wood -= Variables.UPGRADE_BASE_ATTACK_TECHNOLOGY_WOOD_COST + (Variables.UPGRADE_BASE_ATTACK_TECHNOLOGY_WOOD_COST % Variables.UPGRADE_PLUS_ATTACK_TECHNOLOGY_WOOD_COST)*technologyAttack;
-            iron -= Variables.UPGRADE_BASE_ATTACK_TECHNOLOGY_IRON_COST+ (Variables.UPGRADE_BASE_ATTACK_TECHNOLOGY_IRON_COST % Variables.UPGRADE_PLUS_ATTACK_TECHNOLOGY_IRON_COST)*technologyAttack;
-            technologyAttack += 1;
-        } else {
-            throw new ResourceException("No tienes suficientes materiales para investigar la tecnologia de ataque");
-        }
-    }
+    public void upgradeTechnologyAttack() {
+    	int costWood;
+    	int costIron;
+    	int costFood;
+    	if (getTechnologyAttack() < 1) {
+	            costWood = Variables.UPGRADE_BASE_ATTACK_TECHNOLOGY_WOOD_COST;
+	            costIron = Variables.UPGRADE_BASE_ATTACK_TECHNOLOGY_IRON_COST;
+	            costFood = Variables.UPGRADE_BASE_ATTACK_TECHNOLOGY_FOOD_COST;
+    	}else {
+	            costWood = (int) (Variables.UPGRADE_BASE_ATTACK_TECHNOLOGY_WOOD_COST + (Variables.UPGRADE_BASE_ATTACK_TECHNOLOGY_WOOD_COST * Variables.UPGRADE_PLUS_ATTACK_TECHNOLOGY_WOOD_COST)*technologyAttack);
+	            costIron = (int) (Variables.UPGRADE_BASE_ATTACK_TECHNOLOGY_IRON_COST+ (Variables.UPGRADE_BASE_ATTACK_TECHNOLOGY_IRON_COST * Variables.UPGRADE_PLUS_ATTACK_TECHNOLOGY_IRON_COST)*technologyAttack);
+	            costFood = (int) (Variables.UPGRADE_BASE_ATTACK_TECHNOLOGY_FOOD_COST + (Variables.UPGRADE_BASE_ATTACK_TECHNOLOGY_FOOD_COST * Variables.UPGRADE_PLUS_ATTACK_TECHNOLOGY_FOOD_COST)*technologyAttack);
+    	}
+    	if (wood >= costWood && iron >= costIron && food >= costFood) {
+    		 wood -= costWood;
+    		 iron -= costIron;
+    		 food -= costFood;
+    		 technologyAttack += 1;
+	            UI.ventana.nuevoEvento("Se ha investigado la tecnologia de ataque con exito");
+	        } else {
+	        	UI.ventana.nuevoEvento("No tienes suficientes materiales para investigar la tecnologia de ataque");
+	        }
+    	}
     
-    public void upgradeTechnologyDefense() throws ResourceException {
-        if (wood >= Variables.UPGRADE_BASE_DEFENSE_TECHNOLOGY_WOOD_COST + (Variables.UPGRADE_BASE_DEFENSE_TECHNOLOGY_WOOD_COST % Variables.UPGRADE_PLUS_DEFENSE_TECHNOLOGY_WOOD_COST)*technologyDefense && iron >= Variables.UPGRADE_BASE_DEFENSE_TECHNOLOGY_IRON_COST + (Variables.UPGRADE_BASE_DEFENSE_TECHNOLOGY_IRON_COST % Variables.UPGRADE_PLUS_DEFENSE_TECHNOLOGY_IRON_COST)*technologyDefense) {
-            wood -= Variables.UPGRADE_BASE_DEFENSE_TECHNOLOGY_WOOD_COST + (Variables.UPGRADE_BASE_DEFENSE_TECHNOLOGY_WOOD_COST % Variables.UPGRADE_PLUS_DEFENSE_TECHNOLOGY_WOOD_COST)*technologyDefense;
-            iron -= Variables.UPGRADE_BASE_DEFENSE_TECHNOLOGY_IRON_COST+ (Variables.UPGRADE_BASE_DEFENSE_TECHNOLOGY_IRON_COST % Variables.UPGRADE_PLUS_DEFENSE_TECHNOLOGY_IRON_COST)*technologyDefense;
-            technologyDefense += 1;
-        } else {
-            throw new ResourceException("No tienes suficientes materiales para investigar la tecnologia de defensa");
-        }
-    }
+    public void upgradeTechnologyDefense() {
+    	int costWood;
+    	int costIron;
+    	int costFood;
+    	if (getTechnologyDefense() < 1) {
+	            costWood = Variables.UPGRADE_BASE_DEFENSE_TECHNOLOGY_WOOD_COST;
+	            costIron = Variables.UPGRADE_BASE_DEFENSE_TECHNOLOGY_IRON_COST;
+	            costFood = Variables.UPGRADE_BASE_DEFENSE_TECHNOLOGY_FOOD_COST;
+    	}else {
+
+	            costWood = (int) (Variables.UPGRADE_BASE_DEFENSE_TECHNOLOGY_WOOD_COST + (Variables.UPGRADE_BASE_DEFENSE_TECHNOLOGY_WOOD_COST * Variables.UPGRADE_PLUS_DEFENSE_TECHNOLOGY_WOOD_COST*technologyDefense));
+	            costIron = (int) (Variables.UPGRADE_BASE_DEFENSE_TECHNOLOGY_IRON_COST+ (Variables.UPGRADE_BASE_DEFENSE_TECHNOLOGY_IRON_COST * Variables.UPGRADE_PLUS_DEFENSE_TECHNOLOGY_IRON_COST*technologyDefense));
+	            costFood = (int) (Variables.UPGRADE_BASE_DEFENSE_TECHNOLOGY_FOOD_COST + (Variables.UPGRADE_BASE_DEFENSE_TECHNOLOGY_FOOD_COST * Variables.UPGRADE_PLUS_DEFENSE_TECHNOLOGY_FOOD_COST*technologyDefense));
+    	}
+    	if (wood >= costWood && iron >= costIron && food >= costFood) {
+	    	wood -= costWood;
+	   		 iron -= costIron;
+	   		 food -= costFood;
+	   		 technologyAttack += 1;
+		            UI.ventana.nuevoEvento("Se ha investigado la tecnologia de defensa con exito");
+		        } else {
+		        	UI.ventana.nuevoEvento("No tienes suficientes materiales para investigar la tecnologia de defensa");
+		}
+}
     
     /*Create Units*/
     

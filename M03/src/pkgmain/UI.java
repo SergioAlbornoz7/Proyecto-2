@@ -22,6 +22,8 @@ import javax.swing.JTextArea;
 import javax.swing.SwingUtilities;
 import javax.swing.border.TitledBorder;
 
+import pkgmain.Civilization.ResourceException;
+
 public class UI {
 	
 	public static MiVentana ventana;
@@ -68,6 +70,10 @@ class MiVentana extends JFrame{
 	
 	public void actuInterRecursos() {
 	    panelOeste.updateRecursos();
+	}
+	public void nuevoEvento(String nombre) {
+		panelCentral.registrarEvento(nombre);
+		actuInterRecursos();
 	}
 }
 class PanelCentral extends JPanel {
@@ -207,8 +213,8 @@ class Panel_Oeste_Botones extends JPanel {
         
         add(btnAtaque);
         add(btnDefensa);
-        btnAtaque.addActionListener(e -> System.out.println("[CLICK] Pulsaste botonAtaque (Debería ser Ataque)"));
-        btnDefensa.addActionListener(e -> System.out.println("[CLICK] Pulsaste botonDefensa (Debería ser Defensa)"));
+        btnAtaque.addActionListener(e -> Main.player.upgradeTechnologyAttack());
+        btnDefensa.addActionListener(e -> Main.player.upgradeTechnologyDefense());
 
     }
 }
@@ -254,40 +260,12 @@ class Panel_Este_Inferior extends JPanel {
         add(boton4);
         add(boton5);
         
-        boton1.addActionListener(e -> pedirCantidadEstructuras("Granja"));
-        boton2.addActionListener(e -> pedirCantidadEstructuras("Herreria"));
-        boton3.addActionListener(e -> pedirCantidadEstructuras("Iglesia"));
-        boton4.addActionListener(e -> pedirCantidadEstructuras("Torre_Magica"));
-        boton5.addActionListener(e -> pedirCantidadEstructuras("Carpinteria"));
-    }
-    private void pedirCantidadEstructuras(String nombreTropa) {
-        // Despliega la pestañita pidiendo el dato
-        String respuesta = JOptionPane.showInputDialog(
-            this, 
-            "¿Cuántas estructuras de '" + nombreTropa + "' deseas ingresar?", 
-            "Configurar Tropas", 
-            JOptionPane.QUESTION_MESSAGE
-        );
-        
-        // Controlamos si el usuario le dio a "Cancelar" o cerró la pestañita sin escribir
-        if (respuesta != null && !respuesta.trim().isEmpty()) {
-            try {
-                // Convertimos el texto ingresado a un número entero entero
-                int cantidad = Integer.parseInt(respuesta);
-                
-                if (cantidad >= 0) {
-                    System.out.println("-> Has asignado " + cantidad + " unidades a: " + nombreTropa);
-                    // AQUÍ FUTURO: Puedes guardar 'cantidad' en las variables de tu juego.
-                } else {
-                    JOptionPane.showMessageDialog(this, "La cantidad no puede ser negativa.", "Error", JOptionPane.ERROR_MESSAGE);
-                }
-                
-            } catch (NumberFormatException ex) {
-                // Si pone letras o símbolos, saltará aquí en lugar de romper el programa
-                JOptionPane.showMessageDialog(this, "Por favor, introduce un número entero válido.", "Error de formato", JOptionPane.ERROR_MESSAGE);
-            }
-        }
-    }
+        boton1.addActionListener(e -> Main.player.newFarm());
+        boton2.addActionListener(e -> Main.player.newSmithy());
+        boton3.addActionListener(e -> Main.player.newChurch());
+        boton4.addActionListener(e -> Main.player.newMagicTower());
+        boton5.addActionListener(e -> Main.player.newCarpentry());
+    } 
 
     // 2. AQUÍ EMPIEZA TU MÉTODO AUXILIAR (Fuera del constructor)
     private JButton crearBotonEstructura(String nombreImagen) {
