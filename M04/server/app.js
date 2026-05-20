@@ -101,6 +101,7 @@ app.get('/', async (req, res) => {
     res.status(500).send('Error consultant la base de dades');
   }
 });
+
 //Programadores
 app.get('/Programadores', (req, res) => {
   const Programadores = JSON.parse(
