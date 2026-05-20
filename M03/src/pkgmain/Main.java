@@ -11,7 +11,7 @@ import pkgmain.Civilization.ResourceException;
 
 public class Main {
 	
-	static Civilization player = new Civilization(0,0,0,0,0,0,0,0,0,0,0,0);
+	static Civilization player = new Civilization(0,0,20000,50000,3000,0,0,0,0,0,0,0);
 	
 	static Civilization enemy = new Civilization(0,0,0,0,0,0,0,0,0,0,0,0);
 	
