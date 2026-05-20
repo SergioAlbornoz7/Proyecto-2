@@ -21,6 +21,8 @@ import javax.swing.JTextArea;
 import javax.swing.SwingUtilities;
 import javax.swing.border.TitledBorder;
 
+import pkgmain.Civilization.ResourceException;
+
 public class UI {
 	
 	public static MiVentana ventana;
@@ -67,6 +69,10 @@ class MiVentana extends JFrame{
 	
 	public void actuInterRecursos() {
 	    panelOeste.updateRecursos();
+	}
+	public void nuevoEvento(String nombre) {
+		panelCentral.registrarEvento(nombre);
+		actuInterRecursos();
 	}
 }
 class PanelCentral extends JPanel {
@@ -204,8 +210,8 @@ class Panel_Oeste_Botones extends JPanel {
         
         add(btnAtaque);
         add(btnDefensa);
-        btnAtaque.addActionListener(e -> System.out.println("[CLICK] Pulsaste botonAtaque (Debería ser Ataque)"));
-        btnDefensa.addActionListener(e -> System.out.println("[CLICK] Pulsaste botonDefensa (Debería ser Defensa)"));
+        btnAtaque.addActionListener(e -> Main.player.upgradeTechnologyAttack());
+        btnDefensa.addActionListener(e -> Main.player.upgradeTechnologyDefense());
 
     }
 }
@@ -251,11 +257,11 @@ class Panel_Este_Inferior extends JPanel {
         add(boton4);
         add(boton5);
         
-        boton1.addActionListener(e -> System.out.println("[CLICK] Pulsaste boton1 (Debería ser Granja)"));
-        boton2.addActionListener(e -> System.out.println("[CLICK] Pulsaste boton1 (Debería ser Herreria)"));
-        boton3.addActionListener(e -> System.out.println("[CLICK] Pulsaste boton1 (Debería ser Iglesia)"));
-        boton4.addActionListener(e -> System.out.println("[CLICK] Pulsaste boton1 (Debería ser Torre_Magica)"));
-        boton5.addActionListener(e -> System.out.println("[CLICK] Pulsaste boton1 (Debería ser Carpinteria)"));
+        boton1.addActionListener(e -> Main.player.newFarm());
+        boton2.addActionListener(e -> Main.player.newSmithy());
+        boton3.addActionListener(e -> Main.player.newChurch());
+        boton4.addActionListener(e -> Main.player.newMagicTower());
+        boton5.addActionListener(e -> Main.player.newCarpentry());
     } 
 
     // 2. AQUÍ EMPIEZA TU MÉTODO AUXILIAR (Fuera del constructor)
