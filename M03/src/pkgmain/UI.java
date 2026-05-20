@@ -18,13 +18,15 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
+import javax.swing.SwingUtilities;
 import javax.swing.border.TitledBorder;
 
 public class UI {
+	
+	public static MiVentana ventana;
 
 	public static void main(String[] args) {
 		new MiVentana();
-
 	}
 
 }
@@ -61,6 +63,10 @@ class MiVentana extends JFrame{
         
 //        panelInferiorCentral=new Panel_Inferior_Central();
 //        add(panelInferiorCentral,BorderLayout.SOUTH);
+	}
+	
+	public void actuInterRecursos() {
+	    panelOeste.updateRecursos();
 	}
 }
 class PanelCentral extends JPanel {
@@ -116,37 +122,63 @@ class Panel_Oeste extends JPanel {
 		panelBotonesMejora = new Panel_Oeste_Botones();
         add(panelBotonesMejora, BorderLayout.SOUTH);
 	}
+	
+	public void updateRecursos() {
+	    panelInferiorCentral.actualizarRecursos();
+	}
 }
 
-class Panel_Oeste_Inferior extends JPanel{
-	private String[] nombres= {
-			"Comida",
-			"Hierro",
-			"Madera",
-			"Mana",
-	};
+class Panel_Oeste_Inferior extends JPanel {
+	private JLabel comidaCantidad;
+    private JLabel hierroCantidad;
+    private JLabel maderaCantidad;
+    private JLabel manaCantidad;
 	public Panel_Oeste_Inferior() {
-        // 1. Decimos que este panel se organice como una rejilla de 2x5
-        // Parámetros: GridLayout(filas, columnas, espacio_horizontal, espacio_vertical)
+
         setLayout(new GridLayout(4, 1, 0, 10));
         
         this.setPreferredSize(new Dimension(200, 400));
         
-        // 3. Creamos y añadimos los 10 cuadraditos (en este caso, botones)
-        for (int i = 0; i <nombres.length; i++) {
-        	ImageIcon iconoRecursoO = new ImageIcon(nombres[i]+".png");
-            Image imagenEscalada = iconoRecursoO.getImage().getScaledInstance(75, 75, Image.SCALE_SMOOTH);
-            ImageIcon iconoRecursoF = new ImageIcon(imagenEscalada);
-            JLabel imagenRecurso = new JLabel(iconoRecursoF);
-            JLabel cantidad = new JLabel("1000");
-            
-            // Opcional: Puedes cambiarles el color de fondo para que se noten más
-            imagenRecurso.setBackground(Color.white); 
-            
-            // Al usar GridLayout, solo con hacer add(), Java lo mete en la celda que toca
-            add(imagenRecurso);
-            add(cantidad);
-        }
+        ImageIcon iconoComidaO = new ImageIcon("Comida.png");
+        Image comidaEscal = iconoComidaO.getImage().getScaledInstance(75, 75, Image.SCALE_SMOOTH);
+        ImageIcon iconoComidaF = new ImageIcon(comidaEscal);
+        JLabel comida = new JLabel(iconoComidaF);
+        comidaCantidad = new JLabel("" + Main.player.getFood());
+        
+        
+        ImageIcon iconoHierroO = new ImageIcon("Hierro.png");
+        Image hierroEscal = iconoHierroO.getImage().getScaledInstance(75, 75, Image.SCALE_SMOOTH);
+        ImageIcon iconoHierroF = new ImageIcon(hierroEscal);
+        JLabel hierro = new JLabel(iconoHierroF);
+        hierroCantidad = new JLabel("" + Main.player.getIron());
+        
+        ImageIcon iconoMaderaO = new ImageIcon("Madera.png");
+        Image maderaEscal = iconoMaderaO.getImage().getScaledInstance(75, 75, Image.SCALE_SMOOTH);
+        ImageIcon iconoMaderaF = new ImageIcon(maderaEscal);
+        JLabel madera = new JLabel(iconoMaderaF);
+        maderaCantidad = new JLabel("" + Main.player.getWood());
+        
+        ImageIcon iconoManaO = new ImageIcon("Mana.png");
+        Image manaEscal = iconoManaO.getImage().getScaledInstance(75, 75, Image.SCALE_SMOOTH);
+        ImageIcon iconoManaF = new ImageIcon(manaEscal);
+        JLabel mana = new JLabel(iconoManaF);
+        manaCantidad = new JLabel("" + Main.player.getMana());
+        
+        add(comida);
+        add(comidaCantidad);
+        add(hierro);
+        add(hierroCantidad);
+        add(madera);
+        add(maderaCantidad);
+        add(mana);
+        add(manaCantidad);
+    }
+	
+	public void actualizarRecursos() {
+        comidaCantidad.setText("" + Main.player.getFood());
+        hierroCantidad.setText("" + Main.player.getIron());
+        maderaCantidad.setText("" + Main.player.getWood());
+        manaCantidad.setText("" + Main.player.getMana());
     }
 }
 class Panel_Oeste_Botones extends JPanel {
