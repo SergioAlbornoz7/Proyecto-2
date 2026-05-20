@@ -57,20 +57,40 @@ hbs.registerPartials(path.join(__dirname, 'views', 'partials'));
 // Route
 app.get('/', async (req, res) => {
   try {
-    // Obtenir les dades de la base de dades
+    // Obtenir les dades de la base de dades de Civilization_stats (com tenies abans)
     const Civilization_statsRows = await db.query('SELECT name FROM Civilization_stats');
-    // Transformar les dades a JSON (per les plantilles .hbs)
-    // Cal informar de les columnes i els seus tipus
     const Civilization_statsJson = db.table_to_json(Civilization_statsRows, {name: 'string'});
     
-    // Llegir l'arxiu .json amb dades comunes per a totes les pàgines
+    // LA TEVA QUERY AMB ELS JOINS I ALIAS + FILTRE PER A LES 2 ÚLTIMES BATALLES
+    // Ordenem per num_battle de forma descendent per agafar les més recents
+    const lastBattlesRows = await db.query(`
+      SELECT cs.name, bt.civilization_id, bt.num_battle, cs.wood_amount, cs.iron_amount, cs.food_amount, cs.mana_amount 
+      FROM Civilization_stats cs 
+      JOIN Battle_stats bt ON cs.civilization_id = bt.civilization_id
+      ORDER BY bt.num_battle DESC 
+      LIMIT 2
+    `);
+
+    // Transformem el resultat de les batalles informant de totes les columnes de la query
+    const lastBattlesJson = db.table_to_json(lastBattlesRows, {
+      name: 'string',
+      civilization_id: 'number',
+      num_battle: 'number',
+      wood_amount: 'number',
+      iron_amount: 'number',
+      food_amount: 'number',
+      mana_amount: 'number'
+    });
+    
+    // Llegir l'arxiu .json amb dades comunes
     const commonData = JSON.parse(
       fs.readFileSync(path.join(__dirname, 'data', 'common.json'), 'utf8')
     );
 
     // Construir l'objecte de dades per a la plantilla
     const data = {
-      Civilization_stats:Civilization_statsJson,
+      Civilization_stats: Civilization_statsJson,
+      Battles: lastBattlesJson, // Enviem les dues últimes batalles amb els camps del JOIN
       common: commonData
     };
 
