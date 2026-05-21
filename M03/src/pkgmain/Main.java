@@ -25,15 +25,14 @@ public class Main {
 		/*Tasks*/
 		TimerTask recursos= new TimerTask() {
 			public void run() {
-				System.out.println("añadidos");
 				player.setFood(player.getFood() + player.getFarm()*Variables.CIVILIZATION_FOOD_GENERATED_PER_FARM + Variables.CIVILIZATION_FOOD_GENERATED);
 				player.setIron(player.getIron() + player.getSmithy()*Variables.CIVILIZATION_IRON_GENERATED_PER_SMITHY + Variables.CIVILIZATION_IRON_GENERATED);
 				player.setWood(player.getWood() + player.getCarpentry()*Variables.CIVILIZATION_WOOD_GENERATED_PER_CARPENTRY + Variables.CIVILIZATION_WOOD_GENERATED);
 				player.setMana(player.getMana() + player.getMagicTower()*Variables.CIVILIZATION_MANA_GENERATED_PER_MAGIC_TOWER);
-				
 				SwingUtilities.invokeLater(new Runnable() {
 					public void run() {
 		                if (UI.ventana != null) {
+		                	UI.ventana.nuevoEvento("Se han generado nuevos recursos");
 		                    UI.ventana.actuInterRecursos();
 		                }
 		            }
