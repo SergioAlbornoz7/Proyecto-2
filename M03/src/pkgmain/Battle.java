@@ -1,8 +1,6 @@
 package pkgmain;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-
 import pkgmain.Civilization.MilitaryUnit;
 public class Battle {
 	// Variables
@@ -26,6 +24,7 @@ public class Battle {
 		//Ejercitos
 		this.civilizationArmy = civilizationArmy;
 		this.enemyArmy = enemyArmy;
+		armies = new ArrayList[2][];
 		armies[0] = civilizationArmy;
 		armies[1] = enemyArmy;
 		battleDevelopment = new String("");
@@ -61,70 +60,170 @@ public class Battle {
 		
 		//Recursos
 		this.wasteWoodIron = new int[2];
-		this.resourcesLooses = new int[2][4];
+		this.resourcesLooses = new int[2][3];
 		
 	}
 	
 	public void startBattle() {
-		int turn = (int) (Math.random()*2+1);
-		while ((actualNumberUnitsCivilization >  ((initialNumberUnitsCivilization/100)*20) || actualNumberUnitsEnemy > ((initialNumberUnitsEnemy/100)*20)) && (actualNumberUnitsEnemy > 0 && actualNumberUnitsCivilization > 0)) {
-			if (turn == 1) {
-				/*offense*/
-				int grp = (int) (Math.random() * 100);
-				int group = -1;
-				int acumulado = 0;
+        int turn = (byte) (Math.random()*2+1);
+        while ((actualNumberUnitsCivilization >  ((initialNumberUnitsCivilization/100)*20) || actualNumberUnitsEnemy > ((initialNumberUnitsEnemy/100)*20)) && (actualNumberUnitsEnemy > 0 && actualNumberUnitsCivilization > 0)) {
+            if (turn == 1) {
 
-				for (int i = 0; i <= 8; i++) {
-				    acumulado += Variables.CHANCE_ATTACK_CIVILIZATION_UNITS[i];
-				    if (grp < acumulado) {
-				        group = i;
-				        break;
-				    }
-				}
-				MilitaryUnit offensive = civilizationArmy[group].get(((int)Math.random()*(civilizationArmy[group].size()-1))) ;
-				/*Defense*/
-				MilitaryUnit defensive = ;
-				/*battle*/
-				
-				
-				turn = 2;
-			}else {
-				
-				turn = 1;
-			}
-		}
-	}
+                /*offense*/
+                int grp = (int) (Math.random() * 100);
+                int group = -1;
+                int acumulado = 0;
 
-	//Metodos finales//
-	
-	String getBattleReport(int battles) {
-		return battleDevelopment;
+                for (int i = 0; i <= 8; i++) {
+                    acumulado += Variables.CHANCE_ATTACK_CIVILIZATION_UNITS[i];
+                    if (grp < acumulado) {
+                        group = i;
+                        break;
+                    }
+                }
+                
+                if (civilizationArmy[group].isEmpty()) {
+                    continue;
+                }
+                
+                MilitaryUnit offensive = civilizationArmy[group].get((int)(Math.random() * civilizationArmy[group].size())) ;
+                
+                /*Defense*/
+
+                int total = actualNumberUnitsEnemy;
+                int[] prov = new int[5];
+                for (int i = 0; i < 5; i++) {
+                    if (total > 0) {
+                        prov[i] = (int) (((double) enemyArmy[i].size() / total) * 100);
+                    }
+                }
+                grp = (int) (Math.random() * 100);
+                group = -1;
+                acumulado = 0;
+
+                for (int i = 0; i <= 4; i++) {
+                    acumulado += prov[i];
+                    if (grp < acumulado) {
+                        group = i;
+                        break;
+                    }
+                }
+                
+                if (group == -1 || enemyArmy[group].isEmpty()) {
+                    for (int i = 0; i < 5; i++) {
+                        if (!enemyArmy[i].isEmpty()) {
+                            group = i;
+                            break;
+                        }
+                    }
+                }
+                
+                int u = (int)(Math.random() * enemyArmy[group].size());
+                MilitaryUnit defensive = enemyArmy[group].get(u) ;
+
+                /*battle*/
+                defensive.takeDamage(offensive.attack());
+                int aa = (int)(Math.random()*100);
+                if (aa <= offensive.getChanceAttackAgain() && defensive.getActualArmor()> 0) {
+                    defensive.takeDamage(offensive.attack());
+                }
+                if (defensive.getActualArmor() <= 0) {
+                    int wc = (int)(Math.random()*100);
+                    if (wc <= defensive.getChanceGeneratinWaste()){
+                        wasteWoodIron[0] = defensive.getWoodCost();
+                        wasteWoodIron[1] = defensive.getIronCost();
+                    }
+                    resourcesLooses[1][0] += defensive.getFoodCost();
+                    resourcesLooses[1][1] += defensive.getWoodCost();
+                    resourcesLooses[1][2] += defensive.getIronCost();
+                    enemyArmy[group].remove(u);
+                    actualNumberUnitsEnemy -= 1;
+                }
+                /*log del ataque*/ 
+                
+                turn = 2;
+            }else {
+                    /*offense*/
+                int grp = (int) (Math.random() * 100);
+                int group = -1;
+                int acumulado = 0;
+
+                for (int i = 0; i <= 4; i++) {
+                    acumulado += Variables.CHANCE_ATTACK_ENEMY_UNITS[i];
+                    if (grp < acumulado) {
+                        group = i;
+                        break;
+                    }
+                }
+                
+                if (enemyArmy[group].isEmpty()) {
+                    continue;
+                }
+                
+                MilitaryUnit offensive = enemyArmy[group].get((int)(Math.random() * enemyArmy[group].size())) ;
+                
+                /*Defense*/
+
+                int total = actualNumberUnitsCivilization;
+                int[] prov = new int[9];
+                for (int i = 0; i < 9; i++) {
+                    if (total > 0) {
+                        prov[i] = (int) (((double) civilizationArmy[i].size() / total) * 100);
+                    }
+                }
+                grp = (int) (Math.random() * 100);
+                group = -1;
+                acumulado = 0;
+
+                for (int i = 0; i <= 8; i++) {
+                    acumulado += prov[i];
+                    if (grp < acumulado) {
+                        group = i;
+                        break;
+                    }
+                }
+                
+                if (group == -1 || civilizationArmy[group].isEmpty()) {
+                    for (int i = 0; i < 9; i++) {
+                        if (!civilizationArmy[i].isEmpty()) {
+                            group = i;
+                            break;
+                        }
+                    }
+                }
+                
+                int u = (int)(Math.random() * civilizationArmy[group].size());
+                MilitaryUnit defensive = civilizationArmy[group].get(u) ;
+
+                /*battle*/
+                defensive.takeDamage(offensive.attack());
+                int aa = (int)(Math.random()*100);
+                if (aa <= offensive.getChanceAttackAgain() && defensive.getActualArmor()> 0) {
+                    defensive.takeDamage(offensive.attack());
+                }
+                if (defensive.getActualArmor() <= 0) {
+                    int wc = (int)(Math.random()*100);
+                    if (wc <= defensive.getChanceGeneratinWaste()){
+                        wasteWoodIron[0] = defensive.getWoodCost();
+                        wasteWoodIron[1] = defensive.getIronCost();
+                    }
+                    resourcesLooses[0][0] += defensive.getFoodCost();
+                    resourcesLooses[0][1] += defensive.getWoodCost();
+                    resourcesLooses[0][2] += defensive.getIronCost();
+                    civilizationArmy[group].remove(u);
+                    actualNumberUnitsCivilization -= 1;
+                }
+                /*log del ataque*/ 
+                turn = 1;
+            }
+        }
+        if (resourcesLooses[0][0]+ (resourcesLooses[0][1]*5) +(resourcesLooses[0][2]*10) > resourcesLooses[1][0]+ (resourcesLooses[1][1]*5) +(resourcesLooses[1][2]*10)) {
+            /*log Victoria*/
+			Main.player.setWood(Main.player.getWood()+ wasteWoodIron[0]);
+			Main.player.setIron(Main.player.getIron()+ wasteWoodIron[1]);
+        } else {
+			/*logDerrota*/
 		}
-	String getBattleDevelopment() {
-		return battleDevelopment;
-		}
-	
-	public void initInitialArmies() {
-	}
-	public void updateResourcesLooses() {
-	}
-	public void fleetResourceCost(ArrayList<MilitaryUnit> army) {}
-	public void initialFleetNumber(ArrayList<MilitaryUnit> army) {}
-	public int remainderPercentageFleet(ArrayList<MilitaryUnit> army) {
-		return initialNumberUnitsCivilization;
-		}
-	public int getGroupDefender(ArrayList<MilitaryUnit> army) {
-		return initialNumberUnitsCivilization;
-		
-	}
-	public int getCivilizationGroupAttacker(){
-		return initialNumberUnitsCivilization;
-		}
-	public int getEnemyGroupAttacker() {
-		return initialNumberUnitsCivilization;
-		}
-	public void resetArmyArmor() {
-		
-	}
-	
+    }
 }
+
