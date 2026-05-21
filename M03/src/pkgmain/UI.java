@@ -8,7 +8,11 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.GridLayout;
 import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
@@ -37,6 +41,7 @@ class MiVentana extends JFrame{
 	private PanelCentral panelCentral;
 	private Panel_Oeste panelOeste;
 	private Panel_Este panelEste;
+	private BufferedImage imagen;
 	MiVentana(){
         setBounds(800, 400, 900, 700);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -45,13 +50,12 @@ class MiVentana extends JFrame{
         setVisible(true);
 	}
 	public void init_components(){
-//		try {
-//			imagen = ImageIO.read(new File("./src/Icono.png"));
-//		} catch (IOException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//		setIconImage(imagen);
+		try {
+			imagen = ImageIO.read(new File("Icono.png"));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		setIconImage(imagen);
 		
         panelCentral = new PanelCentral();
         add(panelCentral, BorderLayout.CENTER);
@@ -367,8 +371,25 @@ class Panel_Inferior_Central extends JPanel {
                 int cantidad = Integer.parseInt(respuesta);
                 
                 if (cantidad >= 0) {
-                    System.out.println("-> Has asignado " + cantidad + " unidades a: " + nombreTropa);
-                    // AQUÍ FUTURO: Puedes guardar 'cantidad' en las variables de tu juego.
+                	if (nombreTropa == "Espadachin") {
+                		Main.player.newSwordsman(cantidad);
+                	} else if (nombreTropa == "Lancero") {
+                		Main.player.newSpearman(cantidad);
+                	} else if (nombreTropa == "Ballesta") {
+                		Main.player.newCrosbow(cantidad);;
+                	} else if (nombreTropa == "Cañon") {
+                		Main.player.newCannon(cantidad);
+                	} else if (nombreTropa == "Torre Lanza") {
+                		Main.player.newArrowTower(cantidad);
+                	} else if (nombreTropa == "Catapulta") {
+                		Main.player.newCatapult(cantidad);
+                	} else if (nombreTropa == "Lanzacohetes") {
+                		Main.player.newRocketLauncher(cantidad);
+                	} else if (nombreTropa == "Mago") {
+                		Main.player.newMagician(cantidad);
+                	} else if (nombreTropa == "Sacerdote") {
+                		Main.player.newPriest(cantidad);
+                	}
                 } else {
                     JOptionPane.showMessageDialog(this, "La cantidad no puede ser negativa.", "Error", JOptionPane.ERROR_MESSAGE);
                 }
