@@ -154,116 +154,151 @@ public class Civilization {
 	
 	/*Build*/
 	
-	public void newChurch() throws ResourceException{
+	public void newChurch() {
 		if (food >= Variables.FOOD_COST_CHURCH && wood >= Variables.WOOD_COST_CHURCH && iron >= Variables.IRON_COST_CHURCH && mana >= 10000) {
 			food -= Variables.FOOD_COST_CHURCH;
 			wood -= Variables.WOOD_COST_CHURCH;
 			iron -= Variables.IRON_COST_CHURCH;
 			mana -= 10000;
 			church += 1;
+			UI.ventana.nuevoEvento("Se ha creado una iglesia");
 		} else {
-			throw new ResourceException("No tienes suficientes materiales para construir la capilla");
+			UI.ventana.nuevoEvento("No tienes materiales suficientes para construir una iglesia");
 		}
 			
 	}
-	public void newSmithy() throws ResourceException {
+	public void newSmithy() {
         if (food >= Variables.FOOD_COST_SMITHY && wood >= Variables.WOOD_COST_SMITHY && iron >= Variables.IRON_COST_SMITHY) {
             food -= Variables.FOOD_COST_SMITHY;
             wood -= Variables.WOOD_COST_SMITHY;
             iron -= Variables.IRON_COST_SMITHY;
             smithy += 1;
+            UI.ventana.nuevoEvento("Se ha creado una herreria");
         } else {
-            throw new ResourceException("No tienes suficientes materiales para construir la herrería");
+        	UI.ventana.nuevoEvento("No tienes suficientes materiales para construir una herrería");
         }
     }
 
-    public void newCarpentry() throws ResourceException {
+    public void newCarpentry() {
         if (food >= Variables.FOOD_COST_CARPENTRY && wood >= Variables.WOOD_COST_CARPENTRY && iron >= Variables.IRON_COST_CARPENTRY) {
             food -= Variables.FOOD_COST_CARPENTRY;
             wood -= Variables.WOOD_COST_CARPENTRY;
             iron -= Variables.IRON_COST_CARPENTRY;
             carpentry += 1;
+            UI.ventana.nuevoEvento("Se ha creado una carpinteria");
         } else {
-            throw new ResourceException("No tienes suficientes materiales para construir la carpintería");
+        	UI.ventana.nuevoEvento("No tienes suficientes materiales para construir una carpintería");
         }
     }
 
-    public void newFarm() throws ResourceException {
+    public void newFarm() {
         if (food >= Variables.FOOD_COST_FARM && wood >= Variables.WOOD_COST_FARM && iron >= Variables.IRON_COST_FARM) {
             food -= Variables.FOOD_COST_FARM;
             wood -= Variables.WOOD_COST_FARM;
             iron -= Variables.IRON_COST_FARM;
             farm += 1;
+            UI.ventana.nuevoEvento("Se ha creado una granja");
         } else {
-            throw new ResourceException("No tienes suficientes materiales para construir la granja");
+        	UI.ventana.nuevoEvento("No tienes suficientes materiales para construir una granja");
         }
     }
 
-    public void newMagicTower() throws ResourceException {
+    public void newMagicTower() {
         if (food >= Variables.FOOD_COST_MAGICTOWER && wood >= Variables.WOOD_COST_MAGICTOWER && iron >= Variables.IRON_COST_MAGICTOWER) {
             food -= Variables.FOOD_COST_MAGICTOWER;
             wood -= Variables.WOOD_COST_MAGICTOWER;
             iron -= Variables.IRON_COST_MAGICTOWER;
             magicTower += 1;
+            UI.ventana.nuevoEvento("Se ha creado una torre magica");
         } else {
-            throw new ResourceException("No tienes suficientes materiales para construir la torre de magos");
+        	UI.ventana.nuevoEvento("No tienes suficientes materiales para construir una torre magica");
         }
     }
     public void printStats() {
+    	String stats;
     	ArrayList<MilitaryUnit>[] data = getArmy();
-    	System.out.printf("%14s %n %n", "              ***************************CIVILIZATION STATS***************************              ");
-    	System.out.println("--------------------------------------------------TECHNOLOGY----------------------------------------\n");
-        System.out.printf("%79s %20s %n", "Attack", "Defense");
-        System.out.printf("%79s %20s %n %n", getTechnologyAttack(), getTechnologyDefense());
-        System.out.println("---------------------------------------------------BUILDINGS----------------------------------------\n");
-        System.out.printf("%16s %20s %20s %20s %20s %n", "Farm", "Smithy", "Carpentry", "Magic Tower", "Church");
-        System.out.printf("%16s %20s %20s %20s %20s %n %n", getFarm(), getSmithy(), getCarpentry(), getMagicTower(), getChurch());
-        //nicio Tropas
-        System.out.println("------------------------------------------------ATTACK UNITS----------------------------------------\n");
-    	System.out.printf("%37s %20s %20s %20s %n", "Swordsman", "Spearman", "Crosswob", "Cannon");
-    	System.out.printf("%37d %20d %20d %20d %n %n", data[0].size(), data[1].size(), data[2].size(), data[3].size());
-        System.out.println("----------------------------------------------------DEFENSES----------------------------------------\n");
-        System.out.printf("%58s %20s %20s %n", "Arrow Tower", "Catapult", "Rocket Launcher");
-        System.out.printf("%58d %20d %20d %n %n", data[4].size(), data[5].size(), data[6].size());
-        System.out.println("-----------------------------------------------SPECIAL UNITS----------------------------------------\n");
-        System.out.printf("%79s %20s %n", "Mague", "Priest");
-        System.out.printf("%79s %20s %n %n", data[7].size(), data[8].size());
-        //fin Tropas
-        System.out.println("---------------------------------------------------RESOURCES----------------------------------------\n");
-        System.out.printf("%37s %20s %20s %20s %n", "Food", "Wood", "Iron", "Mana");
-        System.out.printf("%37d %20d %20d %20d %n", getFood(), getWood(), getIron(), getMana());
-        
-        System.out.printf("%37s %20s %20s %20s %n", "Food", "Wood", "Iron", "Mana");
-        System.out.printf("%37d %20d %20d %20d %n", getFarm()*Variables.CIVILIZATION_FOOD_GENERATED_PER_FARM + Variables.CIVILIZATION_FOOD_GENERATED, getCarpentry()*Variables.CIVILIZATION_WOOD_GENERATED_PER_CARPENTRY + Variables.CIVILIZATION_WOOD_GENERATED, 
+    	stats = String.format("%14s %n %n", "              ***************************CIVILIZATION STATS***************************              ");
+    	stats += String.format("--------------------------------------------------TECNOLOGIA----------------------------------------\n");
+    	stats += String.format("%79s %20s %n", "Ataque", "Defensa");
+    	stats += String.format("%84s %26s %n %n", getTechnologyAttack(), getTechnologyDefense());
+    	stats += String.format("-------------------------------------------------ESTRUCTURAS----------------------------------------\n");
+    	stats += String.format("%16s %20s %20s %20s %20s %n", "Granja", "Herreria", "Carpenteria", "Torre Magica", "Iglesia");
+    	stats += String.format("%23s %25s %25s %25s %27s %n %n", getFarm(), getSmithy(), getCarpentry(), getMagicTower(), getChurch());
+        stats += String.format("-------------------------------------------UNIDADES DE ATAQUE---------------------------------------\n");
+        stats += String.format("%37s %20s %20s %20s %n", "Espadachin", "Lanzero", "Ballesta", "Cañon");
+        stats += String.format("%45d %24d %26d %30d %n %n", data[0].size(), data[1].size(), data[2].size(), data[3].size());
+        stats += String.format("----------------------------------------------------DEFENSAS----------------------------------------\n");
+        stats += String.format("%58s %20s %20s %n", "Torre de Arc.", "Catapulta", "Lanzacohetes");
+        stats += String.format("%61d %27d %30d %n %n", data[4].size(), data[5].size(), data[6].size());
+        stats += String.format("-----------------------------------------------UNIDADES ESPECIALES----------------------------------\n");
+        stats += String.format("%79s %20s %n", "Mago", "Sacerdote");
+        stats += String.format("%84s %28s %n %n", data[7].size(), data[8].size());
+        stats += String.format("---------------------------------------------------RECURSOS-----------------------------------------\n");
+        stats += String.format("%37s %20s %20s %20s %n", "Comida", "Madera", "Hierro", "Mana");
+        stats += String.format("%39d %21d %19d %20d %n", getFood(), getWood(), getIron(), getMana());
+        stats += String.format("---------------------------------------------------RECURSOS GENERADOS-----------------------------------------\n");
+        stats += String.format("%37s %20s %20s %20s %n", "Comida", "Madera", "Hierro", "Mana");
+        stats += String.format("%39d %21d %19d %20d %n", getFarm()*Variables.CIVILIZATION_FOOD_GENERATED_PER_FARM + Variables.CIVILIZATION_FOOD_GENERATED, getCarpentry()*Variables.CIVILIZATION_WOOD_GENERATED_PER_CARPENTRY + Variables.CIVILIZATION_WOOD_GENERATED, 
         		getSmithy()*Variables.CIVILIZATION_IRON_GENERATED_PER_SMITHY + Variables.CIVILIZATION_IRON_GENERATED, getMagicTower()*Variables.CIVILIZATION_MANA_GENERATED_PER_MAGIC_TOWER);
+        UI.ventana.nuevoEvento(stats);
     }
     	
     
     /*Upgrades*/
     
-    public void upgradeTechnologyAttack() throws ResourceException {
-        if (wood >= Variables.UPGRADE_BASE_ATTACK_TECHNOLOGY_WOOD_COST + (Variables.UPGRADE_BASE_ATTACK_TECHNOLOGY_WOOD_COST % Variables.UPGRADE_PLUS_ATTACK_TECHNOLOGY_WOOD_COST)*technologyAttack && iron >= Variables.UPGRADE_BASE_ATTACK_TECHNOLOGY_IRON_COST + (Variables.UPGRADE_BASE_ATTACK_TECHNOLOGY_IRON_COST % Variables.UPGRADE_PLUS_ATTACK_TECHNOLOGY_IRON_COST)*technologyAttack) {
-            wood -= Variables.UPGRADE_BASE_ATTACK_TECHNOLOGY_WOOD_COST + (Variables.UPGRADE_BASE_ATTACK_TECHNOLOGY_WOOD_COST % Variables.UPGRADE_PLUS_ATTACK_TECHNOLOGY_WOOD_COST)*technologyAttack;
-            iron -= Variables.UPGRADE_BASE_ATTACK_TECHNOLOGY_IRON_COST+ (Variables.UPGRADE_BASE_ATTACK_TECHNOLOGY_IRON_COST % Variables.UPGRADE_PLUS_ATTACK_TECHNOLOGY_IRON_COST)*technologyAttack;
-            technologyAttack += 1;
-        } else {
-            throw new ResourceException("No tienes suficientes materiales para investigar la tecnologia de ataque");
-        }
-    }
+    public void upgradeTechnologyAttack() {
+    	int costWood;
+    	int costIron;
+    	int costFood;
+    	if (getTechnologyAttack() < 1) {
+	            costWood = Variables.UPGRADE_BASE_ATTACK_TECHNOLOGY_WOOD_COST;
+	            costIron = Variables.UPGRADE_BASE_ATTACK_TECHNOLOGY_IRON_COST;
+	            costFood = Variables.UPGRADE_BASE_ATTACK_TECHNOLOGY_FOOD_COST;
+    	}else {
+	            costWood = (int) (Variables.UPGRADE_BASE_ATTACK_TECHNOLOGY_WOOD_COST + (Variables.UPGRADE_BASE_ATTACK_TECHNOLOGY_WOOD_COST * Variables.UPGRADE_PLUS_ATTACK_TECHNOLOGY_WOOD_COST)*technologyAttack);
+	            costIron = (int) (Variables.UPGRADE_BASE_ATTACK_TECHNOLOGY_IRON_COST+ (Variables.UPGRADE_BASE_ATTACK_TECHNOLOGY_IRON_COST * Variables.UPGRADE_PLUS_ATTACK_TECHNOLOGY_IRON_COST)*technologyAttack);
+	            costFood = (int) (Variables.UPGRADE_BASE_ATTACK_TECHNOLOGY_FOOD_COST + (Variables.UPGRADE_BASE_ATTACK_TECHNOLOGY_FOOD_COST * Variables.UPGRADE_PLUS_ATTACK_TECHNOLOGY_FOOD_COST)*technologyAttack);
+    	}
+    	if (wood >= costWood && iron >= costIron && food >= costFood) {
+    		 wood -= costWood;
+    		 iron -= costIron;
+    		 food -= costFood;
+    		 technologyAttack += 1;
+	            UI.ventana.nuevoEvento("Se ha investigado la tecnologia de ataque con exito");
+	        } else {
+	        	UI.ventana.nuevoEvento("No tienes suficientes materiales para investigar la tecnologia de ataque");
+	        }
+    	}
     
-    public void upgradeTechnologyDefense() throws ResourceException {
-        if (wood >= Variables.UPGRADE_BASE_DEFENSE_TECHNOLOGY_WOOD_COST + (Variables.UPGRADE_BASE_DEFENSE_TECHNOLOGY_WOOD_COST % Variables.UPGRADE_PLUS_DEFENSE_TECHNOLOGY_WOOD_COST)*technologyDefense && iron >= Variables.UPGRADE_BASE_DEFENSE_TECHNOLOGY_IRON_COST + (Variables.UPGRADE_BASE_DEFENSE_TECHNOLOGY_IRON_COST % Variables.UPGRADE_PLUS_DEFENSE_TECHNOLOGY_IRON_COST)*technologyDefense) {
-            wood -= Variables.UPGRADE_BASE_DEFENSE_TECHNOLOGY_WOOD_COST + (Variables.UPGRADE_BASE_DEFENSE_TECHNOLOGY_WOOD_COST % Variables.UPGRADE_PLUS_DEFENSE_TECHNOLOGY_WOOD_COST)*technologyDefense;
-            iron -= Variables.UPGRADE_BASE_DEFENSE_TECHNOLOGY_IRON_COST+ (Variables.UPGRADE_BASE_DEFENSE_TECHNOLOGY_IRON_COST % Variables.UPGRADE_PLUS_DEFENSE_TECHNOLOGY_IRON_COST)*technologyDefense;
-            technologyDefense += 1;
-        } else {
-            throw new ResourceException("No tienes suficientes materiales para investigar la tecnologia de defensa");
-        }
-    }
+    public void upgradeTechnologyDefense() {
+    	int costWood;
+    	int costIron;
+    	int costFood;
+    	if (getTechnologyDefense() < 1) {
+	            costWood = Variables.UPGRADE_BASE_DEFENSE_TECHNOLOGY_WOOD_COST;
+	            costIron = Variables.UPGRADE_BASE_DEFENSE_TECHNOLOGY_IRON_COST;
+	            costFood = Variables.UPGRADE_BASE_DEFENSE_TECHNOLOGY_FOOD_COST;
+    	}else {
+
+	            costWood = (int) (Variables.UPGRADE_BASE_DEFENSE_TECHNOLOGY_WOOD_COST + (Variables.UPGRADE_BASE_DEFENSE_TECHNOLOGY_WOOD_COST * Variables.UPGRADE_PLUS_DEFENSE_TECHNOLOGY_WOOD_COST*technologyDefense));
+	            costIron = (int) (Variables.UPGRADE_BASE_DEFENSE_TECHNOLOGY_IRON_COST+ (Variables.UPGRADE_BASE_DEFENSE_TECHNOLOGY_IRON_COST * Variables.UPGRADE_PLUS_DEFENSE_TECHNOLOGY_IRON_COST*technologyDefense));
+	            costFood = (int) (Variables.UPGRADE_BASE_DEFENSE_TECHNOLOGY_FOOD_COST + (Variables.UPGRADE_BASE_DEFENSE_TECHNOLOGY_FOOD_COST * Variables.UPGRADE_PLUS_DEFENSE_TECHNOLOGY_FOOD_COST*technologyDefense));
+    	}
+    	if (wood >= costWood && iron >= costIron && food >= costFood) {
+	    	wood -= costWood;
+	   		 iron -= costIron;
+	   		 food -= costFood;
+	   		 technologyAttack += 1;
+		            UI.ventana.nuevoEvento("Se ha investigado la tecnologia de defensa con exito");
+		        } else {
+		        	UI.ventana.nuevoEvento("No tienes suficientes materiales para investigar la tecnologia de defensa");
+		}
+}
     
     /*Create Units*/
     
-    public void newSwordsman(int n) throws ResourceException {
+    public void newSwordsman(int n) {
+    	int gen = 0;
     	for (int i = n; i != 0; i--) {
     		if (food >= Variables.FOOD_COST_SWORDSMAN && wood >= Variables.WOOD_COST_SWORDSMAN && iron >= Variables.IRON_COST_SWORDSMAN && mana >= Variables.MANA_COST_SWORDSMAN) {
                 army[0].add(new Swordsman(Variables.ARMOR_SWORDSMAN, Variables.BASE_DAMAGE_SWORDSMAN));
@@ -271,13 +306,18 @@ public class Civilization {
     			wood -= Variables.WOOD_COST_SWORDSMAN;
     			iron -= Variables.IRON_COST_SWORDSMAN;
     			mana -= Variables.MANA_COST_SWORDSMAN;
+    			gen += 1;
             } else {
-            	System.out.println(String.format("Se han creado %d espadachines", n-i));
-                throw new ResourceException("No tienes suficientes materiales para crear mas espadachines"); 
+            	UI.ventana.nuevoEvento("No tienes suficientes materiales para crear mas espadachines"); 
+            	break;
             }
     	}
+    	if (gen >= 1) {
+    		UI.ventana.nuevoEvento(String.format("Se han creado %d espadachines", gen));
+    	}
     }
-    public void newSpearman(int n) throws ResourceException {
+    public void newSpearman(int n) {
+    	int gen = 0;
     	for (int i = n; i != 0; i--) {
     		if (food >= Variables.FOOD_COST_SPEARMAN && wood >= Variables.WOOD_COST_SPEARMAN && iron >= Variables.IRON_COST_SPEARMAN && mana >= Variables.MANA_COST_SPEARMAN) {
                 army[1].add(new Spearman(Variables.ARMOR_SPEARMAN, Variables.BASE_DAMAGE_SPEARMAN));
@@ -285,13 +325,18 @@ public class Civilization {
     			wood -= Variables.WOOD_COST_SPEARMAN;
     			iron -= Variables.IRON_COST_SPEARMAN;
     			mana -= Variables.MANA_COST_SPEARMAN;
+    			gen += 1;
             } else {
-            	System.out.println(String.format("Se han creado %d espadachines", n-i));
-                throw new ResourceException("No tienes suficientes materiales para crear mas lanceros"); 
+            	UI.ventana.nuevoEvento("No tienes suficientes materiales para crear mas lanceros"); 
+            	break;
             }
     	}
+    	if (gen >= 1) {
+    		UI.ventana.nuevoEvento(String.format("Se han creado %d lanceros", gen));
+    	}
     }
-    public void newCrosbow(int n) throws ResourceException {
+    public void newCrosbow(int n) {
+    	int gen = 0;
     	for (int i = n; i != 0; i--) {
     		if (food >= Variables.FOOD_COST_CROSSBOW && wood >= Variables.WOOD_COST_CROSSBOW && iron >= Variables.IRON_COST_CROSSBOW && mana >= Variables.MANA_COST_CROSSBOW) {
                 army[2].add(new Crossbow(Variables.ARMOR_CROSSBOW, Variables.BASE_DAMAGE_CROSSBOW));
@@ -299,13 +344,18 @@ public class Civilization {
     			wood -= Variables.WOOD_COST_CROSSBOW;
     			iron -= Variables.IRON_COST_CROSSBOW;
     			mana -= Variables.MANA_COST_CROSSBOW;
+    			gen += 1;
             } else {
-            	System.out.println(String.format("Se han creado %d espadachines", n-i));
-                throw new ResourceException("No tienes suficientes materiales para crear mas ballesteros"); 
+            	UI.ventana.nuevoEvento("No tienes suficientes materiales para crear mas ballestas"); 
+            	break;
             }
     	}
+    	if (gen >= 1) {
+    		UI.ventana.nuevoEvento(String.format("Se han creado %d ballestas", gen));
+    	}
     }
-    public void newCannon(int n) throws ResourceException {
+    public void newCannon(int n) {
+    	int gen = 0;
     	for (int i = n; i != 0; i--) {
     		if (food >= Variables.FOOD_COST_CANNON && wood >= Variables.WOOD_COST_CANNON && iron >= Variables.IRON_COST_CANNON && mana >= Variables.MANA_COST_CANNON) {
                 army[3].add(new Cannon(Variables.ARMOR_CANNON, Variables.BASE_DAMAGE_CANNON));
@@ -313,13 +363,18 @@ public class Civilization {
     			wood -= Variables.WOOD_COST_CANNON;
     			iron -= Variables.IRON_COST_CANNON;
     			mana -= Variables.MANA_COST_CANNON;
+    			gen += 1;
             } else {
-            	System.out.println(String.format("Se han creado %d espadachines", n-i));
-                throw new ResourceException("No tienes suficientes materiales para crear mas cañones"); 
+            	UI.ventana.nuevoEvento("No tienes suficientes materiales para crear mas cañones"); 
+            	break;
             }
     	}
+    	if (gen >= 1) {
+    		UI.ventana.nuevoEvento(String.format("Se han creado %d cañones", gen));
+    	}
     }
-    public void newArrowTower(int n) throws ResourceException {
+    public void newArrowTower(int n) {
+    	int gen = 0;
     	for (int i = n; i != 0; i--) {
     		if (food >= Variables.FOOD_COST_ARROWTOWER && wood >= Variables.WOOD_COST_ARROWTOWER && iron >= Variables.IRON_COST_ARROWTOWER && mana >= Variables.MANA_COST_ARROWTOWER) {
                 army[4].add(new ArrowTower(Variables.ARMOR_ARROWTOWER, Variables.BASE_DAMAGE_ARROWTOWER));
@@ -327,67 +382,99 @@ public class Civilization {
     			wood -= Variables.WOOD_COST_ARROWTOWER;
     			iron -= Variables.IRON_COST_ARROWTOWER;
     			mana -= Variables.MANA_COST_ARROWTOWER;
+    			gen += 1;
             } else {
-            	System.out.println(String.format("Se han creado %d espadachines", n-i));
-                throw new ResourceException("No tienes suficientes materiales para crear mas Torres"); 
+            	UI.ventana.nuevoEvento("No tienes suficientes materiales para crear mas torres de arqueros"); 
+            	break;
             }
     	}
+    	if (gen >= 1) {
+    		UI.ventana.nuevoEvento(String.format("Se han creado %d torres de arqueros", gen));
+    	}
     }
-    public void newCatapult(int n) throws ResourceException {
+    public void newCatapult(int n) {
+    	int gen = 0;
     	for (int i = n; i != 0; i--) {
     		if (food >= Variables.FOOD_COST_CATAPULT && wood >= Variables.WOOD_COST_CATAPULT && iron >= Variables.IRON_COST_CATAPULT && mana >= Variables.MANA_COST_CATAPULT) {
-                army[4].add(new Catapult(Variables.ARMOR_CATAPULT, Variables.BASE_DAMAGE_CATAPULT));
+                army[5].add(new Catapult(Variables.ARMOR_CATAPULT, Variables.BASE_DAMAGE_CATAPULT));
     			food -= Variables.FOOD_COST_CATAPULT;
     			wood -= Variables.WOOD_COST_CATAPULT;
     			iron -= Variables.IRON_COST_CATAPULT;
     			mana -= Variables.MANA_COST_CATAPULT;
+    			gen += 1;
             } else {
-            	System.out.println(String.format("Se han creado %d espadachines", n-i));
-                throw new ResourceException("No tienes suficientes materiales para crear mas Catapultas"); 
+            	UI.ventana.nuevoEvento("No tienes suficientes materiales para crear mas catapultas"); 
+            	break;
             }
     	}
+    	if (gen >= 1) {
+    		UI.ventana.nuevoEvento(String.format("Se han creado %d catapultas", gen));
+    	}
     }
-    public void newRocketLauncher(int n) throws ResourceException {
+    public void newRocketLauncher(int n) {
+    	int gen = 0;
     	for (int i = n; i != 0; i--) {
     		if (food >= Variables.FOOD_COST_ROCKETLAUNCHERTOWER && wood >= Variables.WOOD_COST_ROCKETLAUNCHERTOWER && iron >= Variables.IRON_COST_ROCKETLAUNCHERTOWER && mana >= Variables.MANA_COST_ROCKETLAUNCHERTOWER) {
-                army[3].add(new RocketLauncher(Variables.ARMOR_ROCKETLAUNCHERTOWER, Variables.BASE_DAMAGE_ROCKETLAUNCHERTOWER));
+                army[6].add(new RocketLauncher(Variables.ARMOR_ROCKETLAUNCHERTOWER, Variables.BASE_DAMAGE_ROCKETLAUNCHERTOWER));
     			food -= Variables.FOOD_COST_ROCKETLAUNCHERTOWER;
     			wood -= Variables.WOOD_COST_ROCKETLAUNCHERTOWER;
     			iron -= Variables.IRON_COST_ROCKETLAUNCHERTOWER;
     			mana -= Variables.MANA_COST_ROCKETLAUNCHERTOWER;
+    			gen += 1;
             } else {
-            	System.out.println(String.format("Se han creado %d espadachines", n-i));
-                throw new ResourceException("No tienes suficientes materiales para crear mas Lanzacohetes"); 
+            	UI.ventana.nuevoEvento("No tienes suficientes materiales para crear mas lanzacohetes"); 
+            	break;
             }
+    	}
+    	if (gen >= 1) {
+    		UI.ventana.nuevoEvento(String.format("Se han creado %d lanzacohetes", gen));
     	}
     }
-    public void newMagician(int n) throws ResourceException {
-    	for (int i = n; i != 0; i--) {
-    		if (food >= Variables.FOOD_COST_MAGICIAN && wood >= Variables.WOOD_COST_MAGICIAN && iron >= Variables.IRON_COST_MAGICIAN && mana >= Variables.MANA_COST_MAGICIAN) {
-                army[3].add(new Magician(0, Variables.BASE_DAMAGE_MAGICIAN));
-    			food -= Variables.FOOD_COST_MAGICIAN;
-    			wood -= Variables.WOOD_COST_MAGICIAN;
-    			iron -= Variables.IRON_COST_MAGICIAN;
-    			mana -= Variables.MANA_COST_MAGICIAN;
-            } else {
-            	System.out.println(String.format("Se han creado %d espadachines", n-i));
-                throw new ResourceException("No tienes suficientes materiales para crear mas Mago"); 
-            }
+    public void newMagician(int n) {
+    	int gen = 0;
+    	if (magicTower >= 1) {
+	    	for (int i = n; i != 0; i--) {
+	    		if (food >= Variables.FOOD_COST_MAGICIAN && wood >= Variables.WOOD_COST_MAGICIAN && iron >= Variables.IRON_COST_MAGICIAN && mana >= Variables.MANA_COST_MAGICIAN) {
+	                army[7].add(new Magician(0, Variables.BASE_DAMAGE_MAGICIAN));
+	    			food -= Variables.FOOD_COST_MAGICIAN;
+	    			wood -= Variables.WOOD_COST_MAGICIAN;
+	    			iron -= Variables.IRON_COST_MAGICIAN;
+	    			mana -= Variables.MANA_COST_MAGICIAN;
+	    			gen += 1;
+	            } else {
+	            	UI.ventana.nuevoEvento("No tienes suficientes materiales para crear mas magos"); 
+	            	break;
+	            }
+	    	}
+	    	if (gen >= 1) {
+	    		UI.ventana.nuevoEvento(String.format("Se han creado %d magos", gen));
+	    	}
+    	} else {
+    		UI.ventana.nuevoEvento("No hay suficientes torres magicas construidas para crear mas magos");
     	}
     }
-    public void newPriest(int n) throws ResourceException {
-    	for (int i = n; i != 0; i--) {
-    		if (food >= Variables.FOOD_COST_PRIEST && wood >= Variables.WOOD_COST_PRIEST && iron >= Variables.IRON_COST_PRIEST && mana >= Variables.MANA_COST_PRIEST) {
-                army[3].add(new Priest(0, 0));
-    			food -= Variables.FOOD_COST_PRIEST;
-    			wood -= Variables.WOOD_COST_PRIEST;
-    			iron -= Variables.IRON_COST_PRIEST;
-    			mana -= Variables.MANA_COST_PRIEST;
-            } else {
-            	System.out.println(String.format("Se han creado %d espadachines", n-i));
-                throw new ResourceException("No tienes suficientes materiales para crear mas Clerigo"); 
-            }
-    	}
+    public void newPriest(int n) {
+    	int gen = 0;
+	    for (int i = n; i != 0; i--) {
+	    	if (army[8].size() < church) {
+		  		if (food >= Variables.FOOD_COST_PRIEST && wood >= Variables.WOOD_COST_PRIEST && iron >= Variables.IRON_COST_PRIEST && mana >= Variables.MANA_COST_PRIEST) {
+	               army[8].add(new Priest(0, 0));
+	               food -= Variables.FOOD_COST_PRIEST;
+	               wood -= Variables.WOOD_COST_PRIEST;
+	               iron -= Variables.IRON_COST_PRIEST;
+	               mana -= Variables.MANA_COST_PRIEST;
+	               gen += 1;
+		  		} else {
+		  			UI.ventana.nuevoEvento("No tienes suficientes materiales para crear mas sacerdotes"); 
+	            	break;
+		        }
+	    	} else {
+	    		UI.ventana.nuevoEvento("No hay suficientes iglesias construidas para crear mas sacerdotes");
+	    	}
+	    }
+	    if (gen >= 1) {
+	    	UI.ventana.nuevoEvento(String.format("Se han creado %d sacerdotes", gen));
+	    }
     }
     /*Interfaces*/
     
