@@ -235,9 +235,24 @@ public class Battle {
             UI.ventana.nuevoEvento("Batalla ganadas, el botin contiene: " + wasteWoodIron[0] + " Madera y " + wasteWoodIron[1] + " Hierro");
 			Main.player.setWood(Main.player.getWood()+ wasteWoodIron[0]);
 			Main.player.setIron(Main.player.getIron()+ wasteWoodIron[1]);
+			
+			// ACTUALIZACIÓN: Sumamos una batalla jugada al objeto jugador
+			Main.player.setBattles(Main.player.getBattles() + 1);
+			
+			// Guardamos los nuevos almacenes de recursos y el nuevo contador global de batallas
+			BaseDatos.actualizarCivilizacionCompleta(Main.player);
+			
+			// Insertamos la fila en Battle_stats para que el SELECT con JOIN registre los escombros ganados
+			BaseDatos.registrarHistorialBatalla(Main.player.getBattles(), wasteWoodIron[0], wasteWoodIron[1]);
+			
         } else {
 			UI.ventana.nuevoEvento("Perdiste la batalla");
-		}
+			
+			// Aunque pierda, sumamos la batalla al contador e informamos a las tablas
+			Main.player.setBattles(Main.player.getBattles() + 1);
+			BaseDatos.actualizarCivilizacionCompleta(Main.player);
+			BaseDatos.registrarHistorialBatalla(Main.player.getBattles(), 0, 0); // 0 recursos obtenidos por perder
+        }
     }
 	public void showDevelopment() {
 		UI.ventana.nuevoEvento(battleDevelopment);

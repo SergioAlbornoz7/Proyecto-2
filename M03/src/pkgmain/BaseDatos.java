@@ -75,9 +75,7 @@ public class BaseDatos {
         }
     }
 
-    /**
-     * Actualiza los recursos de la partida actual en base al ID que se generó al iniciar.
-     */
+    
     public static void guardarRecursos(int food, int wood, int iron, int mana) {
         if (currentCivilizationId == -1) {
             return; // Si no hay una partida activa registrada, no hace nada
@@ -101,5 +99,79 @@ public class BaseDatos {
             System.err.println("[ERROR BD] Error al sincronizar recursos: " + e.getMessage());
         }
     }
+    public static void actualizarCivilizacionCompleta(Civilization civ) {
+        if (currentCivilizationId == -1) {
+            return; // Si no hay partida iniciada, no hace nada
+        }
+
+        String sqlUpdate = "UPDATE Civilization_stats SET "
+                + "wood_amount = ?, "
+                + "iron_amount = ?, "
+                + "food_amount = ?, "
+                + "mana_amount = ?, "
+                + "magicTower_counter = ?, "
+                + "church_counter = ?, "
+                + "farm_counter = ?, "
+                + "smithy_counter = ?, "
+                + "carpentry_counter = ?, "
+                + "technology_defense_level = ?, "
+                + "technology_attack_level = ?, "
+                + "battles_counter = ? "
+                + "WHERE civilization_id = ?";
+
+        try (Connection conn = obtenerConexion();
+             PreparedStatement pstmt = conn.prepareStatement(sqlUpdate)) {
+
+            // Asignamos los recursos actuales en memoria
+            pstmt.setInt(1, civ.getWood());
+            pstmt.setInt(2, civ.getIron());
+            pstmt.setInt(3, civ.getFood());
+            pstmt.setInt(4, civ.getMana());
+            
+            // Asignamos los contadores reales de estructuras
+            pstmt.setInt(5, civ.getMagicTower());
+            pstmt.setInt(6, civ.getChurch());
+            pstmt.setInt(7, civ.getFarm());
+            pstmt.setInt(8, civ.getSmithy());
+            pstmt.setInt(9, civ.getCarpentry());
+            
+            // Asignamos tecnologías y contador de batallas
+            pstmt.setInt(10, civ.getTechnologyDefense());
+            pstmt.setInt(11, civ.getTechnologyAttack());
+            pstmt.setInt(12, civ.getBattles());
+            
+            // Clave primaria de la fila a modificar
+            pstmt.setInt(13, currentCivilizationId);
+
+            pstmt.executeUpdate();
+            System.out.println("[BD REAL TIME] Fila de Civilization_stats totalmente actualizada en caliente.");
+
+        } catch (SQLException e) {
+            System.err.println("[ERROR BD] Error al sincronizar actualización completa: " + e.getMessage());
+        }
+    }
+    
+    public static void registrarHistorialBatalla(int numBattle, int woodAcquired, int ironAcquired) {
+        if (currentCivilizationId == -1) return;
+
+        String sqlInsert = "INSERT INTO Battle_stats (civilization_id, num_battle, wood_acquired, iron_acquired) VALUES (?, ?, ?, ?)";
+        
+        try (Connection conn = obtenerConexion();
+             PreparedStatement pstmt = conn.prepareStatement(sqlInsert)) {
+
+            pstmt.setInt(1, currentCivilizationId);
+            pstmt.setInt(2, numBattle);
+            pstmt.setInt(3, woodAcquired);
+            pstmt.setInt(4, ironAcquired);
+
+            pstmt.executeUpdate();
+            System.out.println("[BD] Batalla #" + numBattle + " registrada con éxito en Battle_stats.");
+
+        } catch (SQLException e) {
+            System.err.println("[ERROR BD] Error al registrar historial de batalla: " + e.getMessage());
+        }
+    }
+    
+    
 }
 
