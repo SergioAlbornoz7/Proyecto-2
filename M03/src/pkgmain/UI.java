@@ -333,7 +333,7 @@ class Panel_Inferior_Central extends JPanel {
         boton7.addActionListener(e -> pedirCantidadTropas("Lanzacohetes"));
         boton8.addActionListener(e -> pedirCantidadTropas("Mago"));
         boton9.addActionListener(e -> pedirCantidadTropas("Sacerdote"));
-        boton10.addActionListener(e -> System.out.println("[CLICK] Pulsaste boton10 (Debería ser Informe)"));
+        boton10.addActionListener(e -> Main.nb.showDevelopment());
         boton11.addActionListener(e -> Main.player.printStats());
         boton12.addActionListener(e -> Main.viewThreat());
     }
