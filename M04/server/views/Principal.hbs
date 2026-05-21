@@ -34,52 +34,36 @@
             </div>
         </section>
         <table>
-            <thead>
-                <tr>
-                    <th>Nombre</th>
-                    <th>Rol</th>
-                    <th>Edad</th>
-                </tr>
-            </thead>
+    <thead>
+        <tr>
+            
+            <th>ID Civilització</th>
+            <th>Nom Civilització</th>
+            <th>Fusta (Wood)</th>
+            <th>Ferro (Iron)</th>
+            <th>Menjar (Food)</th>
+            <th>Manà (Mana)</th>
+        </tr>
+    </thead>
 
-            <tbody>
-                <tr>
-                    <td>Juan</td>
-                    <td>Programador</td>
-                    <td>20</td>
-                </tr>
-
-                <tr>
-                    <td>Ana</td>
-                    <td>Diseñadora</td>
-                    <td>19</td>
-                </tr>
-            </tbody>
-        </table>
-
-        <table>
-            <thead>
-                <tr>
-                    <th>Nombre</th>
-                    <th>Rol</th>
-                    <th>Edad</th>
-                </tr>
-            </thead>
-
-            <tbody>
-                <tr>
-                    <td>Juan</td>
-                    <td>Programador</td>
-                    <td>20</td>
-                </tr>
-
-                <tr>
-                    <td>Ana</td>
-                    <td>Diseñadora</td>
-                    <td>19</td>
-                </tr>
-            </tbody>
-        </table>
+    <tbody>
+        {{#each Battles}}
+        <tr>
+            
+            <td>{{this.civilization_id}}</td>
+            <td>{{this.name}}</td>
+            <td>{{this.wood_amount}}</td>
+            <td>{{this.iron_amount}}</td>
+            <td>{{this.food_amount}}</td>
+            <td>{{this.mana_amount}}</td>
+        </tr>
+        {{else}}
+        <tr>
+            <td colspan="7">No s'han trobat dades de batalles o civilitzacions de les últimes partides.</td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
 
     </main>
   

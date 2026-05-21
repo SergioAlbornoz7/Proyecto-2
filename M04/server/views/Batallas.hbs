@@ -8,6 +8,42 @@
    </head>
    <body>
 
+      <h1>Panell Històric de Batalles</h1>
+
+    <div class="panell-destacat">
+        <h2>Total de batalles jugades: <span class="xifra-destacada">{{totalBattles}}</span></h2>
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Nº Batalla</th>
+                <th>ID Civilització</th>
+                <th>Nom de la Civilització</th>
+                <th>Accions</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {{#each Battles}}
+            <tr>
+                <td>{{this.num_battle}}</td>
+                <td>{{this.civilization_id}}</td>
+                <td>{{this.name}}</td>
+                <td>
+                    <a class="enllac-detalls" href="/Info?id={{this.civilization_id}}">
+                        Veure informe de batalla
+                    </a>
+                </td>
+            </tr>
+            {{else}}
+            <tr>
+                <td colspan="4">Encara no s'ha jugat ni registrat cap batalla al sistema.</td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+
 {{> footer}}
        
    </body>
