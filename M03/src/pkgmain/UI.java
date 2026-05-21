@@ -55,6 +55,9 @@ class MiVentana extends JFrame {
 	
 	public void actuInterRecursos() {
 	    panelOeste.updateRecursos();
+	    
+	    // AGREGA ESTA LÍNEA AQUÍ: Guarda instantáneamente los recursos restantes tras gastar
+	    BaseDatos.guardarRecursos(Main.player.getFood(), Main.player.getWood(), Main.player.getIron(), Main.player.getMana());
 	}
 	
 	public void nuevoEvento(String nombre) {
