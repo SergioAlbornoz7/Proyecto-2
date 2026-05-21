@@ -215,32 +215,32 @@ public class Civilization {
         }
     }
     public void printStats() {
+    	String stats;
     	ArrayList<MilitaryUnit>[] data = getArmy();
-    	System.out.printf("%14s %n %n", "              ***************************CIVILIZATION STATS***************************              ");
-    	System.out.println("--------------------------------------------------TECHNOLOGY----------------------------------------\n");
-        System.out.printf("%79s %20s %n", "Attack", "Defense");
-        System.out.printf("%79s %20s %n %n", getTechnologyAttack(), getTechnologyDefense());
-        System.out.println("---------------------------------------------------BUILDINGS----------------------------------------\n");
-        System.out.printf("%16s %20s %20s %20s %20s %n", "Farm", "Smithy", "Carpentry", "Magic Tower", "Church");
-        System.out.printf("%16s %20s %20s %20s %20s %n %n", getFarm(), getSmithy(), getCarpentry(), getMagicTower(), getChurch());
-        //nicio Tropas
-        System.out.println("------------------------------------------------ATTACK UNITS----------------------------------------\n");
-    	System.out.printf("%37s %20s %20s %20s %n", "Swordsman", "Spearman", "Crosswob", "Cannon");
-    	System.out.printf("%37d %20d %20d %20d %n %n", data[0].size(), data[1].size(), data[2].size(), data[3].size());
-        System.out.println("----------------------------------------------------DEFENSES----------------------------------------\n");
-        System.out.printf("%58s %20s %20s %n", "Arrow Tower", "Catapult", "Rocket Launcher");
-        System.out.printf("%58d %20d %20d %n %n", data[4].size(), data[5].size(), data[6].size());
-        System.out.println("-----------------------------------------------SPECIAL UNITS----------------------------------------\n");
-        System.out.printf("%79s %20s %n", "Mague", "Priest");
-        System.out.printf("%79s %20s %n %n", data[7].size(), data[8].size());
-        //fin Tropas
-        System.out.println("---------------------------------------------------RESOURCES----------------------------------------\n");
-        System.out.printf("%37s %20s %20s %20s %n", "Food", "Wood", "Iron", "Mana");
-        System.out.printf("%37d %20d %20d %20d %n", getFood(), getWood(), getIron(), getMana());
-        
-        System.out.printf("%37s %20s %20s %20s %n", "Food", "Wood", "Iron", "Mana");
-        System.out.printf("%37d %20d %20d %20d %n", getFarm()*Variables.CIVILIZATION_FOOD_GENERATED_PER_FARM + Variables.CIVILIZATION_FOOD_GENERATED, getCarpentry()*Variables.CIVILIZATION_WOOD_GENERATED_PER_CARPENTRY + Variables.CIVILIZATION_WOOD_GENERATED, 
+    	stats = String.format("%14s %n %n", "              ***************************CIVILIZATION STATS***************************              ");
+    	stats += String.format("--------------------------------------------------TECNOLOGIA----------------------------------------\n");
+    	stats += String.format("%79s %20s %n", "Ataque", "Defensa");
+    	stats += String.format("%84s %26s %n %n", getTechnologyAttack(), getTechnologyDefense());
+    	stats += String.format("-------------------------------------------------ESTRUCTURAS----------------------------------------\n");
+    	stats += String.format("%16s %20s %20s %20s %20s %n", "Granja", "Herreria", "Carpenteria", "Torre Magica", "Iglesia");
+    	stats += String.format("%23s %25s %25s %25s %27s %n %n", getFarm(), getSmithy(), getCarpentry(), getMagicTower(), getChurch());
+        stats += String.format("-------------------------------------------UNIDADES DE ATAQUE---------------------------------------\n");
+        stats += String.format("%37s %20s %20s %20s %n", "Espadachin", "Lanzero", "Ballesta", "Cañon");
+        stats += String.format("%45d %24d %26d %30d %n %n", data[0].size(), data[1].size(), data[2].size(), data[3].size());
+        stats += String.format("----------------------------------------------------DEFENSAS----------------------------------------\n");
+        stats += String.format("%58s %20s %20s %n", "Torre de Arc.", "Catapulta", "Lanzacohetes");
+        stats += String.format("%61d %27d %30d %n %n", data[4].size(), data[5].size(), data[6].size());
+        stats += String.format("-----------------------------------------------UNIDADES ESPECIALES----------------------------------\n");
+        stats += String.format("%79s %20s %n", "Mago", "Sacerdote");
+        stats += String.format("%84s %28s %n %n", data[7].size(), data[8].size());
+        stats += String.format("---------------------------------------------------RECURSOS-----------------------------------------\n");
+        stats += String.format("%37s %20s %20s %20s %n", "Comida", "Madera", "Hierro", "Mana");
+        stats += String.format("%39d %21d %19d %20d %n", getFood(), getWood(), getIron(), getMana());
+        stats += String.format("---------------------------------------------------RECURSOS GENERADOS-----------------------------------------\n");
+        stats += String.format("%37s %20s %20s %20s %n", "Comida", "Madera", "Hierro", "Mana");
+        stats += String.format("%39d %21d %19d %20d %n", getFarm()*Variables.CIVILIZATION_FOOD_GENERATED_PER_FARM + Variables.CIVILIZATION_FOOD_GENERATED, getCarpentry()*Variables.CIVILIZATION_WOOD_GENERATED_PER_CARPENTRY + Variables.CIVILIZATION_WOOD_GENERATED, 
         		getSmithy()*Variables.CIVILIZATION_IRON_GENERATED_PER_SMITHY + Variables.CIVILIZATION_IRON_GENERATED, getMagicTower()*Variables.CIVILIZATION_MANA_GENERATED_PER_MAGIC_TOWER);
+        UI.ventana.nuevoEvento(stats);
     }
     	
     
