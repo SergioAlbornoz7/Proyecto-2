@@ -216,13 +216,12 @@ public class Main {
 		}
 		return enemy.getArmy();
 	}
-	static String viewThreat() {
+	static void viewThreat() {
 		int swn = enemy.getArmy()[0].size();
 		int spn = enemy.getArmy()[1].size();
 		int cbn = enemy.getArmy()[2].size();
 		int cnn = enemy.getArmy()[3].size();
-		String result = String.format("NEW threat COMMING %n Swordsman %11d %n Spearman %12d %n Crossbow %12d %n Cannon %14d", swn, spn, cbn, cnn);;
-		
-		return result;
+		String result = String.format("El ejercito enemigo que se aproxima es: %n Swordsman %11d %n Spearman %12d %n Crossbow %12d %n Cannon %14d", swn, spn, cbn, cnn);;
+		UI.ventana.nuevoEvento(result);
 	}
 }
