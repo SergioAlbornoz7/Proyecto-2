@@ -11,11 +11,12 @@ import pkgmain.Civilization.ResourceException;
 
 public class Main {
 	
-	static Civilization player = new Civilization(0,0,60000,50000,30000,80000,0,0,0,0,0,0);
+	static Civilization player = new Civilization(0,0,20000,50000,3000,0,0,0,0,0,0,0);
 	
 	static Civilization enemy = new Civilization(0,0,0,0,0,0,0,0,0,0,0,0);
 	
 	public static void main(String[] args) {
+		BaseDatos.iniciarNuevaPartida("Imperio_Player", player.getFood(), player.getWood(), player.getIron(), player.getMana());
 		SwingUtilities.invokeLater(new Runnable() {
 	        public void run() {
 	            UI.ventana = new MiVentana();
@@ -48,6 +49,7 @@ public class Main {
 				nb.startBattle();
 				
 				player.setBattles(player.getBattles() + 1);
+				BaseDatos.guardarRecursos(player.getFood(), player.getWood(), player.getIron(), player.getMana());
 			}
 		
 		};
