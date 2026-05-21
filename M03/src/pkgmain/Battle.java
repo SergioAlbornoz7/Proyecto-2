@@ -1,8 +1,6 @@
 package pkgmain;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-
 import pkgmain.Civilization.MilitaryUnit;
 public class Battle {
 	// Variables
@@ -66,9 +64,10 @@ public class Battle {
 	}
 	
 	public void startBattle() {
-		int turn = (int) (Math.random()*2+1);
+		int turn = (byte) (Math.random()*2+1);
 		while ((actualNumberUnitsCivilization >  ((initialNumberUnitsCivilization/100)*20) || actualNumberUnitsEnemy > ((initialNumberUnitsEnemy/100)*20)) && (actualNumberUnitsEnemy > 0 && actualNumberUnitsCivilization > 0)) {
 			if (turn == 1) {
+
 				/*offense*/
 				int grp = (int) (Math.random() * 100);
 				int group = -1;
@@ -81,10 +80,31 @@ public class Battle {
 				        break;
 				    }
 				}
-				MilitaryUnit offensive = civilizationArmy[group].get(((int)Math.random()*(civilizationArmy[group].size()-1))) ;
+				MilitaryUnit offensive = civilizationArmy[group].get(((int)Math.random()*(civilizationArmy[group].size()))) ;
+				
 				/*Defense*/
-				MilitaryUnit defensive = ;
+
+				int total = actualNumberUnitsEnemy;
+				int[] prov = new int[4];
+				for (int i = 0; i < 4; i++) {
+					prov[i] = (enemyArmy[i].size()/total)*100;
+				}
+				grp = (int) (Math.random() * 100);
+				group = -1;
+				acumulado = 0;
+
+				for (int i = 0; i <= 4; i++) {
+				    acumulado += prov[i];
+				    if (grp < acumulado) {
+				        group = i;
+				        break;
+				    }
+				}
+				MilitaryUnit defensive = enemyArmy[group].get(((int)Math.random()*(enemyArmy[group].size()))) ;
+
 				/*battle*/
+				
+				defensive.takeDamage(offensive.attack());
 				
 				
 				turn = 2;
