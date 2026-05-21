@@ -5,7 +5,11 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -33,6 +37,7 @@ class MiVentana extends JFrame {
 	private PanelCentral panelCentral;
 	private Panel_Oeste panelOeste;
 	private Panel_Este panelEste;
+	private BufferedImage imagen;
 	
 	MiVentana(){
         setBounds(800, 400, 900, 700);
@@ -43,6 +48,12 @@ class MiVentana extends JFrame {
 	}
 	
 	public void init_components(){
+		try {
+			imagen = ImageIO.read(new File("Icono.png"));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		setIconImage(imagen);
         panelCentral = new PanelCentral();
         add(panelCentral, BorderLayout.CENTER);
         
@@ -273,7 +284,7 @@ class Panel_Este_Inferior extends JPanel {
 
 class Panel_Inferior_Central extends JPanel {
     private JButton boton1, boton2, boton3, boton4, boton5, boton6, boton7, boton8, boton9;
-    private JButton boton10, boton11; // Cambiados a JButton de Swing para consistencia
+    private JButton boton10, boton11, boton12; 
 
     public Panel_Inferior_Central() {
         setLayout(new GridLayout(2, 5, 10, 10));
@@ -294,7 +305,8 @@ class Panel_Inferior_Central extends JPanel {
         boton8 = crearBotonTropa("Mago");
         boton9 = crearBotonTropa("Sacerdote");
         boton10 = new JButton("Informe");
-        boton11 = new JButton("Ejercito Enemigo");
+        boton11 = new JButton("Estadisticas");
+        boton12 = new JButton("Ejercito Enemigo");
         
         boton10.setBackground(Color.WHITE);
         boton11.setBackground(Color.WHITE);
@@ -310,6 +322,7 @@ class Panel_Inferior_Central extends JPanel {
         add(boton9); 
         add(boton10);
         add(boton11);
+        add(boton12);
      
         boton1.addActionListener(e -> pedirCantidadTropas("Espadachin"));
         boton2.addActionListener(e -> pedirCantidadTropas("Lancero"));
@@ -321,7 +334,8 @@ class Panel_Inferior_Central extends JPanel {
         boton8.addActionListener(e -> pedirCantidadTropas("Mago"));
         boton9.addActionListener(e -> pedirCantidadTropas("Sacerdote"));
         boton10.addActionListener(e -> System.out.println("[CLICK] Pulsaste boton10 (Debería ser Informe)"));
-        boton11.addActionListener(e -> System.out.println("[CLICK] Pulsaste boton11 (Debería ser Ejercito Enemigo)"));
+        boton11.addActionListener(e -> Main.player.printStats());
+        boton12.addActionListener(e -> Main.viewThreat());
     }
     
     private void pedirCantidadTropas(String nombreTropa) {
@@ -336,7 +350,25 @@ class Panel_Inferior_Central extends JPanel {
             try {
                 int cantidad = Integer.parseInt(respuesta);
                 if (cantidad >= 0) {
-                    System.out.println("-> Has asignado " + cantidad + " unidades a: " + nombreTropa);
+                	if (nombreTropa == "Espadachin") {
+                		Main.player.newSwordsman(cantidad);
+                	} else if (nombreTropa == "Lancero") {
+                		Main.player.newSpearman(cantidad);
+                	} else if (nombreTropa == "Ballesta") {
+                		Main.player.newCrosbow(cantidad);;
+                	} else if (nombreTropa == "Cañon") {
+                		Main.player.newCannon(cantidad);
+                	} else if (nombreTropa == "Torre Lanza") {
+                		Main.player.newArrowTower(cantidad);
+                	} else if (nombreTropa == "Catapulta") {
+                		Main.player.newCatapult(cantidad);
+                	} else if (nombreTropa == "Lanzacohetes") {
+                		Main.player.newRocketLauncher(cantidad);
+                	} else if (nombreTropa == "Mago") {
+                		Main.player.newMagician(cantidad);
+                	} else if (nombreTropa == "Sacerdote") {
+                		Main.player.newPriest(cantidad);
+                	}
                 } else {
                     JOptionPane.showMessageDialog(this, "La cantidad no puede ser negativa.", "Error", JOptionPane.ERROR_MESSAGE);
                 }
