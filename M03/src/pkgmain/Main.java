@@ -14,6 +14,7 @@ public class Main {
 	static Civilization player = new Civilization(0,0,20000,50000,3000,0,0,0,0,0,0,0);
 	
 	static Civilization enemy = new Civilization(0,0,0,0,0,0,0,0,0,0,0,0);
+	static Battle nb;
 	
 	public static void main(String[] args) {
 		BaseDatos.iniciarNuevaPartida("Imperio_Player", player.getFood(), player.getWood(), player.getIron(), player.getMana());
@@ -43,7 +44,7 @@ public class Main {
 		TimerTask enemy_attack = new TimerTask() {
 
 			public void run() {
-				Battle nb = new Battle(player.getArmy(), createEnemyArmy(Variables.ENEMY_FLEET_INCREASE*player.getBattles()));
+				nb = new Battle(player.getArmy(), createEnemyArmy(Variables.ENEMY_FLEET_INCREASE*player.getBattles()));
 				viewThreat();
 				nb.startBattle();
 				
