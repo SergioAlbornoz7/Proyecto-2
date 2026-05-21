@@ -67,7 +67,7 @@ app.get('/', async (req, res) => {
       SELECT cs.name, bt.civilization_id, bt.num_battle, cs.wood_amount, cs.iron_amount, cs.food_amount, cs.mana_amount 
       FROM Civilization_stats cs 
       JOIN Battle_stats bt ON cs.civilization_id = bt.civilization_id
-      ORDER BY bt.num_battle DESC 
+      ORDER BY bt.civilization_id DESC 
       LIMIT 2
     `);
 
@@ -216,7 +216,7 @@ app.get('/Info', async (req, res) => {
       select cs.name,bt.civilization_id,bt.num_battle,cs.wood_amount,cs.iron_amount,cs.food_amount,cs.mana_amount
       from Civilization_stats cs
       join Battle_stats bt on cs.civilization_id=bt.civilization_id
-      where bt.num_battle=${[cursId]}`)
+      where bt.civilization_id=${[cursId]}`)
 
     // Si no s'ha trobat cap curs amb aquest id, respondre amb error 404
     if (!Battle_statsRows || Battle_statsRows.length === 0) {
@@ -252,6 +252,97 @@ app.get('/Info', async (req, res) => {
   } catch (err) {
     console.error(err)
     res.status(500).send('Error consultant la base de dades')
+  }
+});
+
+/*Batallas*/
+app.get('/Batallas', async (req, res) => {
+  try {
+    // 1. Consulta per obtenir TOTES les batalles barrejades amb el nom de la civilització
+    const allBattlesRows = await db.query(`
+      SELECT bt.num_battle, bt.civilization_id, cs.name
+      FROM Battle_stats bt
+      JOIN Civilization_stats cs ON bt.civilization_id = cs.civilization_id
+      ORDER BY bt.num_battle DESC
+    `);
+
+    // Transformar el resultat a JSON indicant columnes i tipus
+    const allBattlesJson = db.table_to_json(allBattlesRows, {
+      num_battle: 'number',
+      civilization_id: 'number',
+      name: 'string'
+    });
+
+    // 2. Consulta per a calcular el TOTAL de batalles (per al lloc destacat)
+    const totalRows = await db.query('SELECT COUNT(*) AS total FROM Battle_stats');
+    // Agafem el valor de la primera fila retornada (si no hi ha res, serà 0)
+    const totalBattlesCount = totalRows[0]?.total || 0;
+    
+    // 3. Llegir l'arxiu .json amb dades comunes
+    const commonData = JSON.parse(
+      fs.readFileSync(path.join(__dirname, 'data', 'common.json'), 'utf8')
+    );
+
+    // 4. Construir l'objecte de dades que rebrà la vista de Handlebars
+    const data = {
+      Battles: allBattlesJson,
+      totalBattles: totalBattlesCount, // Passem la xifra del comptador
+      common: commonData
+    };
+
+    // Renderitzar la plantilla 'Batallas.hbs'
+    res.render('Batallas', data);
+  } catch (err) {
+    console.error(err);
+    res.status(500).send('Error consultant les batalles a la base de dades');
+  }
+});
+
+app.get('/Civilizacion', async (req, res) => {
+  try {
+    // Seleccionamos toda la información de recursos, edificios y tecnologías
+    const Civilization_statsRows = await db.query(`
+      SELECT 
+        civilization_id, name, wood_amount, iron_amount, food_amount, mana_amount,
+        magicTower_counter, church_counter, farm_counter, smithy_counter, carpentry_counter,
+        technology_defense_level, technology_attack_level, battles_counter
+      FROM Civilization_stats
+    `);
+
+    // Transformamos a JSON mapeando correctamente los tipos de datos
+    const Civilization_statsJson = db.table_to_json(Civilization_statsRows, {
+      civilization_id: 'number',
+      name: 'string',
+      wood_amount: 'number',
+      iron_amount: 'number',
+      food_amount: 'number',
+      mana_amount: 'number',
+      magicTower_counter: 'number',
+      church_counter: 'number',
+      farm_counter: 'number',
+      smithy_counter: 'number',
+      carpentry_counter: 'number',
+      technology_defense_level: 'number',
+      technology_attack_level: 'number',
+      battles_counter: 'number'
+    });
+    
+    // Leer el archivo de datos comunes (menús, configuraciones, etc.)
+    const commonData = JSON.parse(
+      fs.readFileSync(path.join(__dirname, 'data', 'common.json'), 'utf8')
+    );
+
+    // Estructuramos el objeto de datos para Handlebars
+    const data = {
+      Civilizations: Civilization_statsJson,
+      common: commonData
+    };
+
+    // Renderizamos la nueva plantilla independiente 'Civilizacion.hbs'
+    res.render('Civilizaciones', data);
+  } catch (err) {
+    console.error(err);
+    res.status(500).send('Error consultant la base de dades');
   }
 });
 

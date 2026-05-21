@@ -298,3 +298,89 @@ th {
     white-space: nowrap; /* Evita que el texto y la imagen se separen en dos líneas */
 }
 
+/*Batallas*/
+.panell-destacat {
+            background-color: #f1f3f9;
+            border-left: 6px solid #2b579a;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 4px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .panell-destacat h2 {
+            margin: 0;
+            font-size: 20px;
+            color: #333;
+        }
+        .xifra-destacada {
+            font-size: 28px;
+            color: #2b579a;
+            font-weight: bold;
+            margin-left: 10px;
+        }
+/*Civilizaciones*/
+.civ-container {
+            border: 2px solid #333;
+            padding: 15px;
+            margin-bottom: 20px;
+            background-color: #fcfcfc;
+            border-radius: 6px;
+            font-size: 14px; /* Tamaño general de texto un poco más pequeño */
+        }
+
+        .civ-container h2 {
+            font-size: 18px;
+            margin-top: 0;
+            margin-bottom: 8px;
+        }
+
+        .civ-container h3 {
+            font-size: 14px;
+            margin-top: 15px;
+            margin-bottom: 8px;
+            border-bottom: 1px dotted #ccc;
+            padding-bottom: 3px;
+        }
+
+        .civ-container p {
+            margin: 4px 0;
+        }
+
+        .civ-nombre-destacado {
+            color: #2b579a;
+        }
+
+        /* CLASE ESPECÍFICA PARA LA TABLA (No se mezclará con tus otras tablas) */
+        .tabla-recursos-civ {
+            width: 100%;
+            margin-bottom: 15px;
+            border-collapse: collapse;
+            font-size: 13px; /* Tabla con letra más pequeña */
+        }
+
+        /* Aplicamos estilos apuntando únicamente a esta clase */
+        .tabla-recursos-civ thead tr {
+            background-color: #e2e2e2;
+        }
+
+        .tabla-recursos-civ th, 
+        .tabla-recursos-civ td {
+            padding: 6px 8px; /* Reducido para que la tabla sea más bajita */
+            border: 1px solid #ccc;
+            text-align: center;
+        }
+
+        .tabla-recursos-civ tbody tr {
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        /* Lista de edificios compacta */
+        .civ-lista-edificios {
+            padding-left: 20px;
+            margin: 5px 0;
+        }
+
+        .civ-lista-edificios li {
+            margin-bottom: 3px;
+        }
