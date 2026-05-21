@@ -65,6 +65,7 @@ public class Battle {
 	}
 	
 	public void startBattle() {
+		UI.ventana.nuevoEvento("Ha iniciado una batalla");
         int turn = (byte) (Math.random()*2+1);
         while ((actualNumberUnitsCivilization >  ((initialNumberUnitsCivilization/100)*20) || actualNumberUnitsEnemy > ((initialNumberUnitsEnemy/100)*20)) && (actualNumberUnitsEnemy > 0 && actualNumberUnitsCivilization > 0)) {
             if (turn == 1) {
@@ -127,6 +128,10 @@ public class Battle {
                 if (aa <= offensive.getChanceAttackAgain() && defensive.getActualArmor()> 0) {
                     defensive.takeDamage(offensive.attack());
                 }
+                
+                battleDevelopment += "CIVILIZACIÓN ATACA: " + offensive.getClass().getSimpleName() 
+                        + " ataca a Enemigo " + defensive.getClass().getSimpleName();
+                
                 if (defensive.getActualArmor() <= 0) {
                     int wc = (int)(Math.random()*100);
                     if (wc <= defensive.getChanceGeneratinWaste()){
@@ -138,8 +143,10 @@ public class Battle {
                     resourcesLooses[1][2] += defensive.getIronCost();
                     enemyArmy[group].remove(u);
                     actualNumberUnitsEnemy -= 1;
+                    battleDevelopment += "¡Unidad enemiga DESTRUIDA!\n";
+                } else {
+                    battleDevelopment += "El enemigo sobrevive con " + defensive.getActualArmor() + " de armadura.\n";
                 }
-                /*log del ataque*/ 
                 
                 turn = 2;
             }else {
@@ -201,6 +208,10 @@ public class Battle {
                 if (aa <= offensive.getChanceAttackAgain() && defensive.getActualArmor()> 0) {
                     defensive.takeDamage(offensive.attack());
                 }
+                
+                battleDevelopment += "ENEMIGO ATACA: " + offensive.getClass().getSimpleName() 
+                        + " ataca a Civilización " + defensive.getClass().getSimpleName();
+                
                 if (defensive.getActualArmor() <= 0) {
                     int wc = (int)(Math.random()*100);
                     if (wc <= defensive.getChanceGeneratinWaste()){
@@ -212,18 +223,24 @@ public class Battle {
                     resourcesLooses[0][2] += defensive.getIronCost();
                     civilizationArmy[group].remove(u);
                     actualNumberUnitsCivilization -= 1;
+                    battleDevelopment += "¡Nuestra unidad fue DESTRUIDA!\n";
+                } else {
+                    battleDevelopment += "Nuestra unidad sobrevive con " + defensive.getActualArmor() + " de armadura.\n";
                 }
-                /*log del ataque*/ 
+ 
                 turn = 1;
             }
         }
         if (resourcesLooses[0][0]+ (resourcesLooses[0][1]*5) +(resourcesLooses[0][2]*10) > resourcesLooses[1][0]+ (resourcesLooses[1][1]*5) +(resourcesLooses[1][2]*10)) {
-            /*log Victoria*/
+            UI.ventana.nuevoEvento("Batalla ganadas, el botin contiene: " + wasteWoodIron[0] + " Madera y " + wasteWoodIron[1] + " Hierro");
 			Main.player.setWood(Main.player.getWood()+ wasteWoodIron[0]);
 			Main.player.setIron(Main.player.getIron()+ wasteWoodIron[1]);
         } else {
-			/*logDerrota*/
+			UI.ventana.nuevoEvento("Perdiste la batalla");
 		}
     }
+	public void showDevelopment() {
+		UI.ventana.nuevoEvento(battleDevelopment);
+	}
 }
 

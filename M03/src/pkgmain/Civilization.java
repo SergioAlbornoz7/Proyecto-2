@@ -288,7 +288,7 @@ public class Civilization {
 	    	wood -= costWood;
 	   		 iron -= costIron;
 	   		 food -= costFood;
-	   		 technologyAttack += 1;
+	   		 technologyDefense += 1;
 		            UI.ventana.nuevoEvento("Se ha investigado la tecnologia de defensa con exito");
 		        } else {
 		        	UI.ventana.nuevoEvento("No tienes suficientes materiales para investigar la tecnologia de defensa");
