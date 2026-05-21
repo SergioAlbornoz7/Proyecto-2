@@ -28,6 +28,7 @@ public class Battle {
 		this.enemyArmy = enemyArmy;
 		armies[0] = civilizationArmy;
 		armies[1] = enemyArmy;
+		battleDevelopment = new String("");
 		initialCostFleet = new int[2][3];
 		initialCostFleet[0][0] = civilizationArmy[0].size()*8000 + civilizationArmy[1].size()*5000+civilizationArmy[7].size()*12000+civilizationArmy[8].size()*15000;
 		initialCostFleet[0][1] = civilizationArmy[0].size()*3000 + civilizationArmy[1].size()*6500+civilizationArmy[2].size()*45000+civilizationArmy[3].size()*30000+civilizationArmy[4].size()*2500+civilizationArmy[5].size()*4000+civilizationArmy[6].size()*50000+civilizationArmy[7].size()*2000;
@@ -43,7 +44,17 @@ public class Battle {
 		for (ArrayList<MilitaryUnit> elemento : enemyArmy) {
 			initialNumberUnitsEnemy += elemento.size();
 		}
-		battleDevelopment = new String("");
+		initialArmies = new int [2][9];
+		int id = 0;
+		for (ArrayList<MilitaryUnit> elemento : civilizationArmy) {
+			initialArmies[0][id] = elemento.size();
+			id++;
+		}
+		id = 0;
+		for (ArrayList<MilitaryUnit> elemento : enemyArmy) {
+			initialArmies[1][id] = elemento.size();
+			id++;
+		}
 		actualNumberUnitsCivilization = initialNumberUnitsCivilization;
 		actualNumberUnitsEnemy = initialNumberUnitsEnemy;
 
@@ -51,35 +62,41 @@ public class Battle {
 		//Recursos
 		this.wasteWoodIron = new int[2];
 		this.resourcesLooses = new int[2][4];
+		
 	}
 	
 	public void startBattle() {
 		int turn = (int) (Math.random()*2+1);
-		while (inBattle()) {
+		while ((actualNumberUnitsCivilization >  ((initialNumberUnitsCivilization/100)*20) || actualNumberUnitsEnemy > ((initialNumberUnitsEnemy/100)*20)) && (actualNumberUnitsEnemy > 0 && actualNumberUnitsCivilization > 0)) {
 			if (turn == 1) {
-				civilizationAttack();
+				/*offense*/
+				int grp = (int) (Math.random() * 100);
+				int group = -1;
+				int acumulado = 0;
+
+				for (int i = 0; i <= 8; i++) {
+				    acumulado += Variables.CHANCE_ATTACK_CIVILIZATION_UNITS[i];
+				    if (grp < acumulado) {
+				        group = i;
+				        break;
+				    }
+				}
+				MilitaryUnit offensive = civilizationArmy[group].get(((int)Math.random()*(civilizationArmy[group].size()-1))) ;
+				/*Defense*/
+				MilitaryUnit defensive = ;
+				/*battle*/
+				
+				
 				turn = 2;
 			}else {
-				enemyAttack();
+				
 				turn = 1;
 			}
 		}
 	}
-	
-	public void civilizationAttack() {
-		
-	}
-	
-	public void enemyAttack() {
-		
-	}
-	
-	boolean inBattle() {
-		
-		return true;
-	}
-	
+
 	//Metodos finales//
+	
 	String getBattleReport(int battles) {
 		return battleDevelopment;
 		}
