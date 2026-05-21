@@ -296,6 +296,7 @@ class Panel_Inferior_Central extends JPanel {
     private JButton boton1, boton2, boton3, boton4, boton5, boton6, boton7, boton8, boton9;
 	private Button boton11;
 	private Button boton10;
+	private Button boton12;
 
     public Panel_Inferior_Central() {
         // 1. Configuración básica
@@ -320,7 +321,8 @@ class Panel_Inferior_Central extends JPanel {
         boton8 = crearBotonTropa("Mago");
         boton9 = crearBotonTropa("Sacerdote");
         boton10=new Button("Informe");
-        boton11=new Button("Ejercito Enemigo");
+        boton11=new Button("Estadisticas");
+        boton12=new Button("Ejercito Enemigo");
         
         // ========================================================
         // PASO 2: AÑADIRLOS AL LAYOUT (Orden visual garantizado)
@@ -339,6 +341,7 @@ class Panel_Inferior_Central extends JPanel {
         add(boton9); // Celda 9 (Fila 2, Col 4) -> Sacerdote
         add(boton10);
         add(boton11);
+        add(boton12);
      
      // PASO 2: Clics independientes con Lambdas (Mucho más limpio y sin errores de argumentos)
         boton1.addActionListener(e -> pedirCantidadTropas("Espadachin"));
@@ -351,7 +354,8 @@ class Panel_Inferior_Central extends JPanel {
         boton8.addActionListener(e -> pedirCantidadTropas("Mago"));
         boton9.addActionListener(e -> pedirCantidadTropas("Sacerdote"));
         boton10.addActionListener(e -> System.out.println("[CLICK] Pulsaste boton10 (Debería ser Informe)"));
-        boton11.addActionListener(e -> System.out.println("[CLICK] Pulsaste boton11 (Debería ser Ejercito Enemigo)"));
+        boton11.addActionListener(e -> Main.player.printStats());
+        boton12.addActionListener(e -> Main.viewThreat());
 
     }
     
