@@ -135,8 +135,8 @@ public class Battle {
                 if (defensive.getActualArmor() <= 0) {
                     int wc = (int)(Math.random()*100);
                     if (wc <= defensive.getChanceGeneratinWaste()){
-                        wasteWoodIron[0] = defensive.getWoodCost();
-                        wasteWoodIron[1] = defensive.getIronCost();
+                        wasteWoodIron[0] += defensive.getWoodCost();
+                        wasteWoodIron[1] += defensive.getIronCost();
                     }
                     resourcesLooses[1][0] += defensive.getFoodCost();
                     resourcesLooses[1][1] += defensive.getWoodCost();
@@ -215,8 +215,8 @@ public class Battle {
                 if (defensive.getActualArmor() <= 0) {
                     int wc = (int)(Math.random()*100);
                     if (wc <= defensive.getChanceGeneratinWaste()){
-                        wasteWoodIron[0] = defensive.getWoodCost();
-                        wasteWoodIron[1] = defensive.getIronCost();
+                        wasteWoodIron[0] += defensive.getWoodCost();
+                        wasteWoodIron[1] += defensive.getIronCost();
                     }
                     resourcesLooses[0][0] += defensive.getFoodCost();
                     resourcesLooses[0][1] += defensive.getWoodCost();
@@ -231,7 +231,7 @@ public class Battle {
                 turn = 1;
             }
         }
-        if (resourcesLooses[0][0]+ (resourcesLooses[0][1]*5) +(resourcesLooses[0][2]*10) > resourcesLooses[1][0]+ (resourcesLooses[1][1]*5) +(resourcesLooses[1][2]*10)) {
+        if (resourcesLooses[0][0]+ (resourcesLooses[0][1]*5) +(resourcesLooses[0][2]*10) < resourcesLooses[1][0]+ (resourcesLooses[1][1]*5) +(resourcesLooses[1][2]*10)) {
             UI.ventana.nuevoEvento("Batalla ganadas, el botin contiene: " + wasteWoodIron[0] + " Madera y " + wasteWoodIron[1] + " Hierro");
 			Main.player.setWood(Main.player.getWood()+ wasteWoodIron[0]);
 			Main.player.setIron(Main.player.getIron()+ wasteWoodIron[1]);
