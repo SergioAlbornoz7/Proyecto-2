@@ -14,6 +14,7 @@ public class Main {
 	static Civilization player = new Civilization(0,0,20000,50000,3000,0,0,0,0,0,0,0);
 	
 	static Civilization enemy = new Civilization(0,0,0,0,0,0,0,0,0,0,0,0);
+	static Battle nb;
 	
 	public static void main(String[] args) {
 		BaseDatos.iniciarNuevaPartida("Imperio_Player", player.getFood(), player.getWood(), player.getIron(), player.getMana());
@@ -23,28 +24,30 @@ public class Main {
 	        };
 		});
 		/*Tasks*/
-		TimerTask recursos= new TimerTask() {
+		/*Tasks*/
+		/*Tasks*/
+		TimerTask recursos = new TimerTask() {
 			public void run() {
-				System.out.println("añadidos");
+				// Tus 3 recursos originales
 				player.setFood(player.getFood() + player.getFarm()*Variables.CIVILIZATION_FOOD_GENERATED_PER_FARM + Variables.CIVILIZATION_FOOD_GENERATED);
 				player.setIron(player.getIron() + player.getSmithy()*Variables.CIVILIZATION_IRON_GENERATED_PER_SMITHY + Variables.CIVILIZATION_IRON_GENERATED);
 				player.setWood(player.getWood() + player.getCarpentry()*Variables.CIVILIZATION_WOOD_GENERATED_PER_CARPENTRY + Variables.CIVILIZATION_WOOD_GENERATED);
-				player.setMana(player.getMana() + player.getMagicTower()*Variables.CIVILIZATION_MANA_GENERATED_PER_MAGIC_TOWER);
 				
-				SwingUtilities.invokeLater(new Runnable() {
-					public void run() {
-		                if (UI.ventana != null) {
-		                    UI.ventana.actuInterRecursos();
-		                }
-		            }
-		        });
+				// ¡AÑADE ESTA LÍNEA! Para que las Torres Mágicas generen Maná
+				player.setMana(player.getMana() + player.getMagicTower() * Variables.CIVILIZATION_MANA_GENERATED_PER_MAGIC_TOWER);
+				
+				// El resto de tu código para guardar y actualizar la pantalla...
+				BaseDatos.actualizarCivilizacionCompleta(player);
+				if (UI.ventana != null) {
+					UI.ventana.actuInterRecursos();
+				}
 			}
 		};
 		
 		TimerTask enemy_attack = new TimerTask() {
 
 			public void run() {
-				Battle nb = new Battle(player.getArmy(), createEnemyArmy(Variables.ENEMY_FLEET_INCREASE*player.getBattles()));
+				nb = new Battle(player.getArmy(), createEnemyArmy(Variables.ENEMY_FLEET_INCREASE*player.getBattles()));
 				viewThreat();
 				nb.startBattle();
 				

@@ -75,6 +75,7 @@ class MiVentana extends JFrame {
 		panelCentral.registrarEvento(nombre);
 		actuInterRecursos();
 	}
+	
 }
 
 class PanelCentral extends JPanel {
@@ -238,29 +239,95 @@ class Panel_Este_Inferior extends JPanel {
         add(boton5);
         
         // AQUÍ NO LLEVAN TRY-CATCH (No lanzan la excepción checked)
+     // Botón 1: Granja
         boton1.addActionListener(e -> {
-            Main.player.newFarm();
-            UI.ventana.actuInterRecursos();
+            int costeMadera = 500;
+            int costeHierro = 200;
+            
+            if (Main.player.getWood() >= costeMadera && Main.player.getIron() >= costeHierro) {
+                // 1. Modificamos la memoria RAM
+                Main.player.setWood(Main.player.getWood() - costeMadera);
+                Main.player.setIron(Main.player.getIron() - costeHierro);
+                Main.player.setFarm(Main.player.getFarm() + 1);
+                
+                // 2. ¡AQUÍ ESTÁ LA SOLUCIÓN! Mandamos el texto a la zona central de la pantalla
+                UI.ventana.nuevoEvento("[ESTRUCTURA] Has construido una Granja. ¡Producción de comida aumentada!");
+                
+                // 3. Sincronizamos con Workbench
+                BaseDatos.actualizarCivilizacionCompleta(Main.player);
+            } else {
+                JOptionPane.showMessageDialog(this, "No tienes suficientes recursos para la Granja.", "Aviso", JOptionPane.WARNING_MESSAGE);
+            }
         });
-        
+
+        // Botón 2: Herrería
         boton2.addActionListener(e -> {
-            Main.player.newSmithy();
-            UI.ventana.actuInterRecursos();
+            int costeMadera = 1000;
+            int costeHierro = 500;
+            if (Main.player.getWood() >= costeMadera && Main.player.getIron() >= costeHierro) {
+                Main.player.setWood(Main.player.getWood() - costeMadera);
+                Main.player.setIron(Main.player.getIron() - costeHierro);
+                Main.player.setSmithy(Main.player.getSmithy() + 1);
+                
+                // Se muestra en la pantalla central
+                UI.ventana.nuevoEvento("[ESTRUCTURA] Has construido una Herrería. ¡Producción de hierro aumentada!");
+                
+                BaseDatos.actualizarCivilizacionCompleta(Main.player); 
+            } else {
+                JOptionPane.showMessageDialog(this, "No tienes suficientes recursos para la Herrería.", "Aviso", JOptionPane.WARNING_MESSAGE);
+            }
         });
-        
+
+        // Botón 3: Iglesia
         boton3.addActionListener(e -> {
-            Main.player.newChurch();
-            UI.ventana.actuInterRecursos();
+            int costeMadera = 2000;
+            if (Main.player.getWood() >= costeMadera) {
+                Main.player.setWood(Main.player.getWood() - costeMadera);
+                Main.player.setChurch(Main.player.getChurch() + 1);
+                
+                // Se muestra en la pantalla central
+                UI.ventana.nuevoEvento("[ESTRUCTURA] Has construido una Iglesia. Los ciudadanos se sienten inspirados.");
+                
+                BaseDatos.actualizarCivilizacionCompleta(Main.player);
+            } else {
+                JOptionPane.showMessageDialog(this, "No tienes suficientes recursos para la Iglesia.", "Aviso", JOptionPane.WARNING_MESSAGE);
+            }
         });
-        
+
+        // Botón 4: Torre Mágica
         boton4.addActionListener(e -> {
-            Main.player.newMagicTower();
-            UI.ventana.actuInterRecursos();
+            int costeMadera = 5000;
+            int costeHierro = 1000;
+            if (Main.player.getWood() >= costeMadera && Main.player.getIron() >= costeHierro) {
+                Main.player.setWood(Main.player.getWood() - costeMadera);
+                Main.player.setIron(Main.player.getIron() - costeHierro);
+                Main.player.setMagicTower(Main.player.getMagicTower() + 1);
+                
+                // Se muestra en la pantalla central
+                UI.ventana.nuevoEvento("[ESTRUCTURA] Has construido una Torre Mágica. El maná empieza a fluir.");
+                
+                BaseDatos.actualizarCivilizacionCompleta(Main.player);
+            } else {
+                JOptionPane.showMessageDialog(this, "No tienes suficientes recursos para la Torre Mágica.", "Aviso", JOptionPane.WARNING_MESSAGE);
+            }
         });
-        
+
+        // Botón 5: Carpintería
         boton5.addActionListener(e -> {
-            Main.player.newCarpentry();
-            UI.ventana.actuInterRecursos();
+            int costeMadera = 500;
+            int costeComida = 500;
+            if (Main.player.getWood() >= costeMadera && Main.player.getFood() >= costeComida) {
+                Main.player.setWood(Main.player.getWood() - costeMadera);
+                Main.player.setFood(Main.player.getFood() - costeComida);
+                Main.player.setCarpentry(Main.player.getCarpentry() + 1);
+                
+                // Se muestra en la pantalla central
+                UI.ventana.nuevoEvento("[ESTRUCTURA] Has construido una Carpintería. ¡Producción de madera aumentada!");
+                
+                BaseDatos.actualizarCivilizacionCompleta(Main.player);
+            } else {
+                JOptionPane.showMessageDialog(this, "No tienes suficientes recursos para la Carpintería.", "Aviso", JOptionPane.WARNING_MESSAGE);
+            }
         });
     } 
 
@@ -333,7 +400,7 @@ class Panel_Inferior_Central extends JPanel {
         boton7.addActionListener(e -> pedirCantidadTropas("Lanzacohetes"));
         boton8.addActionListener(e -> pedirCantidadTropas("Mago"));
         boton9.addActionListener(e -> pedirCantidadTropas("Sacerdote"));
-        boton10.addActionListener(e -> System.out.println("[CLICK] Pulsaste boton10 (Debería ser Informe)"));
+        boton10.addActionListener(e -> Main.nb.showDevelopment());
         boton11.addActionListener(e -> Main.player.printStats());
         boton12.addActionListener(e -> Main.viewThreat());
     }
