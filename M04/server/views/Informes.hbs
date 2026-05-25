@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+   <head>
+        {{> header}}
+       <meta charset="UTF-8">
+       <title>Informes</title>
+       {{> menu}}
+   </head>
+   <body>
+    <h1>Informe de Batalla ID:{{Battle.civilization_id}}</h1>
+    <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Numero_Batallas</th>
+                    <th>
+                        Wood
+                        <img class="imagenes" src="imagenes/Madera.png" alt="">
+                    </th>
+                    <th>
+                        iron
+                        <img class="imagenes" src="imagenes/Hierro.png" alt="">
+                    </th>
+                    <th>
+                        food
+                        <img class="imagenes" src="imagenes/Comida.png" alt="">
+                    </th>
+                    <th>
+                        mana
+                        <img src="imagenes/Mana.png" class="imagenes">
+                    </th>
+                </tr>
+            </thead>
+
+            <tbody>
+                  <tr>
+                     <td>{{Battle.civilization_id}}</td>
+                     <td>{{Battle.name}}</td>
+                     <td>{{Battle.num_battle}}</td>
+                     <td>{{Battle.wood_amount}}</td>
+                     <td>{{Battle.iron_amount}}</td>
+                     <td>{{Battle.food_amount}}</td>
+                     <td>{{Battle.mana_amount}}</td>
+                     
+                  </tr>
+         </tbody>
+      </table>
+
+
+{{> footer}}
+       
+   </body>
+</html> 

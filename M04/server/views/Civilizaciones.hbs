@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+   <head>
+        {{> header}}
+       <meta charset="UTF-8">
+       <title>Civilizaciones</title>
+       {{> menu}}
+   </head>
+   <body>
+   <h1>Panell de Control de la Civilització</h1>
+
+    {{#each Civilizations}}
+    <div class="civ-container">
+        <h2>Estat de la Civilització: <span class="civ-nombre-destacado">{{this.name}}</span> (ID: {{this.civilization_id}})</h2>
+        <p><strong>Total batalles lliurades:</strong> {{this.battles_counter}}</p>
+
+        <hr>
+
+        <h3>📊 Recursos Actuals</h3>
+        <table class="tabla-recursos-civ">
+            <thead>
+                <tr>
+                    <th>Fusta 🪵</th>
+                    <th>Ferro ⛏️</th>
+                    <th>Menjar 🍖</th>
+                    <th>Manà 🔮</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>{{this.wood_amount}}</td>
+                    <td>{{this.iron_amount}}</td>
+                    <td>{{this.food_amount}}</td>
+                    <td>{{this.mana_amount}}</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3>🏰 Infraestructures / Edificis</h3>
+        <ul class="civ-lista-edificios">
+            <li><strong>Granges (Farm):</strong> {{this.farm_counter}}</li>
+            <li><strong>Ferreries (Smithy):</strong> {{this.smithy_counter}}</li>
+            <li><strong>Fusteries (Carpentry):</strong> {{this.carpentry_counter}}</li>
+            <li><strong>Esglésies (Church):</strong> {{this.church_counter}}</li>
+            <li><strong>Torres Màgiques (Magic Tower):</strong> {{this.magicTower_counter}}</li>
+        </ul>
+
+        <h3>🧬 Desenvolupament Tecnològic</h3>
+        <p>⚔️ <strong>Nivell d'Atac:</strong> {{this.technology_attack_level}}</p>
+        <p>🛡️ <strong>Nivell de Defensa:</strong> {{this.technology_defense_level}}</p>
+    </div>
+    {{else}}
+    <p>No hi ha cap civilització registrada a la base de dades per mostrar estadístiques.</p>
+    {{/each}}
+
+{{> footer}}
+       
+   </body>
+</html> 
